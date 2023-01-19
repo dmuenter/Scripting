@@ -1,11 +1,33 @@
 //Cross-product functions and variables
 
-//Open template file
+//Opening, saving, and closing files
 function openTemplate(path) {
     var currentFile = File(path);
     var currentTemplate = open(currentFile);
     app.displayDialogs = DialogModes.ERROR;
 };
+
+function savePSD(activeDocument, destination) {
+    var psdSaveOptions = new PhotoshopSaveOptions();
+    psdSaveOptions.alphaChannels = true;
+    psdSaveOptions.embedColorProfile = true;
+    activeDocument.saveAs(destination, psdSaveOptions, false, Extension.LOWERCASE);
+}
+
+function saveJPG(activeDocument, destination, humanAssist) {
+    if (humanAssist === true) {
+        savePSD(activeDocument, destination);
+    } else {
+        var jpgSaveOptions = new JPEGSaveOptions();
+        jpgSaveOptions.embedColorProfile = true;
+        jpgSaveOptions.quality = 12;
+        activeDocument.saveAs(destination, jpgSaveOptions, false, Extension.LOWERCASE);
+    }
+}
+
+function closeDocument() {
+    app.activeDocument.close(SaveOptions.DONOTSAVECHANGES);
+}
 
 //Set image orientation type
 function setOrientationTarget(data) {
@@ -52,25 +74,22 @@ function processFile(data) {
 }
 
 //Keep Color layer
-function keepColor(currentLayer, type) {
-    var currentGroupName = app.activeDocument.activeLayer.name;
+function keepColor(type) {
     var activeGroup = app.activeDocument.activeLayer;
-    currentLayer = activeGroup.artLayers.getByName("Color");
-    currentLayer.move(activeDocument.layerSets.getByName("Targets"), ElementPlacement.PLACEBEFORE);
+    var colorLayer = setActiveLayer(activeGroup.artLayers.getByName("Color"));
+    colorLayer.move(activeDocument.layerSets.getByName("Targets"), ElementPlacement.PLACEBEFORE);
 
     if (type === "print") {
         deleteAllLayersExcept(["Color"]);
     } else { //for listing files
-    
     }
 }
 
 //Keep EP Inverted layer
-function keepEPInverted(currentLayer, type) {
-    var currentGroupName = app.activeDocument.activeLayer.name;
+function keepEPInverted(type) {
     var activeGroup = app.activeDocument.activeLayer;
-    currentLayer = activeGroup.artLayers.getByName("EP inverted");
-    currentLayer.move(activeDocument.layerSets.getByName("Targets"), ElementPlacement.PLACEBEFORE);
+    var epInverted = setActiveLayer(activeGroup.artLayers.getByName("EP inverted"));
+    epInverted.move(activeDocument.layerSets.getByName("Targets"), ElementPlacement.PLACEBEFORE);
 
     if (type === "print") { //for print files
        deleteAllLayersExcept(["EP inverted"]);
@@ -80,13 +99,14 @@ function keepEPInverted(currentLayer, type) {
 }
 
 //Keep EP and EP Inverted layers
-function keepBothEP(currentLayer, type) {
-    var currentGroupName = app.activeDocument.activeLayer.name;
+function keepBothEP(type) {
     var activeGroup = app.activeDocument.activeLayer;
-    currentLayer = activeGroup.artLayers.getByName("EP");
-    currentLayer.move(activeDocument.layerSets.getByName("Targets"), ElementPlacement.PLACEBEFORE);
-    currentLayer = activeGroup.artLayers.getByName("EP inverted");
-    currentLayer.move(activeDocument.layerSets.getByName("Targets"), ElementPlacement.PLACEBEFORE);
+    var ep = setActiveLayer(activeGroup.artLayers.getByName("EP"));
+    var epInverted = setActiveLayer(activeGroup.artLayers.getByName("EP inverted"));
+    //currentLayer = activeGroup.artLayers.getByName("EP");
+    ep.move(activeDocument.layerSets.getByName("Targets"), ElementPlacement.PLACEBEFORE);
+    //currentLayer = activeGroup.artLayers.getByName("EP inverted");
+    epInverted.move(activeDocument.layerSets.getByName("Targets"), ElementPlacement.PLACEBEFORE);
    
     if (type === "print") {
         deleteAllLayersExcept(["EP", "EP inverted"])
@@ -151,45 +171,14 @@ function deleteAllFolders() {
     }
 }
 
-//Apply Glassware #404040 to print file
-function apply404040(currentLayer) {
-    applyColorOverlay(
-        {
-            r: 64,
-            g: 64,
-            b: 64,
-        })
-    var tempLayer = activeDocument.artLayers.add();
-    tempLayer.name = "EP inverted";
-    activeDocument.mergeVisibleLayers();
-}
 
-function applyListingGlassGray(currentLayer) {
-    setActiveLayer(activeDocument.artLayers.getByName("EP inverted"));
-    applyColorOverlay(
-        {
-            r: 188,
-            g: 188,
-            b: 188,
-        })
-        var tempLayer = activeDocument.artLayers.add();
-        tempLayer.name = "EP inverted";
-        activeDocument.mergeVisibleLayers();
-}
-
-function applyEngravingOnSilver(currentLayer) {
-    setActiveLayer(activeDocument.artLayers.getByName("EP"));
-    applyColorOverlay(
-        {
-            r: 82,
-            g: 45,
-            b: 16,
-        })
-}
+//Color Overlay styles for layers
 
 
-    
-function applyColorOverlay(color) {
+function applyColorOverlay(targetLayerName, color) {
+    var storeLayer = getActiveLayer();
+    setActiveLayer(targetLayerName);
+
     var desc6 = new ActionDescriptor();
     var ref1 = new ActionReference();
     ref1.putProperty(charIDToTypeID('Prpr'), charIDToTypeID('Lefx'));
@@ -210,30 +199,58 @@ function applyColorOverlay(color) {
     desc7.putObject(charIDToTypeID('SoFi'), charIDToTypeID('SoFi'), desc8);
     desc6.putObject(charIDToTypeID('T   '), charIDToTypeID('Lefx'), desc7);
     executeAction(charIDToTypeID('setd'), desc6, DialogModes.NO);
+
+    setActiveLayer(storeLayer);
 };
 
-function savePSD(activeDocument, destination) {
-    var psdSaveOptions = new PhotoshopSaveOptions();
-    psdSaveOptions.alphaChannels = true;
-    psdSaveOptions.embedColorProfile = true;
-    activeDocument.saveAs(destination, psdSaveOptions, false, Extension.LOWERCASE);
+//Apply Glassware #404040 to print file
+function apply404040(targetLayerName) {
+    var storeLayer = getActiveLayer();
+    $.writeln(typeof targetLayerName)
+    setActiveLayer(targetLayerName);
+    applyColorOverlay(targetLayerName,
+        {
+            r: 64,
+            g: 64,
+            b: 64,
+        });
+    rasterizeLayer();
+    // var tempLayer = activeDocument.artLayers.add();
+    // tempLayer.name = "EP inverted";
+    // activeDocument.mergeVisibleLayers();
+    setActiveLayer(storeLayer);
 }
 
-function saveJPG(activeDocument, destination, humanAssist) {
-    if (humanAssist === true) {
-        savePSD(activeDocument, destination);
-    } else {
-        var jpgSaveOptions = new JPEGSaveOptions();
-        jpgSaveOptions.embedColorProfile = true;
-        jpgSaveOptions.quality = 12;
-        activeDocument.saveAs(destination, jpgSaveOptions, false, Extension.LOWERCASE);
-    }
+function applyListingGlassGray(targetLayerName) {
+    var storeLayer = getActiveLayer();
+    setActiveLayer(targetLayerName);
+    applyColorOverlay(targetLayerName,
+        {
+            r: 188,
+            g: 188,
+            b: 188,
+        });
+    rasterizeLayer();
+        // var tempLayer = activeDocument.artLayers.add();
+        // tempLayer.name = "EP inverted";
+        // activeDocument.mergeVisibleLayers();
+    setActiveLayer(storeLayer);
 }
 
-function closeDocument() {
-    app.activeDocument.close(SaveOptions.DONOTSAVECHANGES);
+function applyEngravingOnSilver(targetLayerName) {
+    var storeLayer = getActiveLayer();
+    setActiveLayer(targetLayerName);
+    applyColorOverlay(targetLayerName,
+        {
+            r: 82,
+            g: 45,
+            b: 16,
+        });
+    rasterizeLayer();
+    setActiveLayer(storeLayer);
 }
 
+//Multiple outputs listing image (specifically, Polar Mug)
 function processBaseVariations(saveListingDestination) {
     var basesGroup = activeDocument.layerSets.getByName("Bases").artLayers;
     if (basesGroup[0].name === "SILVER") {
@@ -243,27 +260,29 @@ function processBaseVariations(saveListingDestination) {
         saveJPG(activeDocument, saveListingLoc, false);
         if (basesGroup.length > 1) {
             activeDocument.artLayers.getByName("EP").remove();
-            selectCurrentLayerPixels();
+            selectLayerPixels("EP inverted");
             activeDocument.layerSets.getByName("Bases").allLocked = false;
-            activeLayer = activeDocument.layerSets.getByName("Bases").artLayers.getByName("SILVER");
-            setActiveLayer(activeLayer);
-            $.writeln("currently selecting " + activeLayer.name);
-            makeMask();
+            //activeLayer = activeDocument.layerSets.getByName("Bases").artLayers.getByName("SILVER");
+            //setActiveLayer(activeLayer);
+            //$.writeln("currently selecting " + activeLayer.name);
+            makeMask(activeDocument.layerSets.getByName("Bases").artLayers.getByName("SILVER"));
+            setLayerVisibility("EP inverted", false);
         }
     }
     var layerToHide;
     var layerToShow;
+    setActiveLayer(activeDocument.layerSets.getByName("Bases").artLayers.getByName("SILVER"));
     for (var i = 1; i < basesGroup.length; i++) {
         if (i === 1) {
             layerToShow = basesGroup[i].name;
             $.writeln("need to show " + layerToShow);
-            setLayerVisibility(layerToShow, true);
+            setLayerVisibility(activeDocument.layerSets.getByName("Bases").artLayers.getByName(layerToShow), true);
             $.writeln("black base set up")
         } else {
             layerToHide = basesGroup[i-1].name;
             layerToShow = basesGroup[i].name;
-            setLayerVisibility(layerToHide, false);
-            setLayerVisibility(layerToShow, true);
+            setLayerVisibility(activeDocument.layerSets.getByName("Bases").artLayers.getByName(layerToHide), false);
+            setLayerVisibility(activeDocument.layerSets.getByName("Bases").artLayers.getByName(layerToShow), true);
         }
         $.writeln("starting save for " + basesGroup)
         saveListingLoc = File(saveListingDestination + " - " + basesGroup[i].name);
@@ -271,7 +290,7 @@ function processBaseVariations(saveListingDestination) {
     }
 }
 
-// Layer Helpers
+// Layer/Folder Getting and Setting
 function getActiveLayer() {
     return app.activeDocument.activeLayer;
 }
@@ -282,6 +301,7 @@ function setActiveLayer(newActiveLayer) {
     } else {
         app.activeDocument.activeLayer = newActiveLayer;
     }
+    return app.activeDocument.activeLayer;
 }
 
 function getLayerByName(name) {
@@ -292,15 +312,26 @@ function getFolderByName(name) {
     return activeDocument.layerSets.getByName(name);
 }
 
-function setLayerVisibility(layerName, visibility) {
-    // var storeActiveLayer = currentLayer;
-    // currentLayer = activeDocument.artLayers
+//Layer Functionality
+
+function setLayerVisibility(targetLayerName, visibility) {
+    var storeLayer = getActiveLayer();
+    setActiveLayer(targetLayerName);
+
     var desc11 = new ActionDescriptor();
     var idnull = stringIDToTypeID("null");
     var list6 = new ActionList();
     var ref8 = new ActionReference();
     var idlayer = stringIDToTypeID("layer");
-    ref8.putName(idlayer, layerName);
+
+    var actualLayerName;
+    if (typeof targetLayerName === 'string') {
+        actualLayerName = targetLayerName;
+    } else {
+        actualLayerName = targetLayerName.name;
+    }
+
+    ref8.putName(idlayer, actualLayerName);
     list6.putReference(ref8);
     desc11.putList(idnull, list6);
     var desc = new ActionDescriptor()
@@ -308,7 +339,7 @@ function setLayerVisibility(layerName, visibility) {
 
     var idlayer = stringIDToTypeID("layer");
     ref = new ActionReference();
-    ref.putName(idlayer, layerName);
+    ref.putName(idlayer, actualLayerName);
     var desc = executeActionGet(ref);
     var vis = desc.getBoolean(charIDToTypeID("Vsbl"));
 
@@ -319,37 +350,67 @@ function setLayerVisibility(layerName, visibility) {
         var idshow = stringIDToTypeID( "show" );
         executeAction(idshow, desc11, DialogModes.NO);
     }
+
+    setActiveLayer(storeLayer);
 }
 
 function layerLock(name, status) {
     activeDocument.artLayers.getByName(name).allLocked = status;
 }
 
-//Photoshop Functions
-
-function selectLayerPixels(targetLayerName) {
+function setFillOpacity(targetLayerName, percentage) {
     var storeLayer = getActiveLayer();
     setActiveLayer(targetLayerName);
 
-    var id1268 = charIDToTypeID( "setd" );
-    var desc307 = new ActionDescriptor();
-    var id1269 = charIDToTypeID( "null" );
-    var ref257 = new ActionReference();
-    var id1270 = charIDToTypeID( "Chnl" );
-    var id1271 = charIDToTypeID( "fsel" );
-    ref257.putProperty( id1270, id1271 );
-    desc307.putReference( id1269, ref257 );
-    var id1272 = charIDToTypeID( "T   " );
-    var ref258 = new ActionReference();
-    var id1273 = charIDToTypeID( "Chnl" );
-    var id1274 = charIDToTypeID( "Chnl" );
-    var id1275 = charIDToTypeID( "Trsp" );
-    ref258.putEnumerated( id1273, id1274, id1275 );
-    desc307.putReference( id1272, ref258 );
-    executeAction( id1268, desc307, DialogModes.NO )
+    getActiveLayer().fillOpacity = percentage;
 
     setActiveLayer(storeLayer);
 }
+
+function MoveLayerTo(layerToMove, fX,fY) { //original by Max Kielland
+    var storeLayer = getActiveLayer();
+    setActiveLayer(layerToMove);
+
+    $.writeln(layerToMove.name);
+    var layerWidth = getLayerWidth(layerToMove);
+    $.writeln(layerWidth);
+    var layerHeight = getLayerHeight(layerToMove);
+    $.writeln(layerHeight);
+    var Position = layerToMove.bounds;
+    Position[0] = fX - Position[0] + (layerWidth / 2);
+    Position[1] = fY - Position[1] + (layerHeight / 2);
+    layerToMove.translate(-Position[0],-Position[1]);
+
+    setActiveLayer(storeLayer);
+  }
+
+function renameLayer(currentName, desiredName) {
+    var storeLayer = getActiveLayer();
+    setActiveLayer(currentName);
+
+    getActiveLayer().name = desiredName;
+
+    setActiveLayer(storeLayer);
+  }
+
+function rasterizeLayer() {
+    var idrasterizeLayer = stringIDToTypeID( "rasterizeLayer" );
+    var desc5 = new ActionDescriptor();
+    var idnull = charIDToTypeID( "null" );
+        var ref4 = new ActionReference();
+        var idLyr = charIDToTypeID( "Lyr " );
+        var idOrdn = charIDToTypeID( "Ordn" );
+        var idTrgt = charIDToTypeID( "Trgt" );
+        ref4.putEnumerated( idLyr, idOrdn, idTrgt );
+    desc5.putReference( idnull, ref4 );
+    var idWhat = charIDToTypeID( "What" );
+    var idrasterizeItem = stringIDToTypeID( "rasterizeItem" );
+    var idlayerStyle = stringIDToTypeID( "layerStyle" );
+    desc5.putEnumerated( idWhat, idrasterizeItem, idlayerStyle );
+executeAction( idrasterizeLayer, desc5, DialogModes.NO );
+}
+
+//Photoshop Functions
 
 function makeMask(targetLayerName) {
     var storeLayer = getActiveLayer();
@@ -376,38 +437,28 @@ function makeMask(targetLayerName) {
     setActiveLayer(storeLayer);
 }
 
-function getLayerWidth(activeLayer) {
-    $.writeln(activeLayer.name);
-    var layerBounds = activeLayer.bounds;
-    return layerBounds[2] - layerBounds[0];
+
+    
+
+//Selection functions
+
+function selectAll() {
+    app.activeDocument.selection.selectAll();
 }
 
-function getLayerHeight(activeLayer) {
-    $.writeln(activeLayer.name);
-    var layerBounds = activeLayer.bounds;
-    return layerBounds[3] - layerBounds[1];
+function copySelection() {
+    app.activeDocument.selection.copy();
 }
 
-function MoveLayerTo(activeLayer, fX,fY) { //original by Max Kielland
-    $.writeln(activeLayer.name);
-    var layerWidth = getLayerWidth(activeLayer);
-    $.writeln(layerWidth);
-    var layerHeight = getLayerHeight(activeLayer);
-    $.writeln(layerHeight);
+function deselect() {
+    app.activeDocument.selection.deselect();
+}
 
-    var Position = activeLayer.bounds;
-    Position[0] = fX - Position[0] + (layerWidth / 2);
-    Position[1] = fY - Position[1] + (layerHeight / 2);
-  
-    activeLayer.translate(-Position[0],-Position[1]);
-  }
+function paste() {
+    app.activeDocument.paste();
+}
 
-  function renameLayer(currentName, desiredName) {
-    currentLayer = activeDocument.artLayers.getByName(currentName);
-    currentLayer.name = desiredName;
-  }
-
-  function magicWand (x, y, tol, sampleAllLyrs){
+function magicWand (x, y, tol, sampleAllLyrs){
     var idsetd = charIDToTypeID( "setd" );
         var desc2 = new ActionDescriptor();
         var idnull = charIDToTypeID( "null" );
@@ -441,44 +492,31 @@ function MoveLayerTo(activeLayer, fX,fY) { //original by Max Kielland
     executeAction( idsetd, desc2, DialogModes.NO );
     };
 
-function rasterizeLayer() {
-    var idrasterizeLayer = stringIDToTypeID( "rasterizeLayer" );
-    var desc5 = new ActionDescriptor();
-    var idnull = charIDToTypeID( "null" );
-        var ref4 = new ActionReference();
-        var idLyr = charIDToTypeID( "Lyr " );
-        var idOrdn = charIDToTypeID( "Ordn" );
-        var idTrgt = charIDToTypeID( "Trgt" );
-        ref4.putEnumerated( idLyr, idOrdn, idTrgt );
-    desc5.putReference( idnull, ref4 );
-    var idWhat = charIDToTypeID( "What" );
-    var idrasterizeItem = stringIDToTypeID( "rasterizeItem" );
-    var idlayerStyle = stringIDToTypeID( "layerStyle" );
-    desc5.putEnumerated( idWhat, idrasterizeItem, idlayerStyle );
-executeAction( idrasterizeLayer, desc5, DialogModes.NO );
-}
-    
+function selectLayerPixels(targetLayerName) {
+    var storeLayer = getActiveLayer();
+    setActiveLayer(targetLayerName);
 
-//Selection functions
+    var id1268 = charIDToTypeID( "setd" );
+    var desc307 = new ActionDescriptor();
+    var id1269 = charIDToTypeID( "null" );
+    var ref257 = new ActionReference();
+    var id1270 = charIDToTypeID( "Chnl" );
+    var id1271 = charIDToTypeID( "fsel" );
+    ref257.putProperty( id1270, id1271 );
+    desc307.putReference( id1269, ref257 );
+    var id1272 = charIDToTypeID( "T   " );
+    var ref258 = new ActionReference();
+    var id1273 = charIDToTypeID( "Chnl" );
+    var id1274 = charIDToTypeID( "Chnl" );
+    var id1275 = charIDToTypeID( "Trsp" );
+    ref258.putEnumerated( id1273, id1274, id1275 );
+    desc307.putReference( id1272, ref258 );
+    executeAction( id1268, desc307, DialogModes.NO )
 
-function selectAll() {
-    app.activeDocument.selection.selectAll();
-}
+    setActiveLayer(storeLayer);
+    }
 
-function copySelection() {
-    app.activeDocument.selection.copy();
-}
-
-function deselect() {
-    app.activeDocument.selection.deselect();
-}
-
-function paste() {
-    app.activeDocument.paste();
-}
-
-
-//Some other helpers
+//Some other helpers/calculations
 
 function convertHextoRGB(hex) {
     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
@@ -487,4 +525,16 @@ function convertHextoRGB(hex) {
       g: parseInt(result[2], 16),
       b: parseInt(result[3], 16)
     } : null;
+}
+
+function getLayerWidth(targetLayer) {
+    $.writeln(targetLayer.name);
+    var layerBounds = targetLayer.bounds;
+    return layerBounds[2] - layerBounds[0];
+}
+
+function getLayerHeight(activeLayer) {
+    $.writeln(activeLayer.name);
+    var layerBounds = activeLayer.bounds;
+    return layerBounds[3] - layerBounds[1];
 }
