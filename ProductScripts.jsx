@@ -42,8 +42,33 @@ const ProductScripts = [
         key: "ds_MugCheckbox",
         functionToRun: process_DS_Mug
     },
-    { key: "br_PatchCheckbox",
+    {   
+        key: "br_PatchCheckbox",
         functionToRun: process_BR_Patch
+    },
+    {   
+        key: "br_BeanieCheckbox",
+        functionToRun: process_BR_Beanie
+    },
+    {   
+        key: "br_PillowcaseCheckbox",
+        functionToRun: process_BR_Pillowcase
+    },
+    {   
+        key: "ep_DogTagCheckbox",
+        functionToRun: process_EP_DogTag
+    },
+    {   
+        key: "ds_DogTagCheckbox",
+        functionToRun: process_DS_DogTag
+    },
+    {   
+        key: "ep_KeyChainCheckbox",
+        functionToRun: process_EP_KeyChain
+    },
+    {   
+        key: "ds_KeyChainCheckbox",
+        functionToRun: process_DS_KeyChain
     },
 ];
 
@@ -365,6 +390,156 @@ function process_BR_Patch(data) {
     makeMask("Fill");
     getLayerByName("Fill").blendMode = BlendMode.MULTIPLY;
     getLayerByName("Color").blendMode = BlendMode.MULTIPLY;
+    saveJPG(activeDocument, saveListingDestination);
+    closeDocument();
+}
+
+function process_BR_Beanie(data) {
+    var printTemplatePath = File("C:/Scripting/Templates/Beanie/Beanie - Template.psd");
+    var listingTemplatePath = File("C:/Scripting/Templates/Beanie/Beanie - Listing Template.psd");
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/BR - Beanie - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/BR - Beanie - " + data.fileSKU);
+
+//Generate Print File
+    openTemplate(printTemplatePath);
+    processFile(data);
+    keepColor("print");
+    deleteAllFolders();
+    savePSD(activeDocument, savePrintDestination);
+    closeDocument();
+
+//Generate Listing File
+    openTemplate(listingTemplatePath);
+    processFile(data);
+    keepColor("listing");
+    deleteAllFolders();
+    getLayerByName("Color").blendMode = BlendMode.MULTIPLY;
+    saveJPG(activeDocument, saveListingDestination);
+    closeDocument();
+}
+
+function process_BR_Pillowcase (data) {
+    var printTemplatePath = File("C:/Scripting/Templates/Pillowcase/Pillowcase - Template.psd");
+    var listingTemplatePath = File("C:/Scripting/Templates/Pillowcase/Pillowcase - Listing Template.psd");
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/BR - Pillowcase - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/BR - Pillowcase - " + data.fileSKU);
+
+//Generate Print File
+    openTemplate(printTemplatePath);
+    processFile(data);
+    keepColor("print");
+    deleteAllFolders();
+    savePSD(activeDocument, savePrintDestination);
+    closeDocument();
+
+//Generate Listing File
+    openTemplate(listingTemplatePath);
+    processFile(data);
+    keepColor("listing");
+    deleteAllFolders();
+    saveJPG(activeDocument, saveListingDestination);
+    closeDocument();
+}
+
+function process_EP_DogTag(data) {
+    var printTemplatePath = File("C:/Scripting/Templates/DogTag KeyChain/EP DT KC - Template.psd");
+    var listingTemplatePath = File("C:/Scripting/Templates/DogTag KeyChain/DT KC - Listing Template.psd");
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/EP - DT KC - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/EP - DT - " + data.fileSKU);
+
+// //Generate Print File
+    openTemplate(printTemplatePath);
+    processFile(data);
+    keepBothEP("print");
+    deleteAllFolders();
+    savePSD(activeDocument, savePrintDestination);
+    closeDocument();
+
+//Generate Listing File
+    openTemplate(listingTemplatePath);
+    processFile(data);
+    keepBothEP("listing");
+    deleteAllFolders();
+    applyColorOverlay("EP", convertHextoRGB("#c8c8c8"));
+    applyColorOverlay("EP inverted", convertHextoRGB("#c8c8c8"));
+    savePSD(activeDocument, saveListingDestination);
+    closeDocument();
+}
+
+function process_EP_KeyChain(data) {
+var printTemplatePath = File("C:/Scripting/Templates/DogTag KeyChain/EP DT KC - Template.psd");
+var listingTemplatePath = File("C:/Scripting/Templates/DogTag KeyChain/DT KC - Listing Template.psd");
+var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/EP - DT KC - " + data.fileSKU);
+var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/EP - KC - " + data.fileSKU);
+
+//Generate Print File
+    openTemplate(printTemplatePath);
+    processFile(data);
+    keepBothEP("print");
+    deleteAllFolders();
+    savePSD(activeDocument, savePrintDestination);
+    closeDocument();
+
+//Generate Listing File
+    openTemplate(listingTemplatePath);
+    processFile(data);
+    keepBothEP("listing");
+    deleteAllFolders();
+    MoveLayerTo(getLayerByName("EP"), 1967, 2962);
+    MoveLayerTo(getLayerByName("EP inverted"), 1967, 2962);
+    setLayerVisibility(activeDocument.layerSets.getByName("Dog Tag"), false);
+    setLayerVisibility(activeDocument.layerSets.getByName("Key Chain"), true);
+    applyColorOverlay("EP", convertHextoRGB("#c8c8c8"));
+    applyColorOverlay("EP inverted", convertHextoRGB("#c8c8c8"));
+    savePSD(activeDocument, saveListingDestination);
+    closeDocument();
+}
+
+function process_DS_DogTag(data) {
+    var printTemplatePath = File("C:/Scripting/Templates/DogTag KeyChain/DS DT KC - Template.psd");
+    var listingTemplatePath = File("C:/Scripting/Templates/DogTag KeyChain/DT KC - Listing Template.psd");
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DS - DT KC - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DS - DT - " + data.fileSKU);
+
+// //Generate Print File
+    openTemplate(printTemplatePath);
+    processFile(data);
+    keepColor("print");
+    deleteAllFolders();
+    savePSD(activeDocument, savePrintDestination);
+    closeDocument();
+
+//Generate Listing File
+    openTemplate(listingTemplatePath);
+    processFile(data);
+    keepColor("listing");
+    deleteAllFolders();
+    saveJPG(activeDocument, saveListingDestination);
+    closeDocument();
+}
+
+function process_DS_KeyChain(data) {
+var printTemplatePath = File("C:/Scripting/Templates/DogTag KeyChain/DS DT KC - Template.psd");
+var listingTemplatePath = File("C:/Scripting/Templates/DogTag KeyChain/DT KC - Listing Template.psd");
+var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DS - DT KC - " + data.fileSKU);
+var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DS - KC - " + data.fileSKU);
+
+//Generate Print File
+    openTemplate(printTemplatePath);
+    processFile(data);
+    keepColor("print");
+    deleteAllFolders();
+    savePSD(activeDocument, savePrintDestination);
+    closeDocument();
+
+//Generate Listing File
+    openTemplate(listingTemplatePath);
+    processFile(data);
+    keepColor("listing");
+    deleteAllFolders();
+    MoveLayerTo(getLayerByName("Color"), 1967, 2962);
+    setLayerVisibility(activeDocument.layerSets.getByName("Dog Tag"), false);
+    setLayerVisibility(activeDocument.layerSets.getByName("Key Chain"), true);
     saveJPG(activeDocument, saveListingDestination);
     closeDocument();
 }
