@@ -2,11 +2,11 @@
 #include "./ProductScripts.jsx";
 
 var data = {
-    inputFilePath: "C:/Scripting/sampleSquare.psd",
-    fileSKU: "RF - 0003",
+    inputFilePath: "C:/Scripting/sampleTall.psd",
+    fileSKU: "EX - 0001",
     colorVariationStatus: false,
-    imageOrientation: "Square",
-    backgroundColor: "#ffffff",
+    imageOrientation: "Tall",
+    backgroundColor: "#ff0000",
     products: [
     "dts_WaterBottleCheckbox",
     "ep_BeerCanGlassCheckbox",
@@ -25,6 +25,11 @@ var data = {
     "ep_KeyChainCheckbox",
     "ds_DogTagCheckbox",
     "ds_KeyChainCheckbox",
+    "br_ApronCheckbox",
+    "br_CrewSocksCheckbox",
+    "ds_MousePadCheckbox",
+    "ds_SequinSquareCheckbox",
+    "ds_SequinHeartCheckbox",
 ]   
 };
 

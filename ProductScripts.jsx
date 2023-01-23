@@ -70,6 +70,26 @@ const ProductScripts = [
         key: "ds_KeyChainCheckbox",
         functionToRun: process_DS_KeyChain
     },
+    {
+        key: "br_ApronCheckbox",
+        functionToRun: process_BR_Apron
+    },
+    {
+        key: "br_CrewSocksCheckbox",
+        functionToRun: process_BR_CrewSocks
+    },
+    {
+        key: "ds_MousePadCheckbox",
+        functionToRun: process_DS_MousePad
+    },
+    {
+        key: "ds_SequinSquareCheckbox",
+        functionToRun: process_DS_SequinSquare
+    },
+    {
+        key: "ds_SequinHeartCheckbox",
+        functionToRun: process_DS_SequinHeart
+    },
 ];
 
 // Product Scripts (identification stage)
@@ -542,4 +562,187 @@ var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Lis
     setLayerVisibility(activeDocument.layerSets.getByName("Key Chain"), true);
     saveJPG(activeDocument, saveListingDestination);
     closeDocument();
+}
+
+function process_BR_Apron(data) {
+    var printTemplatePath = File("C:/Scripting/Templates/Apron/Apron - Template.psd");
+    var listingTemplatePath = File("C:/Scripting/Templates/Apron/Apron - Listing Template.psd");
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/BR - Apron - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/BR - Apron - " + data.fileSKU);
+
+//Generate Print File
+    openTemplate(printTemplatePath);
+    processFile(data);
+    keepColor("print");
+    deleteAllFolders();
+    savePSD(activeDocument, savePrintDestination);
+    closeDocument();
+
+//Generate Listing File
+    openTemplate(listingTemplatePath);
+    processFile(data);
+    keepColor("listing");
+    deleteAllFolders();
+    getLayerByName("Color").blendMode = BlendMode.MULTIPLY;
+    saveJPG(activeDocument, saveListingDestination);
+    closeDocument();
+}
+
+function process_BR_CrewSocks(data) {
+    var printTemplatePath = File("C:/Scripting/Templates/CrewSocks/Crew Socks - Template.psd");
+    var listingTemplatePath = File("C:/Scripting/Templates/CrewSocks/Crew Socks - Listing Template.psd");
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/BR - CS - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/BR - CS - " + data.fileSKU);
+
+//Generate Print File
+    openTemplate(printTemplatePath);
+    processFile(data);
+    keepColor("print");
+    deleteAllFolders();
+    savePSD(activeDocument, savePrintDestination);
+    closeDocument();
+
+//Generate Listing File
+    openTemplate(listingTemplatePath);
+    processFile(data);
+    keepColor("listing");
+    deleteAllFolders();
+    getLayerByName("Color").blendMode = BlendMode.MULTIPLY;
+    saveJPG(activeDocument, saveListingDestination);
+    closeDocument();
+}
+
+function process_DS_MousePad(data) {
+    var printTemplatePath = File("C:/Scripting/Templates/MousePad/MousePad - Template.psd");
+    var listingTemplatePath = File("C:/Scripting/Templates/MousePad/MousePad - Listing Template.psd");
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/BR - CS - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/BR - CS - " + data.fileSKU);
+
+//Generate Print File
+    openTemplate(printTemplatePath);
+    processFile(data);
+    keepColor("print");
+    deleteAllFolders();
+    layerLock("Fill", false);
+    applyColorOverlay("Fill", convertHextoRGB(data.backgroundColor));
+    setActiveLayer("Fill");
+    rasterizeLayer();
+    activeDocument.artLayers[0].merge();
+    savePSD(activeDocument, savePrintDestination);
+    closeDocument();
+
+// //Generate Listing File
+    openTemplate(listingTemplatePath);
+    processFile(data, getActiveLayer());
+    keepColor("listing");
+    deleteAllFolders();
+    layerLock("Fill", false);
+    var bgRGB = convertHextoRGB(data.backgroundColor);
+    applyColorOverlay("Fill", bgRGB);
+    setActiveLayer("Fill");
+    rasterizeLayer();
+    if (bgRGB.r <= 35 && bgRGB.g <= 35 && bgRGB.b <= 35) {
+        setFillOpacity("Fill", 90);
+        }
+    selectLayerPixels("Color");
+    activeDocument.selection.invert();
+    activeDocument.selection.expand(1);
+    makeMask("Fill");
+    getLayerByName("Fill").blendMode = BlendMode.MULTIPLY;
+    getLayerByName("Color").blendMode = BlendMode.MULTIPLY;
+    saveJPG(activeDocument, saveListingDestination);
+    closeDocument();
+}
+
+function process_DS_SequinSquare(data) {
+    var printTemplatePath = File("C:/Scripting/Templates/SequinPillows/Sequin Square - Template.psd");
+    var listingTemplatePath = File("C:/Scripting/Templates/SequinPillows/Sequin Square - Listing Template.psd");
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DS - Sequin Square - " + data.fileSKU);
+    var saveListingDestination = "C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DS - Sequin Square - " + data.fileSKU;
+
+//Generate Print File
+    openTemplate(printTemplatePath);
+    processFile(data);
+    keepColor("print");
+    deleteAllFolders();
+    savePSD(activeDocument, savePrintDestination);
+    closeDocument();
+
+//Generate Listing File
+    openTemplate(listingTemplatePath);
+    processFile(data);
+    keepColor("listing");
+    deleteAllFolders();
+    getLayerByName("Color").blendMode = BlendMode.MULTIPLY;
+    var saveUncovered = File(saveListingDestination + " - UNCOVERED");
+    saveJPG(activeDocument, saveUncovered);
+    setLayerVisibility("Hand", true);
+    setLayerVisibility(activeDocument.layerSets.getByName("Bases"), true)
+    var saveSilver = File(saveListingDestination + " - SILVER");
+    saveJPG(activeDocument, saveSilver);
+    closeDocument();
+}
+
+function process_DS_SequinSquare(data) {
+    var printTemplatePath = File("C:/Scripting/Templates/SequinPillows/Sequin Square - Template.psd");
+    var listingTemplatePath = File("C:/Scripting/Templates/SequinPillows/Sequin Square - Listing Template.psd");
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DS - Sequin Square - " + data.fileSKU);
+    var saveListingDestination = "C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DS - Sequin Square - " + data.fileSKU;
+
+//Generate Print File
+    openTemplate(printTemplatePath);
+    processFile(data);
+    keepColor("print");
+    deleteAllFolders();
+    savePSD(activeDocument, savePrintDestination);
+    closeDocument();
+
+//Generate Listing File
+    openTemplate(listingTemplatePath);
+    processFile(data);
+    keepColor("listing");
+    deleteAllFolders();
+    getLayerByName("Color").blendMode = BlendMode.MULTIPLY;
+    var saveLocation = File(saveListingDestination + " - UNCOVERED");
+    saveJPG(activeDocument, saveLocation);
+    setLayerVisibility("Hand", true);
+    setLayerVisibility(activeDocument.layerSets.getByName("Bases"), true);
+    saveLocation = File(saveListingDestination + " - SILVER");
+    saveJPG(activeDocument, saveLocation);
+    closeDocument();
+}
+
+function process_DS_SequinHeart(data) {
+    var printTemplatePath = File("C:/Scripting/Templates/SequinPillows/Sequin Heart - Template.psd");
+    var listingTemplatePath = File("C:/Scripting/Templates/SequinPillows/Sequin Heart - Listing Template.psd");
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DS - Sequin Heart - " + data.fileSKU);
+    var saveListingDestination = "C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DS - Sequin Heart - " + data.fileSKU;
+
+//Generate Print File
+    openTemplate(printTemplatePath);
+    processFile(data);
+    keepColor("print");
+    deleteAllFolders();
+    savePSD(activeDocument, savePrintDestination);
+    closeDocument();
+
+//Generate Listing File
+    openTemplate(listingTemplatePath);
+    processFile(data);
+    keepColor("print");
+    deleteAllFolders();
+    getLayerByName("Color").blendMode = BlendMode.MULTIPLY;
+    var saveLocation = File(saveListingDestination + " - UNCOVERED");
+    saveJPG(activeDocument, saveLocation);
+    var basesGroup = activeDocument.layerSets.getByName("Bases").artLayers;
+    setLayerVisibility(activeDocument.layerSets.getByName("Bases"), true);
+    for (var i = 0; i < basesGroup.length; i++) {
+        setLayerVisibility(basesGroup[i], true);
+        if (i != 0) {setLayerVisibility(basesGroup[i-1], false);
+        }
+        saveLocation = File(saveListingDestination + " - " + basesGroup[i].name);
+        saveJPG(activeDocument, saveLocation);
+    }
+    closeDocument();
+
 }
