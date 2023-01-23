@@ -2,23 +2,34 @@
 #include "./ProductScripts.jsx";
 
 var data = {
-    inputFilePath: "C:/Scripting/sampleWide.psd",
-    fileSKU: "RF - 0003",
+    inputFilePath: "C:/Scripting/sampleTall.psd",
+    fileSKU: "EX - 0001",
     colorVariationStatus: false,
-    imageOrientation: "Wide",
-    backgroundColor: "#ffffff",
+    imageOrientation: "Tall",
+    backgroundColor: "#ff0000",
     products: [
-    "dts_WaterBottleCheckbox", //good after rf
-    "ep_BeerCanGlassCheckbox", //good afer rf
-    "dts_BeerCanGlassCheckbox", //good after rf
-    "dts_ScotchCGlassCheckbox", //good after rf
-    "ep_ScotchCGlassCheckbox", //good after rf
-    "dts_ScotchMGlassCheckbox", //good after rf
-    "ep_ScotchMGlassCheckbox", //good after rf
-    "ep_PolarMugCheckbox", //good after rf
-    "br_BaseballCapCheckbox", //good after rf
-    "ds_MugCheckbox", //good after rf
-    "br_PatchCheckbox", //good after rf
+    "dts_WaterBottleCheckbox",
+    "ep_BeerCanGlassCheckbox",
+    "dts_BeerCanGlassCheckbox",
+    "dts_ScotchCGlassCheckbox",
+    "ep_ScotchCGlassCheckbox",
+    "dts_ScotchMGlassCheckbox",
+    "ep_ScotchMGlassCheckbox",
+    "ep_PolarMugCheckbox",
+    "br_BaseballCapCheckbox",
+    "ds_MugCheckbox",
+    "br_PatchCheckbox",
+    "br_BeanieCheckbox",
+    "br_PillowcaseCheckbox",
+    "ep_DogTagCheckbox",
+    "ep_KeyChainCheckbox",
+    "ds_DogTagCheckbox",
+    "ds_KeyChainCheckbox",
+    "br_ApronCheckbox",
+    "br_CrewSocksCheckbox",
+    "ds_MousePadCheckbox",
+    "ds_SequinSquareCheckbox",
+    "ds_SequinHeartCheckbox",
 ]   
 };
 
