@@ -90,6 +90,42 @@ const ProductScripts = [
         key: "ds_SequinHeartCheckbox",
         functionToRun: process_DS_SequinHeart
     },
+    {
+        key: "dts_AluminumWalletCheckbox",
+        functionToRun: process_DTS_AluminumWallet
+    },
+    {
+        key: "dts_CeramicCoasterCheckbox",
+        functionToRun: process_DTS_CeramicCoaster
+    },
+    {
+        key: "dts_MagnetCheckbox",
+        functionToRun: process_DTS_Magnet
+    },
+    {
+        key: "dts_GlassCoasterCheckbox",
+        functionToRun: process_DTS_GlassCoaster
+    },
+    {
+        key: "dts_FlaskCheckbox",
+        functionToRun: process_DTS_Flask
+    },
+    {
+        key: "ep_FlaskCheckbox",
+        functionToRun: process_EP_Flask
+    },
+    {
+        key: "dts_MasonCheckbox",
+        functionToRun: process_DTS_Mason
+    },
+    {
+        key: "ep_VectorCheckbox",
+        functionToRun: process_EP_Vector
+    },
+    {
+        key: "dts_VectorCheckbox",
+        functionToRun: process_DTS_Vector
+    },
 ];
 
 // Product Scripts (identification stage)
@@ -744,5 +780,251 @@ function process_DS_SequinHeart(data) {
         saveJPG(activeDocument, saveLocation);
     }
     closeDocument();
+}
 
+function process_DTS_AluminumWallet(data){
+    var printTemplatePath = File("C:/Scripting/Templates/AluminumWallet/Aluminum Wallet - Template.psd");
+    var listingTemplatePath = File("C:/Scripting/Templates/AluminumWallet/Aluminum Wallet - Listing Template.psd");
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - AW - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - AW  - " + data.fileSKU);
+
+//Generate Print File
+    openTemplate(printTemplatePath);
+    processFile(data);
+    keepColor("print");
+    deleteAllFolders();
+    savePSD(activeDocument, savePrintDestination);
+    closeDocument();
+
+// Generate Listing File
+    openTemplate(listingTemplatePath);
+    processFile(data);
+    keepColor("listing");
+    unlockAllFoldersExcept(["Bases"]);
+    deleteAllFolders();
+    savePSD(activeDocument, saveListingDestination);
+    closeDocument();
+}
+
+function process_DTS_CeramicCoaster(data) {
+    var printTemplatePath = File("C:/Scripting/Templates/CeramicCoaster/Ceramic Coaster - Template.psd");
+    var listingTemplatePath = File("C:/Scripting/Templates/CeramicCoaster/Ceramic Coaster - Listing Template.psd");
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - CST - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - CST  - " + data.fileSKU);
+
+// //Generate Print File
+    openTemplate(printTemplatePath);
+    processFile(data);
+    keepColor("print");
+    deleteAllFolders();
+    layerLock("Fill", false);
+    applyColorOverlay("Fill", convertHextoRGB(data.backgroundColor));
+    setActiveLayer("Fill");
+    rasterizeLayer();
+    activeDocument.artLayers[0].merge();
+    savePSD(activeDocument, savePrintDestination);
+    closeDocument();
+
+//Generate Listing File
+    openTemplate(listingTemplatePath);
+    processFile(data, getActiveLayer());
+    keepColor("listing");
+    deleteAllFolders();
+    layerLock("Fill", false);
+    var bgRGB = convertHextoRGB(data.backgroundColor);
+    applyColorOverlay("Fill", bgRGB);
+    setActiveLayer("Fill");
+    rasterizeLayer();
+    if (bgRGB.r <= 35 && bgRGB.g <= 35 && bgRGB.b <= 35) {
+        setFillOpacity("Fill", 90);
+        }
+    activeDocument.artLayers[0].merge();
+    getLayerByName("Fill").blendMode = BlendMode.MULTIPLY;
+    saveJPG(activeDocument, saveListingDestination);
+    closeDocument();
+}
+
+function process_DTS_Magnet(data) {
+    var printTemplatePath = File("C:/Scripting/Templates/Magnet/Magnet - Template.psd");
+    var listingTemplatePath = File("C:/Scripting/Templates/Magnet/Magnet - Listing Template.psd");
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - MT - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - MT - " + data.fileSKU);
+
+// //Generate Print File
+    openTemplate(printTemplatePath);
+    processFile(data);
+    keepColor("print");
+    deleteAllFolders();
+    layerLock("Fill", false);
+    applyColorOverlay("Fill", convertHextoRGB(data.backgroundColor));
+    setActiveLayer("Fill");
+    rasterizeLayer();
+    activeDocument.artLayers[0].merge();
+    savePSD(activeDocument, savePrintDestination);
+    closeDocument();
+
+//Generate Listing File
+    openTemplate(listingTemplatePath);
+    processFile(data, getActiveLayer());
+    keepColor("listing");
+    deleteAllFolders();
+    layerLock("Fill", false);
+    var bgRGB = convertHextoRGB(data.backgroundColor);
+    applyColorOverlay("Fill", bgRGB);
+    setActiveLayer("Fill");
+    rasterizeLayer();
+    if (bgRGB.r <= 35 && bgRGB.g <= 35 && bgRGB.b <= 35) {
+        setFillOpacity("Fill", 90);
+        }
+    activeDocument.artLayers[1].merge();
+    getLayerByName("Fill").blendMode = BlendMode.MULTIPLY;
+    saveJPG(activeDocument, saveListingDestination);
+    closeDocument();
+}
+
+function process_DTS_GlassCoaster(data) {
+    var printTemplatePath = File("C:/Scripting/Templates/CoasterGlass/Glass Coaster - Template.psd");
+    var listingTemplatePath = File("C:/Scripting/Templates/CoasterGlass/Glass Coaster - Listing Template.psd");
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - Glass Coaster - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - Glass Coaster - " + data.fileSKU);
+
+//Generate Print File
+    openTemplate(printTemplatePath);
+    processFile(data);
+    keepColor("print");
+    deleteAllFolders();
+    savePSD(activeDocument, savePrintDestination);
+    closeDocument();
+
+// Generate Listing File
+    openTemplate(listingTemplatePath);
+    processFile(data);
+    keepColor("listing");
+    deleteAllFolders();
+    saveJPG(activeDocument, saveListingDestination);
+    closeDocument();
+
+}
+
+function process_DTS_Flask(data) {
+    var printTemplatePath = File("C:/Scripting/Templates/Flask/DTS - Flask - Template.psd");
+    var listingTemplatePath = File("C:/Scripting/Templates/Flask/Flask - Listing Template.psd");
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - Flask - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - Flask - " + data.fileSKU);
+
+//Generate Print File
+    openTemplate(printTemplatePath);
+    processFile(data);
+    keepColor("print");
+    deleteAllFolders();
+    savePSD(activeDocument, savePrintDestination);
+    closeDocument();
+
+// Generate Listing File
+    openTemplate(listingTemplatePath);
+    processFile(data);
+    keepColor("listing");
+    deleteAllFolders();
+    saveJPG(activeDocument, saveListingDestination);
+    closeDocument();
+}
+
+function process_EP_Flask(data) {
+    var printTemplatePath = File("C:/Scripting/Templates/Flask/EP - Flask - Template.psd");
+    var listingTemplatePath = File("C:/Scripting/Templates/Flask/Flask - Listing Template.psd");
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/EP - Flask - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/EP - Flask - " + data.fileSKU);
+
+//Generate Print File
+    openTemplate(printTemplatePath);
+    processFile(data);
+    keepEP("print");
+    deleteAllFolders();
+    savePSD(activeDocument, savePrintDestination);
+    closeDocument();
+
+// Generate Listing File
+    openTemplate(listingTemplatePath);
+    processFile(data);
+    keepEP("listing");
+    deleteAllFolders();
+    applyEngravingOnSilver("EP");
+    saveJPG(activeDocument, saveListingDestination);
+    closeDocument();
+}
+
+function process_DTS_Mason(data) {
+    var printTemplatePath = File("C:/Scripting/Templates/Mason/DTS - Mason - Template.psd");
+    var listingTemplatePath = File("C:/Scripting/Templates/Mason/Mason - Listing Template.psd");
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - Mason - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - Mason - " + data.fileSKU);
+
+//Generate Print File
+    openTemplate(printTemplatePath);
+    processFile(data);
+    keepColor("print");
+    deleteAllFolders();
+    savePSD(activeDocument, savePrintDestination);
+    closeDocument();
+
+// Generate Listing File
+    openTemplate(listingTemplatePath);
+    processFile(data);
+    keepColor("listing");
+    deleteAllFolders();
+    saveJPG(activeDocument, saveListingDestination);
+    closeDocument();
+}
+
+function process_EP_Vector(data) {
+    var printTemplatePath = File("C:/Scripting/Templates/Vector/EP - Vector - Template.psd");
+    var listingTemplatePath = File("C:/Scripting/Templates/Vector/Vector - Listing Template.psd");
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/EP - VT - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/EP - VT - " + data.fileSKU);
+
+//Generate Print File
+    openTemplate(printTemplatePath);
+    processFile(data);
+    keepEPInverted("print");
+    deleteAllFolders();
+    savePSD(activeDocument, savePrintDestination);
+    closeDocument();
+
+//Generate Listing File
+    openTemplate(listingTemplatePath);
+    processFile(data);
+    keepEPInverted("listing");
+    deleteAllFolders();
+    unlockAllFoldersExcept(["Bases"]);
+    for (var i = 0; i < 3; i++) { //iterate through folders 0, 1, 2
+        selectLayerPixels("EP inverted");
+        makeMask(activeDocument.layerSets[i]);
+    }
+    setLayerVisibility("EP inverted", false);
+    savePSD(activeDocument, saveListingDestination);
+    closeDocument();
+}
+
+function process_DTS_Vector(data) {
+    var printTemplatePath = File("C:/Scripting/Templates/Vector/DTS - Vector - Template.psd");
+    var listingTemplatePath = File("C:/Scripting/Templates/Vector/Vector - Listing Template.psd");
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - VT - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - VT - " + data.fileSKU);
+
+//Generate Print File
+    openTemplate(printTemplatePath);
+    processFile(data);
+    keepColor("print");
+    deleteAllFolders();
+    savePSD(activeDocument, savePrintDestination);
+    closeDocument();
+
+//Generate Listing File
+    openTemplate(listingTemplatePath);
+    processFile(data);
+    keepColor("listing");
+    unlockAllFoldersExcept(["Bases"]);
+    deleteAllFolders();
+    savePSD(activeDocument, saveListingDestination);
+    closeDocument();
 }

@@ -85,6 +85,18 @@ function keepColor(type) {
     }
 }
 
+//Keep EP
+function keepEP(type) {
+    var activeGroup = app.activeDocument.activeLayer;
+    var colorLayer = setActiveLayer(activeGroup.artLayers.getByName("EP"));
+    colorLayer.move(activeDocument.layerSets.getByName("Targets"), ElementPlacement.PLACEBEFORE);
+
+    if (type === "print") {
+        deleteAllLayersExcept(["EP"]);
+    } else { //for listing files
+    }
+}
+
 //Keep EP Inverted layer
 function keepEPInverted(type) {
     var activeGroup = app.activeDocument.activeLayer;
