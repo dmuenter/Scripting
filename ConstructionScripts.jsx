@@ -263,42 +263,15 @@ function applyEngravingOnSilver(targetLayerName) {
 }
 
 //Multiple outputs listing image (specifically, Polar Mug)
-function processBaseVariations(saveListingDestination) {
+function processBases(saveListingDestination) {
     var basesGroup = activeDocument.layerSets.getByName("Bases").artLayers;
-    if (basesGroup[0].name === "SILVER") {
-        applyEngravingOnSilver(activeDocument.artLayers.getByName("EP"));
-        setLayerVisibility("EP inverted", false);
-        var saveListingLoc = File(saveListingDestination + " - " + basesGroup[0].name);
-        saveJPG(activeDocument, saveListingLoc, false);
-        if (basesGroup.length > 1) {
-            activeDocument.artLayers.getByName("EP").remove();
-            selectLayerPixels("EP inverted");
-            activeDocument.layerSets.getByName("Bases").allLocked = false;
-            //activeLayer = activeDocument.layerSets.getByName("Bases").artLayers.getByName("SILVER");
-            //setActiveLayer(activeLayer);
-            //$.writeln("currently selecting " + activeLayer.name);
-            makeMask(activeDocument.layerSets.getByName("Bases").artLayers.getByName("SILVER"));
-            setLayerVisibility("EP inverted", false);
+    setLayerVisibility(activeDocument.layerSets.getByName("Bases"), true);
+    for (var i = 0; i < basesGroup.length; i++) {
+        setLayerVisibility(basesGroup[i], true);
+        if (i != 0) {setLayerVisibility(basesGroup[i-1], false);
         }
-    }
-    var layerToHide;
-    var layerToShow;
-    setActiveLayer(activeDocument.layerSets.getByName("Bases").artLayers.getByName("SILVER"));
-    for (var i = 1; i < basesGroup.length; i++) {
-        if (i === 1) {
-            layerToShow = basesGroup[i].name;
-            $.writeln("need to show " + layerToShow);
-            setLayerVisibility(activeDocument.layerSets.getByName("Bases").artLayers.getByName(layerToShow), true);
-            $.writeln("black base set up")
-        } else {
-            layerToHide = basesGroup[i-1].name;
-            layerToShow = basesGroup[i].name;
-            setLayerVisibility(activeDocument.layerSets.getByName("Bases").artLayers.getByName(layerToHide), false);
-            setLayerVisibility(activeDocument.layerSets.getByName("Bases").artLayers.getByName(layerToShow), true);
-        }
-        $.writeln("starting save for " + basesGroup)
-        saveListingLoc = File(saveListingDestination + " - " + basesGroup[i].name);
-        saveJPG(activeDocument, saveListingLoc, false);
+        saveLocation = File(saveListingDestination + " - " + basesGroup[i].name);
+        saveJPG(activeDocument, saveLocation);
     }
 }
 
