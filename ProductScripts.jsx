@@ -126,6 +126,27 @@ const ProductScripts = [
         key: "dts_VectorCheckbox",
         functionToRun: process_DTS_Vector
     },
+    {
+        key: "ep_BeerMugCheckbox",
+        functionToRun: process_EP_BeerMug
+    },
+    {
+        key: "ep_PintGlassCheckbox",
+        functionToRun: process_EP_PintGlass
+    },
+    {
+        key: "ep_StemlessWineCheckbox",
+        functionToRun: process_EP_StemlessWine
+    },
+    {
+        key: "ep_WineGlassCheckbox",
+        functionToRun: process_EP_WineGlass
+    },
+    {
+        key: "ep_PilsnerGlassCheckbox",
+        functionToRun: process_EP_PilsnerGlass
+    },
+
 ];
 
 // Product Scripts (identification stage)
@@ -331,7 +352,16 @@ function process_EP_PolarMug(data) {
     processFile(data);
     keepBothEP("listing");
     deleteAllFolders();
-    processBaseVariations(saveListingDestination);
+    applyEngravingOnSilver("EP");
+    setLayerVisibility("EP inverted", false);
+    saveJPG(activeDocument, File(saveListingDestination + " - SILVER"));
+    setLayerVisibility("EP", false);
+    selectLayerPixels("EP inverted");
+    layerLock("SILVER", false);
+    makeMask("SILVER");
+    setLayerVisibility("EP inverted", false);
+    setActiveLayer("SILVER");
+    processBases(saveListingDestination);
     closeDocument();
 }
 
@@ -770,15 +800,15 @@ function process_DS_SequinHeart(data) {
     getLayerByName("Color").blendMode = BlendMode.MULTIPLY;
     var saveLocation = File(saveListingDestination + " - UNCOVERED");
     saveJPG(activeDocument, saveLocation);
-    var basesGroup = activeDocument.layerSets.getByName("Bases").artLayers;
-    setLayerVisibility(activeDocument.layerSets.getByName("Bases"), true);
-    for (var i = 0; i < basesGroup.length; i++) {
-        setLayerVisibility(basesGroup[i], true);
-        if (i != 0) {setLayerVisibility(basesGroup[i-1], false);
-        }
-        saveLocation = File(saveListingDestination + " - " + basesGroup[i].name);
-        saveJPG(activeDocument, saveLocation);
-    }
+    // var basesGroup = activeDocument.layerSets.getByName("Bases").artLayers;
+    // setLayerVisibility(activeDocument.layerSets.getByName("Bases"), true);
+    // for (var i = 0; i < basesGroup.length; i++) {
+    //     setLayerVisibility(basesGroup[i], true);
+    //     if (i != 0) {setLayerVisibility(basesGroup[i-1], false);
+    //     }
+    //     saveLocation = File(saveListingDestination + " - " + basesGroup[i].name);
+    //     saveJPG(activeDocument, saveLocation);
+    processBases(saveListingDestination);
     closeDocument();
 }
 
@@ -1026,5 +1056,130 @@ function process_DTS_Vector(data) {
     unlockAllFoldersExcept(["Bases"]);
     deleteAllFolders();
     savePSD(activeDocument, saveListingDestination);
+    closeDocument();
+}
+
+function process_EP_BeerMug(data) {
+    var printTemplatePath = File("C:/Scripting/Templates/BeerMug/EP - Beer Mug - Template.psd");
+    var listingTemplatePath = File("C:/Scripting/Templates/BeerMug/EP - Beer Mug - Listing Template.psd");
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/EP - Beer Mug - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/EP - Beer Mug - " + data.fileSKU);
+
+//Generate Print File
+    openTemplate(printTemplatePath);
+    processFile(data);
+    keepEPInverted("print");
+    deleteAllFolders();
+    apply404040("EP inverted");    
+    savePSD(activeDocument, savePrintDestination);
+    closeDocument();
+
+// Generate Listing File
+    openTemplate(listingTemplatePath);
+    processFile(data);
+    keepEPInverted("listing");
+    deleteAllFolders();
+    applyListingGlassGray("EP inverted");
+    saveJPG(activeDocument, saveListingDestination);
+    closeDocument();
+}
+
+function process_EP_PintGlass(data) {
+    var printTemplatePath = File("C:/Scripting/Templates/BeerMug/EP - Beer Mug - Template.psd");
+    var listingTemplatePath = File("C:/Scripting/Templates/BeerMug/EP - Beer Mug - Listing Template.psd");
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/EP - Beer Mug - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/EP - Beer Mug - " + data.fileSKU);
+
+//Generate Print File
+    openTemplate(printTemplatePath);
+    processFile(data);
+    keepEPInverted("print");
+    deleteAllFolders();
+    apply404040("EP inverted");    
+    savePSD(activeDocument, savePrintDestination);
+    closeDocument();
+
+// Generate Listing File
+    openTemplate(listingTemplatePath);
+    processFile(data);
+    keepEPInverted("listing");
+    deleteAllFolders();
+    applyListingGlassGray("EP inverted");
+    saveJPG(activeDocument, saveListingDestination);
+    closeDocument();
+}
+
+function process_EP_StemlessWine(data) {
+    var printTemplatePath = File("C:/Scripting/Templates/WineGlasses/EP - Wine Glasses - Template.psd");
+    var listingTemplatePath = File("C:/Scripting/Templates/WineGlasses/Stemless Wine - Listing Template.psd");
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/EP - Wine Glass and Stemless - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/EP - Stemless Wine - " + data.fileSKU);
+
+//Generate Print File
+    openTemplate(printTemplatePath);
+    processFile(data);
+    keepEPInverted("print");
+    deleteAllFolders();
+    apply404040("EP inverted");    
+    savePSD(activeDocument, savePrintDestination);
+    closeDocument();
+
+// Generate Listing File
+    openTemplate(listingTemplatePath);
+    processFile(data);
+    keepEPInverted("listing");
+    deleteAllFolders();
+    applyListingGlassGray("EP inverted");
+    saveJPG(activeDocument, saveListingDestination);
+    closeDocument();
+}
+
+function process_EP_WineGlass(data) {
+    var printTemplatePath = File("C:/Scripting/Templates/WineGlasses/EP - Wine Glasses - Template.psd");
+    var listingTemplatePath = File("C:/Scripting/Templates/WineGlasses/Wine Glass - Listing Template.psd");
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/EP - Wine Glass and Stemless - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/EP - Wine Glass - " + data.fileSKU);
+
+//Generate Print File
+    openTemplate(printTemplatePath);
+    processFile(data);
+    keepEPInverted("print");
+    deleteAllFolders();
+    apply404040("EP inverted");    
+    savePSD(activeDocument, savePrintDestination);
+    closeDocument();
+
+// Generate Listing File
+    openTemplate(listingTemplatePath);
+    processFile(data);
+    keepEPInverted("listing");
+    deleteAllFolders();
+    applyListingGlassGray("EP inverted");
+    saveJPG(activeDocument, saveListingDestination);
+    closeDocument();
+}
+
+function process_EP_PilsnerGlass(data) {
+    var printTemplatePath = File("C:/Scripting/Templates/PilsnerGlass/EP - Pilsner - Template.psd");
+    var listingTemplatePath = File("C:/Scripting/Templates/PilsnerGlass/Pilsner - Listing Template.psd");
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/EP - Pilsner - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/EP - Pilsner - " + data.fileSKU);
+
+//Generate Print File
+    openTemplate(printTemplatePath);
+    processFile(data);
+    keepEPInverted("print");
+    deleteAllFolders();
+    apply404040("EP inverted");    
+    savePSD(activeDocument, savePrintDestination);
+    closeDocument();
+
+// Generate Listing File
+    openTemplate(listingTemplatePath);
+    processFile(data);
+    keepEPInverted("listing");
+    deleteAllFolders();
+    applyListingGlassGray("EP inverted");
+    saveJPG(activeDocument, saveListingDestination);
     closeDocument();
 }

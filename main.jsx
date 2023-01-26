@@ -3,10 +3,10 @@
 
 var data = {
     inputFilePath: "C:/Scripting/sampleTall.psd",
-    fileSKU: "EX - 0001",
+    fileSKU: "EX - 0002",
     colorVariationStatus: false,
     imageOrientation: "Tall",
-    backgroundColor: "#ff0000",
+    backgroundColor: "#0000ff",
     products: [
     // "dts_WaterBottleCheckbox",
     // "ep_BeerCanGlassCheckbox",
@@ -39,7 +39,11 @@ var data = {
     // "dts_MasonCheckbox",
     // "ep_VectorCheckbox",
     // "dts_VectorCheckbox",
-]   
+    // "ep_BeerMugCheckbox",
+    // "ep_PintGlassCheckbox",
+    // "ep_StemlessWineCheckbox",
+    // "ep_WineGlassCheckbox",
+]
 };
 
 
