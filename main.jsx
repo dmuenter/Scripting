@@ -2,10 +2,10 @@
 #include "./ProductScripts.jsx";
 
 var data = {
-    inputFilePath: "C:/Scripting/sampleTall.psd",
+    inputFilePath: "C:/Scripting/sampleWide.psd",
     fileSKU: "EX - 0002",
     colorVariationStatus: false,
-    imageOrientation: "Tall",
+    imageOrientation: "Wide",
     backgroundColor: "#0000ff",
     products: [
     // "dts_WaterBottleCheckbox",
@@ -43,6 +43,9 @@ var data = {
     // "ep_PintGlassCheckbox",
     // "ep_StemlessWineCheckbox",
     // "ep_WineGlassCheckbox",
+    // "dts_OrnamentDangleCheckbox",
+    // "dts_WoodMagnetCheckbox",
+    // "dts_WoodPrintCheckbox",
 ]
 };
 

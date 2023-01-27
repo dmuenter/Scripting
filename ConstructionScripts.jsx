@@ -369,6 +369,11 @@ function MoveLayerTo(layerToMove, fX,fY) { //original by Max Kielland
     setActiveLayer(storeLayer);
   }
 
+function createNewLayer(desiredName) {
+    var newLayer = activeDocument.artLayers.add();
+    newLayer.name = desiredName;
+}
+
 function renameLayer(currentName, desiredName) {
     var storeLayer = getActiveLayer();
     setActiveLayer(currentName);
@@ -510,6 +515,15 @@ function convertHextoRGB(hex) {
       g: parseInt(result[2], 16),
       b: parseInt(result[3], 16)
     } : null;
+}
+
+function hexToSolidColorSwatch(hex) {
+    var inputColor = convertHextoRGB(hex);
+    var colorSwatch = new SolidColor;
+    colorSwatch.rgb.red = inputColor.r;
+    colorSwatch.rgb.green = inputColor.g;
+    colorSwatch.rgb.blue = inputColor.b;
+    return colorSwatch;
 }
 
 function getLayerWidth(targetLayer) {

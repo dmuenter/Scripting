@@ -146,7 +146,18 @@ const ProductScripts = [
         key: "ep_PilsnerGlassCheckbox",
         functionToRun: process_EP_PilsnerGlass
     },
-
+    {
+        key: "dts_OrnamentDangleCheckbox",
+        functionToRun: process_DTS_OrnamentDangle
+    },
+    {
+        key: "dts_WoodMagnetCheckbox",
+        functionToRun: process_DTS_WoodMagnet
+    },
+    {
+        key: "dts_WoodPrintCheckbox",
+        functionToRun: process_DTS_WoodPrint
+    },
 ];
 
 // Product Scripts (identification stage)
@@ -749,35 +760,6 @@ function process_DS_SequinSquare(data) {
     closeDocument();
 }
 
-function process_DS_SequinSquare(data) {
-    var printTemplatePath = File("C:/Scripting/Templates/SequinPillows/Sequin Square - Template.psd");
-    var listingTemplatePath = File("C:/Scripting/Templates/SequinPillows/Sequin Square - Listing Template.psd");
-    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DS - Sequin Square - " + data.fileSKU);
-    var saveListingDestination = "C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DS - Sequin Square - " + data.fileSKU;
-
-//Generate Print File
-    openTemplate(printTemplatePath);
-    processFile(data);
-    keepColor("print");
-    deleteAllFolders();
-    savePSD(activeDocument, savePrintDestination);
-    closeDocument();
-
-//Generate Listing File
-    openTemplate(listingTemplatePath);
-    processFile(data);
-    keepColor("listing");
-    deleteAllFolders();
-    getLayerByName("Color").blendMode = BlendMode.MULTIPLY;
-    var saveLocation = File(saveListingDestination + " - UNCOVERED");
-    saveJPG(activeDocument, saveLocation);
-    setLayerVisibility("Hand", true);
-    setLayerVisibility(activeDocument.layerSets.getByName("Bases"), true);
-    saveLocation = File(saveListingDestination + " - SILVER");
-    saveJPG(activeDocument, saveLocation);
-    closeDocument();
-}
-
 function process_DS_SequinHeart(data) {
     var printTemplatePath = File("C:/Scripting/Templates/SequinPillows/Sequin Heart - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/SequinPillows/Sequin Heart - Listing Template.psd");
@@ -800,14 +782,6 @@ function process_DS_SequinHeart(data) {
     getLayerByName("Color").blendMode = BlendMode.MULTIPLY;
     var saveLocation = File(saveListingDestination + " - UNCOVERED");
     saveJPG(activeDocument, saveLocation);
-    // var basesGroup = activeDocument.layerSets.getByName("Bases").artLayers;
-    // setLayerVisibility(activeDocument.layerSets.getByName("Bases"), true);
-    // for (var i = 0; i < basesGroup.length; i++) {
-    //     setLayerVisibility(basesGroup[i], true);
-    //     if (i != 0) {setLayerVisibility(basesGroup[i-1], false);
-    //     }
-    //     saveLocation = File(saveListingDestination + " - " + basesGroup[i].name);
-    //     saveJPG(activeDocument, saveLocation);
     processBases(saveListingDestination);
     closeDocument();
 }
@@ -832,6 +806,9 @@ function process_DTS_AluminumWallet(data){
     keepColor("listing");
     unlockAllFoldersExcept(["Bases"]);
     deleteAllFolders();
+    if (data.imageOrientation === "Wide") {
+        activeDocument.rotateCanvas(-90);
+    }
     savePSD(activeDocument, saveListingDestination);
     closeDocument();
 }
@@ -908,6 +885,9 @@ function process_DTS_Magnet(data) {
         }
     activeDocument.artLayers[1].merge();
     getLayerByName("Fill").blendMode = BlendMode.MULTIPLY;
+    if (data.imageOrientation === "Wide") {
+        activeDocument.rotateCanvas(-90);
+    }
     saveJPG(activeDocument, saveListingDestination);
     closeDocument();
 }
@@ -1180,6 +1160,107 @@ function process_EP_PilsnerGlass(data) {
     keepEPInverted("listing");
     deleteAllFolders();
     applyListingGlassGray("EP inverted");
+    saveJPG(activeDocument, saveListingDestination);
+    closeDocument();
+}
+
+function process_DTS_OrnamentDangle(data) {
+    var printTemplatePath = File("C:/Scripting/Templates/OrnamentDangle/Ornament Sheet - Template.psd");
+    var listingTemplatePath = File("C:/Scripting/Templates/OrnamentDangle/Ornament Dangle - Listing Template.psd");
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - Ornament Sheet - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - Ornament Dangle - " + data.fileSKU);
+
+//Generate Print File
+    openTemplate(printTemplatePath);
+    processFile(data);
+    keepColor("print");
+    deleteAllFolders();
+    setActiveLayer("Color");
+    magicWand(0, 0, 0, false);
+    activeDocument.selection.invert();
+    activeDocument.selection.expand(150);
+    activeDocument.selection.smooth(40);
+    createNewLayer("Fill");
+    setActiveLayer("Fill");
+    activeDocument.selection.fill(hexToSolidColorSwatch(data.backgroundColor));
+    deselect();
+    setActiveLayer("Fill").move(activeDocument.layerSets.getByName("Ornament Shape"), ElementPlacement.PLACEATBEGINNING);
+    setActiveLayer("Color").move(activeDocument.layerSets.getByName("Ornament Shape"), ElementPlacement.PLACEATBEGINNING);
+    activeDocument.layerSets.getByName("Ornament Shape").allLocked = false;
+    applyColorOverlay(activeDocument.layerSets.getByName("Ornament Shape").artLayers.getByName("Hanger"), convertHextoRGB(data.backgroundColor));
+    savePSD(activeDocument, savePrintDestination);
+    closeDocument();
+
+//Generate Listing File
+    openTemplate(listingTemplatePath);
+    processFile(data);
+    keepColor("listing");
+    deleteAllFolders();
+    setActiveLayer("Color");
+    magicWand(0, 0 , 0, false);
+    activeDocument.selection.invert();
+    activeDocument.selection.expand(40);
+    activeDocument.selection.smooth(20);
+    createNewLayer("Fill");
+    setActiveLayer("Fill");
+    activeDocument.selection.fill(hexToSolidColorSwatch(data.backgroundColor));
+    deselect();
+    unlockAllFoldersExcept([]);
+    setActiveLayer("Color").move(activeDocument.layerSets.getByName("Pieces"), ElementPlacement.PLACEATEND);
+    setActiveLayer("Fill").move(activeDocument.layerSets.getByName("Pieces"), ElementPlacement.PLACEATEND);
+    setActiveLayer(activeDocument.layerSets.getByName("Pieces").artLayers.getByName("AttachmentCircle")).move(activeDocument.layerSets.getByName("Pieces"), ElementPlacement.PLACEATEND);
+    applyColorOverlay(activeDocument.layerSets.getByName("Pieces").artLayers.getByName("AttachmentCircle"), convertHextoRGB(data.backgroundColor));
+    savePSD(activeDocument, saveListingDestination);
+    closeDocument();
+}
+
+function process_DTS_WoodMagnet(data) {
+    var printTemplatePath = File("C:/Scripting/Templates/WoodMagnet/DTS - Wood Magnet - Template.psd");
+    var listingTemplatePath = File("C:/Scripting/Templates/WoodMagnet/Wood Magnet - Listing Template.psd");
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - Wood Magnet - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - Wood Magnet - " + data.fileSKU);
+
+//Generate Print File
+    openTemplate(printTemplatePath);
+    processFile(data);
+    keepColor("print");
+    deleteAllFolders();
+    savePSD(activeDocument, savePrintDestination);
+    closeDocument();
+
+//Generate Listing File
+    openTemplate(listingTemplatePath);
+    processFile(data);
+    keepColor("listing");
+    unlockAllFoldersExcept(["Bases"]);
+    deleteAllFolders();
+    saveJPG(activeDocument, saveListingDestination);
+    closeDocument();
+}
+
+function process_DTS_WoodPrint(data) {
+    var printTemplatePath = File("C:/Scripting/Templates/WoodPrint/DTS - Wood Print - Template.psd");
+    var listingTemplatePath = File("C:/Scripting/Templates/WoodPrint/Wood Print - Listing Template.psd");
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - WP - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - WP - " + data.fileSKU);
+
+//Generate Print File
+    openTemplate(printTemplatePath);
+    processFile(data);
+    keepColor("print");
+    deleteAllFolders();
+    savePSD(activeDocument, savePrintDestination);
+    closeDocument();
+
+//Generate Listing File
+    openTemplate(listingTemplatePath);
+    processFile(data);
+    keepColor("listing");
+    unlockAllFoldersExcept(["Bases"]);
+    deleteAllFolders();
+    if (data.imageOrientation === "Wide") {
+        activeDocument.rotateCanvas(-90);
+    }
     saveJPG(activeDocument, saveListingDestination);
     closeDocument();
 }
