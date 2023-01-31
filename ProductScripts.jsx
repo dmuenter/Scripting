@@ -158,6 +158,18 @@ const ProductScripts = [
         key: "dts_WoodPrintCheckbox",
         functionToRun: process_DTS_WoodPrint
     },
+    {
+        key: "dts_SCBCheckbox",
+        functionToRun: process_DTS_SCB
+    },
+    {
+        key: "ep_SCBCheckbox",
+        functionToRun: process_EP_SCB
+    },
+    {
+        key: "dts_CandleCheckbox",
+        functionToRun: process_DTS_Candle
+    },
 ];
 
 // Product Scripts (identification stage)
@@ -166,8 +178,8 @@ function process_DTS_ScotchGlassC(data) {
 //Capitol
     var printTemplatePath = File("C:/Scripting/Templates/ScotchGlass/Scotch - Capitol - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/ScotchGlass/Scotch - Capitol - Listing Template.psd");
-    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/Scotch - Capitol - " + data.fileSKU);
-    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/Scotch - Capitol - " + data.fileSKU);
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - Scotch - Capitol - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - Scotch - Capitol - " + data.fileSKU);
 
 //Generate Print File
     openTemplate(printTemplatePath);
@@ -190,8 +202,8 @@ function process_DTS_ScotchGlassC(data) {
 function process_EP_ScotchGlassC(data) {
     var printTemplatePath = File("C:/Scripting/Templates/ScotchGlass/EP Scotch - Capitol - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/ScotchGlass/Scotch - Capitol - Listing Template.psd");
-    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/EP Scotch - Capitol - " + data.fileSKU);
-    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/EP Scotch - Capitol - " + data.fileSKU);
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/EP - Scotch - Capitol - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/EP - Scotch - " + data.fileSKU);
 
 //Generate Print File
     openTemplate(printTemplatePath);
@@ -209,6 +221,8 @@ function process_EP_ScotchGlassC(data) {
     keepEPInverted("listing");
     deleteAllFolders();
     applyListingGlassGray("EP inverted");
+    setActiveLayer("EP inverted");
+    applyListingGlassInnerGlow();
     saveJPG(activeDocument, saveListingDestination);
     closeDocument();
 }
@@ -217,8 +231,8 @@ function process_DTS_ScotchGlassM(data) {
 //Manhatan
     var printTemplatePath = File("C:/Scripting/Templates/ScotchGlass/Scotch - Manhatan - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/ScotchGlass/Scotch - Manhatan - Listing Template.psd");
-    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/Scotch - Manhatan - " + data.fileSKU);
-    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/Scotch - Manhatan - " + data.fileSKU);
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - Scotch - Manhatan - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - Scotch - Manhatan - " + data.fileSKU);
     
 //Generate Print File
     openTemplate(printTemplatePath);
@@ -243,8 +257,8 @@ function process_EP_ScotchGlassM(data) {
 //Manhatan
     var printTemplatePath = File("C:/Scripting/Templates/ScotchGlass/EP Scotch - Manhatan - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/ScotchGlass/Scotch - Manhatan - Listing Template.psd");
-    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/EP Scotch - Manhatan - " + data.fileSKU);
-    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/EP Scotch - Manhatan - " + data.fileSKU);
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/EP - Scotch - Manhatan - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/EP - Scotch - " + data.fileSKU);
 
 //Generate Print File
     openTemplate(printTemplatePath);
@@ -262,6 +276,8 @@ function process_EP_ScotchGlassM(data) {
     keepEPInverted("listing");
     deleteAllFolders();
     applyListingGlassGray("EP inverted");
+    setActiveLayer("EP inverted");
+    applyListingGlassInnerGlow();
     saveJPG(activeDocument, saveListingDestination);
     closeDocument();
 }
@@ -269,8 +285,8 @@ function process_EP_ScotchGlassM(data) {
 function process_DTS_BeerCanGlass(data) {
     var printTemplatePath = File("C:/Scripting/Templates/BeerCanGlass/Beer Can Glass - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/BeerCanGlass/Beer Can Glass - Listing Template.psd");
-    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/Beer Can Glass - " + data.fileSKU);
-    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/Beer Can Glass - " + data.fileSKU);
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - Beer Can Glass - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - Beer Can Glass - " + data.fileSKU);
 
 //Generate Print File
     openTemplate(printTemplatePath);
@@ -294,8 +310,8 @@ function process_DTS_BeerCanGlass(data) {
 function process_EP_BeerCanGlass(data) {
     var printTemplatePath = File("C:/Scripting/Templates/BeerCanGlass/EP Beer Can Glass - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/BeerCanGlass/Beer Can Glass - Listing Template.psd");
-    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/EP Beer Can Glass - " + data.fileSKU);
-    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/EP Beer Can Glass - " + data.fileSKU);
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/EP - Beer Can Glass - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/EP - Beer Can Glass - " + data.fileSKU);
 
 //Generate Print File
     openTemplate(printTemplatePath);
@@ -314,6 +330,8 @@ function process_EP_BeerCanGlass(data) {
     keepEPInverted("listing");
     deleteAllFolders();
     applyListingGlassGray("EP inverted");
+    setActiveLayer("EP inverted");
+    applyListingGlassInnerGlow();
     saveJPG(activeDocument, saveListingDestination, false);
     closeDocument();
 }
@@ -321,8 +339,8 @@ function process_EP_BeerCanGlass(data) {
 function process_DTS_WaterBottle(data){
     var printTemplatePath = File("C:/Scripting/Templates/WaterBottle/Water Bottle - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/WaterBottle/Water Bottle - Listing Template.psd");
-    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/Water Bottle - " + data.fileSKU);
-    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/Water Bottle - " + data.fileSKU);
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - Water Bottle - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - Water Bottle - " + data.fileSKU);
 
 //Generate Print File
     openTemplate(printTemplatePath);
@@ -611,6 +629,7 @@ function process_DS_DogTag(data) {
     processFile(data);
     keepColor("listing");
     deleteAllFolders();
+    setLayerVisibility(activeDocument.layerSets.getByName("Dog Tag").artLayers.getByName("DS"), true);
     saveJPG(activeDocument, saveListingDestination);
     closeDocument();
 }
@@ -637,6 +656,7 @@ var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Lis
     MoveLayerTo(getLayerByName("Color"), 1967, 2962);
     setLayerVisibility(activeDocument.layerSets.getByName("Dog Tag"), false);
     setLayerVisibility(activeDocument.layerSets.getByName("Key Chain"), true);
+    setLayerVisibility(activeDocument.layerSets.getByName("Key Chain").artLayers.getByName("DS"), true);
     saveJPG(activeDocument, saveListingDestination);
     closeDocument();
 }
@@ -692,8 +712,8 @@ function process_BR_CrewSocks(data) {
 function process_DS_MousePad(data) {
     var printTemplatePath = File("C:/Scripting/Templates/MousePad/MousePad - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/MousePad/MousePad - Listing Template.psd");
-    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/BR - CS - " + data.fileSKU);
-    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/BR - CS - " + data.fileSKU);
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/BR - MP - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/BR - MP - " + data.fileSKU);
 
 //Generate Print File
     openTemplate(printTemplatePath);
@@ -1060,15 +1080,17 @@ function process_EP_BeerMug(data) {
     keepEPInverted("listing");
     deleteAllFolders();
     applyListingGlassGray("EP inverted");
+    setActiveLayer("EP inverted");
+    applyListingGlassInnerGlow();
     saveJPG(activeDocument, saveListingDestination);
     closeDocument();
 }
 
 function process_EP_PintGlass(data) {
-    var printTemplatePath = File("C:/Scripting/Templates/BeerMug/EP - Beer Mug - Template.psd");
-    var listingTemplatePath = File("C:/Scripting/Templates/BeerMug/EP - Beer Mug - Listing Template.psd");
-    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/EP - Beer Mug - " + data.fileSKU);
-    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/EP - Beer Mug - " + data.fileSKU);
+    var printTemplatePath = File("C:/Scripting/Templates/PintGlass/EP - Pint - Template.psd");
+    var listingTemplatePath = File("C:/Scripting/Templates/PintGlass/Pint - Listing Template.psd");
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/EP - Pint - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/EP - Pint - " + data.fileSKU);
 
 //Generate Print File
     openTemplate(printTemplatePath);
@@ -1085,6 +1107,8 @@ function process_EP_PintGlass(data) {
     keepEPInverted("listing");
     deleteAllFolders();
     applyListingGlassGray("EP inverted");
+    setActiveLayer("EP inverted");
+    applyListingGlassInnerGlow();
     saveJPG(activeDocument, saveListingDestination);
     closeDocument();
 }
@@ -1110,6 +1134,8 @@ function process_EP_StemlessWine(data) {
     keepEPInverted("listing");
     deleteAllFolders();
     applyListingGlassGray("EP inverted");
+    setActiveLayer("EP inverted");
+    applyListingGlassInnerGlow();
     saveJPG(activeDocument, saveListingDestination);
     closeDocument();
 }
@@ -1135,6 +1161,8 @@ function process_EP_WineGlass(data) {
     keepEPInverted("listing");
     deleteAllFolders();
     applyListingGlassGray("EP inverted");
+    setActiveLayer("EP inverted");
+    applyListingGlassInnerGlow();
     saveJPG(activeDocument, saveListingDestination);
     closeDocument();
 }
@@ -1160,6 +1188,8 @@ function process_EP_PilsnerGlass(data) {
     keepEPInverted("listing");
     deleteAllFolders();
     applyListingGlassGray("EP inverted");
+    setActiveLayer("EP inverted");
+    applyListingGlassInnerGlow();
     saveJPG(activeDocument, saveListingDestination);
     closeDocument();
 }
@@ -1261,6 +1291,85 @@ function process_DTS_WoodPrint(data) {
     if (data.imageOrientation === "Wide") {
         activeDocument.rotateCanvas(-90);
     }
+    saveJPG(activeDocument, saveListingDestination);
+    closeDocument();
+}
+
+function process_DTS_SCB(data) {
+    var printTemplatePath = File("C:/Scripting/Templates/SCB/DTS - SCB - Template.psd");
+    var listingTemplatePath = File("C:/Scripting/Templates/SCB/DTS - SCB - Listing Template.psd");
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - SCB - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - SCB - " + data.fileSKU);   
+
+//Generate Print File
+    openTemplate(printTemplatePath);
+    processFile(data);
+    keepColor("print");
+    deleteAllFolders();
+    savePSD(activeDocument, savePrintDestination);
+    closeDocument();
+
+//Generate Listing File
+    openTemplate(listingTemplatePath);
+    processFile(data);
+    keepColor("listing");
+    deleteAllFolders();
+    saveJPG(activeDocument, saveListingDestination);
+    closeDocument();
+}
+
+function process_EP_SCB(data) {
+    var printTemplatePath = File("C:/Scripting/Templates/SCB/EP - SCB - Template.psd");
+    var listingTemplatePath = File("C:/Scripting/Templates/SCB/EP - SCB - Listing Template.psd");
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/EP - SCB - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/EP - SCB - " + data.fileSKU);   
+
+//Generate Print File
+    openTemplate(printTemplatePath);
+    processFile(data);
+    keepEP("print");
+    deleteAllFolders();
+    savePSD(activeDocument, savePrintDestination);
+    closeDocument();
+
+
+// INNER SHADOW ANGLE TO BE AT -60 IF POSSIBLE
+//might have to manually do it: https://stackoverflow.com/questions/23572710/applescript-photoshop-apply-layer-style-inner-shadow
+
+//Generate Listing File
+    openTemplate(listingTemplatePath);
+    processFile(data);
+    keepEP("listing");
+    deleteAllFolders();
+    getLayerByName("EP").blendMode = BlendMode.OVERLAY;
+    if (data.imageOrientation === "Wide") {
+        activeDocument.rotateCanvas(-90);
+    }
+    setActiveLayer("EP");
+    applySCBInnerShadow();
+    saveJPG(activeDocument, saveListingDestination);
+    closeDocument();
+}
+
+function process_DTS_Candle(data) {
+    var printTemplatePath = File("C:/Scripting/Templates/Candle/DTS - Candle 6 in - Template.psd");
+    var listingTemplatePath = File("C:/Scripting/Templates/Candle/DTS - Candle 6 in - Listing Template.psd");
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - CANDLE 6 IN - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - CANDLE 6 IN - " + data.fileSKU);   
+
+//Generate Print File
+    openTemplate(printTemplatePath);
+    processFile(data);
+    keepColor("print");
+    deleteAllFolders();
+    savePSD(activeDocument, savePrintDestination);
+    closeDocument();
+
+//Generate Listing File
+    openTemplate(listingTemplatePath);
+    processFile(data);
+    keepColor("listing");
+    deleteAllFolders();
     saveJPG(activeDocument, saveListingDestination);
     closeDocument();
 }

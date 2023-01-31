@@ -6,7 +6,7 @@ var data = {
     fileSKU: "EX - 0002",
     colorVariationStatus: false,
     imageOrientation: "Wide",
-    backgroundColor: "#0000ff",
+    backgroundColor: "#ffffff",
     products: [
     // "dts_WaterBottleCheckbox",
     // "ep_BeerCanGlassCheckbox",
@@ -43,9 +43,13 @@ var data = {
     // "ep_PintGlassCheckbox",
     // "ep_StemlessWineCheckbox",
     // "ep_WineGlassCheckbox",
+    // "ep_PilsnerGlassCheckbox",
     // "dts_OrnamentDangleCheckbox",
     // "dts_WoodMagnetCheckbox",
     // "dts_WoodPrintCheckbox",
+    // "dts_SCBCheckbox",
+    // "ep_SCBCheckbox",
+    // "dts_CandleCheckbox",
 ]
 };
 
