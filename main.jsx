@@ -2,10 +2,10 @@
 #include "./ProductScripts.jsx";
 
 var data = {
-    inputFilePath: "C:/Scripting/sampleWide.psd",
+    inputFilePath: "C:/Scripting/sampleTall.psd",
     fileSKU: "EX - 0002",
     colorVariationStatus: false,
-    imageOrientation: "Wide",
+    imageOrientation: "Tall",
     backgroundColor: "#ffffff",
     products: [
     // "dts_WaterBottleCheckbox",
@@ -50,6 +50,12 @@ var data = {
     // "dts_SCBCheckbox",
     // "ep_SCBCheckbox",
     // "dts_CandleCheckbox",
+    // "vinyl_StickerCheckbox",
+    // "dts_PolarMugCheckbox",
+    "dts_PintGlassCheckbox",
+    "dts_PilsnerGlassCheckbox",
+    "dts_StemlessWineCheckbox",
+    "dts_WineGlassCheckbox",
 ]
 };
 
@@ -78,5 +84,8 @@ function processProducts(data) {
             return product === productsScriptsItem.key;
         })[0].functionToRun(data);
     })
+
+    alert("Script done running.");
+
 }
 

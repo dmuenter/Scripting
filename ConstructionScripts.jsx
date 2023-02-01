@@ -25,6 +25,13 @@ function saveJPG(activeDocument, destination, humanAssist) {
     }
 }
 
+function exportPath(activeDocument, destination) {
+    var pathSaveOptions = new ExportOptionsIllustrator();
+    pathSaveOptions.path = IllustratorPathType.ALLPATHS;
+    //pathSaveOptions.pathName = "Work Path";
+    activeDocument.exportDocument(File(destination + "_cutLine.eps"), ExportType.ILLUSTRATORPATHS, pathSaveOptions);
+}
+
 function closeDocument() {
     app.activeDocument.close(SaveOptions.DONOTSAVECHANGES);
 }
@@ -243,9 +250,6 @@ function applyListingGlassGray(targetLayerName) {
             b: 200,
         });
     rasterizeLayer();
-        // var tempLayer = activeDocument.artLayers.add();
-        // tempLayer.name = "EP inverted";
-        // activeDocument.mergeVisibleLayers();
     setActiveLayer(storeLayer);
 }
 
@@ -425,6 +429,7 @@ function processBases(saveListingDestination) {
     setLayerVisibility(activeDocument.layerSets.getByName("Bases"), true);
     for (var i = 0; i < basesGroup.length; i++) {
         setLayerVisibility(basesGroup[i], true);
+        setActiveLayer(basesGroup[i]); //just added
         if (i != 0) {setLayerVisibility(basesGroup[i-1], false);
         }
         saveLocation = File(saveListingDestination + " - " + basesGroup[i].name);
@@ -694,3 +699,4 @@ function getLayerHeight(activeLayer) {
     var layerBounds = activeLayer.bounds;
     return layerBounds[3] - layerBounds[1];
 }
+

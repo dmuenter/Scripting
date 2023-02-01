@@ -170,6 +170,30 @@ const ProductScripts = [
         key: "dts_CandleCheckbox",
         functionToRun: process_DTS_Candle
     },
+    {
+        key: "vinyl_StickerCheckbox",
+        functionToRun: process_VINYL_Sticker
+    },
+    {
+        key: "dts_PolarMugCheckbox",
+        functionToRun: process_DTS_PolarMug
+    },
+    {
+        key: "dts_PintGlassCheckbox",
+        functionToRun: process_DTS_PintGlass
+    },
+    {
+        key: "dts_PilsnerGlassCheckbox",
+        functionToRun: process_DTS_PilsnerGlass
+    },
+    {
+        key: "dts_StemlessWineCheckbox",
+        functionToRun: process_DTS_StemlessWine
+    },
+    {
+        key: "dts_WineGlassCheckbox",
+        functionToRun: process_DTS_WineGlass
+    },
 ];
 
 // Product Scripts (identification stage)
@@ -392,6 +416,22 @@ function process_EP_PolarMug(data) {
     setActiveLayer("SILVER");
     processBases(saveListingDestination);
     closeDocument();
+}
+
+function process_DTS_PolarMug(data) {
+    var printTemplatePath = File("C:/Scripting/Templates/PolarMug/DTS - Polar Mug - Template.psd");
+    var listingTemplatePath = File("C:/Scripting/Templates/PolarMug/Polar Mug - Listing Template.psd");
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - Polar Mug - " + data.fileSKU);
+    var saveListingDestination = "C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - Polar Mug - " + data.fileSKU;
+
+//Generate Listing Files
+    openTemplate(listingTemplatePath);
+    processFile(data);
+    keepColor("listing");
+    deleteAllFolders();
+    setActiveLayer("SILVER").move(activeDocument.layerSets.getByName("Bases"), ElementPlacement.PLACEATBEGINNING);
+    processBases(saveListingDestination);
+
 }
 
 function process_BR_BaseballCap(data) {
@@ -1113,6 +1153,29 @@ function process_EP_PintGlass(data) {
     closeDocument();
 }
 
+function process_DTS_PintGlass(data) {
+    var printTemplatePath = File("C:/Scripting/Templates/PintGlass/DTS - Pint - Template.psd");
+    var listingTemplatePath = File("C:/Scripting/Templates/PintGlass/Pint - Listing Template.psd");
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - Pint - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - Pint - " + data.fileSKU);
+
+//Generate Print File
+    // openTemplate(printTemplatePath);
+    // processFile(data);
+    // keepColor("print");
+    // deleteAllFolders();
+    // savePSD(activeDocument, savePrintDestination);
+    // closeDocument();
+
+// Generate Listing File
+    openTemplate(listingTemplatePath);
+    processFile(data);
+    keepColor("listing");
+    deleteAllFolders();
+    saveJPG(activeDocument, saveListingDestination);
+    closeDocument();
+}
+
 function process_EP_StemlessWine(data) {
     var printTemplatePath = File("C:/Scripting/Templates/WineGlasses/EP - Wine Glasses - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/WineGlasses/Stemless Wine - Listing Template.psd");
@@ -1136,6 +1199,29 @@ function process_EP_StemlessWine(data) {
     applyListingGlassGray("EP inverted");
     setActiveLayer("EP inverted");
     applyListingGlassInnerGlow();
+    saveJPG(activeDocument, saveListingDestination);
+    closeDocument();
+}
+
+function process_DTS_StemlessWine(data) {
+    var printTemplatePath = File("C:/Scripting/Templates/WineGlasses/DTS - WineGlasses - Template.psd");
+    var listingTemplatePath = File("C:/Scripting/Templates/WineGlasses/Stemless Wine - Listing Template.psd");
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - Stemless Wine - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - Stemless Wine - " + data.fileSKU);
+
+//Generate Print File
+    // openTemplate(printTemplatePath);
+    // processFile(data);
+    // keepColor("print");
+    // deleteAllFolders();
+    // savePSD(activeDocument, savePrintDestination);
+    // closeDocument();
+
+// Generate Listing File
+    openTemplate(listingTemplatePath);
+    processFile(data);
+    keepColor("listing");
+    deleteAllFolders();
     saveJPG(activeDocument, saveListingDestination);
     closeDocument();
 }
@@ -1167,6 +1253,29 @@ function process_EP_WineGlass(data) {
     closeDocument();
 }
 
+function process_DTS_WineGlass(data) {
+    var printTemplatePath = File("C:/Scripting/Templates/WineGlasses/DTS - Wine Glasses - Template.psd");
+    var listingTemplatePath = File("C:/Scripting/Templates/WineGlasses/Wine Glass - Listing Template.psd");
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - Wine Glass and Stemless - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - Wine Glass - " + data.fileSKU);
+
+// //Generate Print File
+//     openTemplate(printTemplatePath);
+//     processFile(data);
+//     keepColor("print");
+//     deleteAllFolders();
+//     savePSD(activeDocument, savePrintDestination);
+//     closeDocument();
+
+// Generate Listing File
+    openTemplate(listingTemplatePath);
+    processFile(data);
+    keepColor("listing");
+    deleteAllFolders();
+    saveJPG(activeDocument, saveListingDestination);
+    closeDocument();
+}
+
 function process_EP_PilsnerGlass(data) {
     var printTemplatePath = File("C:/Scripting/Templates/PilsnerGlass/EP - Pilsner - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/PilsnerGlass/Pilsner - Listing Template.psd");
@@ -1190,6 +1299,29 @@ function process_EP_PilsnerGlass(data) {
     applyListingGlassGray("EP inverted");
     setActiveLayer("EP inverted");
     applyListingGlassInnerGlow();
+    saveJPG(activeDocument, saveListingDestination);
+    closeDocument();
+}
+
+function process_DTS_PilsnerGlass(data) {
+    var printTemplatePath = File("C:/Scripting/Templates/PilsnerGlass/DTS - Pilsner - Template.psd");
+    var listingTemplatePath = File("C:/Scripting/Templates/PilsnerGlass/Pilsner - Listing Template.psd");
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - Pilsner - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - Pilsner - " + data.fileSKU);
+
+//Generate Print File
+    // openTemplate(printTemplatePath);
+    // processFile(data);
+    // keepColor("print");
+    // deleteAllFolders();
+    // savePSD(activeDocument, savePrintDestination);
+    // closeDocument();
+
+// Generate Listing File
+    openTemplate(listingTemplatePath);
+    processFile(data);
+    keepColor("listing");
+    deleteAllFolders();
     saveJPG(activeDocument, saveListingDestination);
     closeDocument();
 }
@@ -1370,6 +1502,61 @@ function process_DTS_Candle(data) {
     processFile(data);
     keepColor("listing");
     deleteAllFolders();
+    saveJPG(activeDocument, saveListingDestination);
+    closeDocument();
+}
+
+function process_VINYL_Sticker(data) {
+    var printTemplatePath = File("C:/Scripting/Templates/Sticker/Sticker - Template.psd");
+    var listingTemplatePath = File("C:/Scripting/Templates/Sticker/Sticker - Listing Template.psd");
+    var savePrintDestination = "C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/VINYL - STK - DC - " + data.fileSKU;
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/VINYL - STK - DC - " + data.fileSKU);   
+
+//Generate Print File
+    openTemplate(printTemplatePath);
+    processFile(data);
+    keepColor("print");
+    deleteAllFolders();
+    setActiveLayer("Color");
+    magicWand(0, 0, 0, false);
+    activeDocument.selection.invert();
+    activeDocument.selection.expand(40);
+    activeDocument.selection.smooth(20);
+    activeDocument.selection.makeWorkPath(0);
+    magicWand(0, 0, 0, false);
+    activeDocument.selection.invert();
+    activeDocument.selection.expand(60);
+    activeDocument.selection.smooth(30);
+    createNewLayer("Fill");
+    setActiveLayer("Fill");
+    activeDocument.selection.fill(hexToSolidColorSwatch(data.backgroundColor));
+    deselect();
+    getLayerByName("Fill").move(getLayerByName("Color"), ElementPlacement.PLACEAFTER);
+    layerLock("SKU", false);
+    getLayerByName("SKU").textItem.contents = "STK - DC - " + data.fileSKU;
+    exportPath(activeDocument, savePrintDestination);
+    savePSD(activeDocument, File(savePrintDestination));
+    closeDocument();
+    
+
+//Generate Listing File
+    openTemplate(listingTemplatePath);
+    processFile(data);
+    keepColor("listing");
+    deleteAllFolders();
+    unlockAllFoldersExcept([]);
+    setActiveLayer("Color");
+    magicWand(0, 0 , 0, false);
+    activeDocument.selection.invert();
+    activeDocument.selection.expand(60);
+    activeDocument.selection.smooth(30);
+    createNewLayer("Fill");
+    setActiveLayer("Fill");
+    activeDocument.selection.fill(hexToSolidColorSwatch(data.backgroundColor));
+    deselect();
+    unlockAllFoldersExcept([]);
+    setActiveLayer("Color").move(activeDocument.layerSets.getByName("Shadow"), ElementPlacement.PLACEATEND);
+    setActiveLayer("Fill").move(activeDocument.layerSets.getByName("Shadow"), ElementPlacement.PLACEATEND);
     saveJPG(activeDocument, saveListingDestination);
     closeDocument();
 }
