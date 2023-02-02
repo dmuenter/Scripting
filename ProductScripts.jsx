@@ -202,7 +202,7 @@ function process_DTS_ScotchGlassC(data) {
 //Capitol
     var printTemplatePath = File("C:/Scripting/Templates/ScotchGlass/Scotch - Capitol - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/ScotchGlass/Scotch - Capitol - Listing Template.psd");
-    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - Scotch - Capitol - " + data.fileSKU);
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - SCOTCH - Capitol - " + data.fileSKU);
     var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - Scotch - Capitol - " + data.fileSKU);
 
 //Generate Print File
@@ -226,7 +226,7 @@ function process_DTS_ScotchGlassC(data) {
 function process_EP_ScotchGlassC(data) {
     var printTemplatePath = File("C:/Scripting/Templates/ScotchGlass/EP Scotch - Capitol - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/ScotchGlass/Scotch - Capitol - Listing Template.psd");
-    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/EP - Scotch - Capitol - " + data.fileSKU);
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/EP - SCOTCH - Capitol - " + data.fileSKU);
     var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/EP - Scotch - " + data.fileSKU);
 
 //Generate Print File
@@ -255,7 +255,7 @@ function process_DTS_ScotchGlassM(data) {
 //Manhatan
     var printTemplatePath = File("C:/Scripting/Templates/ScotchGlass/Scotch - Manhatan - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/ScotchGlass/Scotch - Manhatan - Listing Template.psd");
-    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - Scotch - Manhatan - " + data.fileSKU);
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - SCOTCH - Manhatan - " + data.fileSKU);
     var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - Scotch - Manhatan - " + data.fileSKU);
     
 //Generate Print File
@@ -281,7 +281,7 @@ function process_EP_ScotchGlassM(data) {
 //Manhatan
     var printTemplatePath = File("C:/Scripting/Templates/ScotchGlass/EP Scotch - Manhatan - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/ScotchGlass/Scotch - Manhatan - Listing Template.psd");
-    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/EP - Scotch - Manhatan - " + data.fileSKU);
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/EP - SCOTCH - Manhatan - " + data.fileSKU);
     var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/EP - Scotch - " + data.fileSKU);
 
 //Generate Print File
@@ -309,8 +309,8 @@ function process_EP_ScotchGlassM(data) {
 function process_DTS_BeerCanGlass(data) {
     var printTemplatePath = File("C:/Scripting/Templates/BeerCanGlass/Beer Can Glass - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/BeerCanGlass/Beer Can Glass - Listing Template.psd");
-    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - Beer Can Glass - " + data.fileSKU);
-    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - Beer Can Glass - " + data.fileSKU);
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - BEER CAN - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - Beer Can - " + data.fileSKU);
 
 //Generate Print File
     openTemplate(printTemplatePath);
@@ -334,8 +334,8 @@ function process_DTS_BeerCanGlass(data) {
 function process_EP_BeerCanGlass(data) {
     var printTemplatePath = File("C:/Scripting/Templates/BeerCanGlass/EP Beer Can Glass - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/BeerCanGlass/Beer Can Glass - Listing Template.psd");
-    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/EP - Beer Can Glass - " + data.fileSKU);
-    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/EP - Beer Can Glass - " + data.fileSKU);
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/EP - BEER CAN - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/EP - Beer Can - " + data.fileSKU);
 
 //Generate Print File
     openTemplate(printTemplatePath);
@@ -363,7 +363,7 @@ function process_EP_BeerCanGlass(data) {
 function process_DTS_WaterBottle(data){
     var printTemplatePath = File("C:/Scripting/Templates/WaterBottle/Water Bottle - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/WaterBottle/Water Bottle - Listing Template.psd");
-    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - Water Bottle - " + data.fileSKU);
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - WATER BOTTLE - " + data.fileSKU);
     var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - Water Bottle - " + data.fileSKU);
 
 //Generate Print File
@@ -388,7 +388,7 @@ function process_DTS_WaterBottle(data){
 function process_EP_PolarMug(data) {
     var printTemplatePath = File("C:/Scripting/Templates/PolarMug/EP - Polar Mug - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/PolarMug/Polar Mug - Listing Template.psd");
-    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/EP - Polar Mug - " + data.fileSKU);
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/EP - POLAR MUG - " + data.fileSKU);
     var saveListingDestination = "C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/EP - Polar Mug - " + data.fileSKU;
 
 //Generate Print File
@@ -421,7 +421,7 @@ function process_EP_PolarMug(data) {
 function process_DTS_PolarMug(data) {
     var printTemplatePath = File("C:/Scripting/Templates/PolarMug/DTS - Polar Mug - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/PolarMug/Polar Mug - Listing Template.psd");
-    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - Polar Mug - " + data.fileSKU);
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - POLAR MUG - " + data.fileSKU);
     var saveListingDestination = "C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - Polar Mug - " + data.fileSKU;
 
 //Generate Listing Files
@@ -437,7 +437,7 @@ function process_DTS_PolarMug(data) {
 function process_BR_BaseballCap(data) {
     var printTemplatePath = File("C:/Scripting/Templates/Hat/Hat - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/Hat/Hat - Listing Template.psd");
-    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/BR - Hat - " + data.fileSKU);
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/BR - HT - " + data.fileSKU);
     var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/BR - Hat - " + data.fileSKU);
 
 //Generate Print File
@@ -467,7 +467,7 @@ function process_BR_BaseballCap(data) {
 function process_DS_Mug(data) {
     var printTemplatePath = File("C:/Scripting/Templates/Mug/Mug - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/Mug/Mug - Listing Template.psd");
-    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DS - Mug - " + data.fileSKU);
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DS - MG - " + data.fileSKU);
     var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DS - Mug - " + data.fileSKU);
 
 //Generate Print File
@@ -510,8 +510,8 @@ function process_DS_Mug(data) {
 function process_BR_Patch(data) {
     var printTemplatePath = File("C:/Scripting/Templates/Patch/Patch - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/Patch/Patch - Listing Template.psd");
-    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/BR - Patch - " + data.fileSKU);
-    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/BR - Patch - " + data.fileSKU);
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/BR - HS P - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/BR - HS Patch - " + data.fileSKU);
 
 //Generate Print File
     openTemplate(printTemplatePath);
@@ -552,7 +552,7 @@ function process_BR_Patch(data) {
 function process_BR_Beanie(data) {
     var printTemplatePath = File("C:/Scripting/Templates/Beanie/Beanie - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/Beanie/Beanie - Listing Template.psd");
-    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/BR - Beanie - " + data.fileSKU);
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/BR - BEANIE - " + data.fileSKU);
     var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/BR - Beanie - " + data.fileSKU);
 
 //Generate Print File
@@ -576,7 +576,7 @@ function process_BR_Beanie(data) {
 function process_BR_Pillowcase (data) {
     var printTemplatePath = File("C:/Scripting/Templates/Pillowcase/Pillowcase - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/Pillowcase/Pillowcase - Listing Template.psd");
-    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/BR - Pillowcase - " + data.fileSKU);
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/BR - PC - " + data.fileSKU);
     var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/BR - Pillowcase - " + data.fileSKU);
 
 //Generate Print File
@@ -600,7 +600,7 @@ function process_EP_DogTag(data) {
     var printTemplatePath = File("C:/Scripting/Templates/DogTag KeyChain/EP DT KC - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/DogTag KeyChain/DT KC - Listing Template.psd");
     var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/EP - DT KC - " + data.fileSKU);
-    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/EP - DT - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/EP - Dog Tag - " + data.fileSKU);
 
 // //Generate Print File
     openTemplate(printTemplatePath);
@@ -625,7 +625,7 @@ function process_EP_KeyChain(data) {
 var printTemplatePath = File("C:/Scripting/Templates/DogTag KeyChain/EP DT KC - Template.psd");
 var listingTemplatePath = File("C:/Scripting/Templates/DogTag KeyChain/DT KC - Listing Template.psd");
 var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/EP - DT KC - " + data.fileSKU);
-var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/EP - KC - " + data.fileSKU);
+var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/EP - Key Chain - " + data.fileSKU);
 
 //Generate Print File
     openTemplate(printTemplatePath);
@@ -654,7 +654,7 @@ function process_DS_DogTag(data) {
     var printTemplatePath = File("C:/Scripting/Templates/DogTag KeyChain/DS DT KC - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/DogTag KeyChain/DT KC - Listing Template.psd");
     var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DS - DT KC - " + data.fileSKU);
-    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DS - DT - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DS - Dog Tag - " + data.fileSKU);
 
 // //Generate Print File
     openTemplate(printTemplatePath);
@@ -678,7 +678,7 @@ function process_DS_KeyChain(data) {
 var printTemplatePath = File("C:/Scripting/Templates/DogTag KeyChain/DS DT KC - Template.psd");
 var listingTemplatePath = File("C:/Scripting/Templates/DogTag KeyChain/DT KC - Listing Template.psd");
 var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DS - DT KC - " + data.fileSKU);
-var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DS - KC - " + data.fileSKU);
+var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DS - Key Chain - " + data.fileSKU);
 
 //Generate Print File
     openTemplate(printTemplatePath);
@@ -704,7 +704,7 @@ var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Lis
 function process_BR_Apron(data) {
     var printTemplatePath = File("C:/Scripting/Templates/Apron/Apron - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/Apron/Apron - Listing Template.psd");
-    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/BR - Apron - " + data.fileSKU);
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/BR - APRON - " + data.fileSKU);
     var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/BR - Apron - " + data.fileSKU);
 
 //Generate Print File
@@ -729,7 +729,7 @@ function process_BR_CrewSocks(data) {
     var printTemplatePath = File("C:/Scripting/Templates/CrewSocks/Crew Socks - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/CrewSocks/Crew Socks - Listing Template.psd");
     var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/BR - CS - " + data.fileSKU);
-    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/BR - CS - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/BR - CrewSocks - " + data.fileSKU);
 
 //Generate Print File
     openTemplate(printTemplatePath);
@@ -753,7 +753,7 @@ function process_DS_MousePad(data) {
     var printTemplatePath = File("C:/Scripting/Templates/MousePad/MousePad - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/MousePad/MousePad - Listing Template.psd");
     var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/BR - MP - " + data.fileSKU);
-    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/BR - MP - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/BR - MousePad - " + data.fileSKU);
 
 //Generate Print File
     openTemplate(printTemplatePath);
@@ -794,7 +794,7 @@ function process_DS_MousePad(data) {
 function process_DS_SequinSquare(data) {
     var printTemplatePath = File("C:/Scripting/Templates/SequinPillows/Sequin Square - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/SequinPillows/Sequin Square - Listing Template.psd");
-    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DS - Sequin Square - " + data.fileSKU);
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DS - SEQUIN SQUARE - " + data.fileSKU);
     var saveListingDestination = "C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DS - Sequin Square - " + data.fileSKU;
 
 //Generate Print File
@@ -823,7 +823,7 @@ function process_DS_SequinSquare(data) {
 function process_DS_SequinHeart(data) {
     var printTemplatePath = File("C:/Scripting/Templates/SequinPillows/Sequin Heart - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/SequinPillows/Sequin Heart - Listing Template.psd");
-    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DS - Sequin Heart - " + data.fileSKU);
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DS - SEQUIN HEART - " + data.fileSKU);
     var saveListingDestination = "C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DS - Sequin Heart - " + data.fileSKU;
 
 //Generate Print File
@@ -850,7 +850,7 @@ function process_DTS_AluminumWallet(data){
     var printTemplatePath = File("C:/Scripting/Templates/AluminumWallet/Aluminum Wallet - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/AluminumWallet/Aluminum Wallet - Listing Template.psd");
     var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - AW - " + data.fileSKU);
-    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - AW  - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - AluminumWallet  - " + data.fileSKU);
 
 //Generate Print File
     openTemplate(printTemplatePath);
@@ -877,7 +877,7 @@ function process_DTS_CeramicCoaster(data) {
     var printTemplatePath = File("C:/Scripting/Templates/CeramicCoaster/Ceramic Coaster - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/CeramicCoaster/Ceramic Coaster - Listing Template.psd");
     var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - CST - " + data.fileSKU);
-    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - CST  - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - Ceramic Coaster  - " + data.fileSKU);
 
 // //Generate Print File
     openTemplate(printTemplatePath);
@@ -915,7 +915,7 @@ function process_DTS_Magnet(data) {
     var printTemplatePath = File("C:/Scripting/Templates/Magnet/Magnet - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/Magnet/Magnet - Listing Template.psd");
     var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - MT - " + data.fileSKU);
-    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - MT - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - Magnet - " + data.fileSKU);
 
 // //Generate Print File
     openTemplate(printTemplatePath);
@@ -955,8 +955,8 @@ function process_DTS_Magnet(data) {
 function process_DTS_GlassCoaster(data) {
     var printTemplatePath = File("C:/Scripting/Templates/CoasterGlass/Glass Coaster - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/CoasterGlass/Glass Coaster - Listing Template.psd");
-    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - Glass Coaster - " + data.fileSKU);
-    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - Glass Coaster - " + data.fileSKU);
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - SQUARE COASTER - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - Square Glass Coaster - " + data.fileSKU);
 
 //Generate Print File
     openTemplate(printTemplatePath);
@@ -979,7 +979,7 @@ function process_DTS_GlassCoaster(data) {
 function process_DTS_Flask(data) {
     var printTemplatePath = File("C:/Scripting/Templates/Flask/DTS - Flask - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/Flask/Flask - Listing Template.psd");
-    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - Flask - " + data.fileSKU);
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - FLASK - " + data.fileSKU);
     var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - Flask - " + data.fileSKU);
 
 //Generate Print File
@@ -1002,7 +1002,7 @@ function process_DTS_Flask(data) {
 function process_EP_Flask(data) {
     var printTemplatePath = File("C:/Scripting/Templates/Flask/EP - Flask - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/Flask/Flask - Listing Template.psd");
-    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/EP - Flask - " + data.fileSKU);
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/EP - FLASK - " + data.fileSKU);
     var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/EP - Flask - " + data.fileSKU);
 
 //Generate Print File
@@ -1026,8 +1026,8 @@ function process_EP_Flask(data) {
 function process_DTS_Mason(data) {
     var printTemplatePath = File("C:/Scripting/Templates/Mason/DTS - Mason - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/Mason/Mason - Listing Template.psd");
-    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - Mason - " + data.fileSKU);
-    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - Mason - " + data.fileSKU);
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - MASON JAR - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - Mason Jar - " + data.fileSKU);
 
 //Generate Print File
     openTemplate(printTemplatePath);
@@ -1050,7 +1050,7 @@ function process_EP_Vector(data) {
     var printTemplatePath = File("C:/Scripting/Templates/Vector/EP - Vector - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/Vector/Vector - Listing Template.psd");
     var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/EP - VT - " + data.fileSKU);
-    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/EP - VT - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/EP - Vector - " + data.fileSKU);
 
 //Generate Print File
     openTemplate(printTemplatePath);
@@ -1079,7 +1079,7 @@ function process_DTS_Vector(data) {
     var printTemplatePath = File("C:/Scripting/Templates/Vector/DTS - Vector - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/Vector/Vector - Listing Template.psd");
     var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - VT - " + data.fileSKU);
-    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - VT - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - Vector - " + data.fileSKU);
 
 //Generate Print File
     openTemplate(printTemplatePath);
@@ -1102,7 +1102,7 @@ function process_DTS_Vector(data) {
 function process_EP_BeerMug(data) {
     var printTemplatePath = File("C:/Scripting/Templates/BeerMug/EP - Beer Mug - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/BeerMug/EP - Beer Mug - Listing Template.psd");
-    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/EP - Beer Mug - " + data.fileSKU);
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/EP - BEER MUG - " + data.fileSKU);
     var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/EP - Beer Mug - " + data.fileSKU);
 
 //Generate Print File
@@ -1129,7 +1129,7 @@ function process_EP_BeerMug(data) {
 function process_EP_PintGlass(data) {
     var printTemplatePath = File("C:/Scripting/Templates/PintGlass/EP - Pint - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/PintGlass/Pint - Listing Template.psd");
-    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/EP - Pint - " + data.fileSKU);
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/EP - PINT - " + data.fileSKU);
     var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/EP - Pint - " + data.fileSKU);
 
 //Generate Print File
@@ -1156,7 +1156,7 @@ function process_EP_PintGlass(data) {
 function process_DTS_PintGlass(data) {
     var printTemplatePath = File("C:/Scripting/Templates/PintGlass/DTS - Pint - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/PintGlass/Pint - Listing Template.psd");
-    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - Pint - " + data.fileSKU);
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - PINT - " + data.fileSKU);
     var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - Pint - " + data.fileSKU);
 
 //Generate Print File
@@ -1179,7 +1179,7 @@ function process_DTS_PintGlass(data) {
 function process_EP_StemlessWine(data) {
     var printTemplatePath = File("C:/Scripting/Templates/WineGlasses/EP - Wine Glasses - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/WineGlasses/Stemless Wine - Listing Template.psd");
-    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/EP - Wine Glass and Stemless - " + data.fileSKU);
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/EP - WINE - " + data.fileSKU);
     var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/EP - Stemless Wine - " + data.fileSKU);
 
 //Generate Print File
@@ -1206,7 +1206,7 @@ function process_EP_StemlessWine(data) {
 function process_DTS_StemlessWine(data) {
     var printTemplatePath = File("C:/Scripting/Templates/WineGlasses/DTS - WineGlasses - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/WineGlasses/Stemless Wine - Listing Template.psd");
-    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - Stemless Wine - " + data.fileSKU);
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - WINE - " + data.fileSKU);
     var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - Stemless Wine - " + data.fileSKU);
 
 //Generate Print File
@@ -1229,7 +1229,7 @@ function process_DTS_StemlessWine(data) {
 function process_EP_WineGlass(data) {
     var printTemplatePath = File("C:/Scripting/Templates/WineGlasses/EP - Wine Glasses - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/WineGlasses/Wine Glass - Listing Template.psd");
-    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/EP - Wine Glass and Stemless - " + data.fileSKU);
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/EP - WINE - " + data.fileSKU);
     var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/EP - Wine Glass - " + data.fileSKU);
 
 //Generate Print File
@@ -1256,7 +1256,7 @@ function process_EP_WineGlass(data) {
 function process_DTS_WineGlass(data) {
     var printTemplatePath = File("C:/Scripting/Templates/WineGlasses/DTS - Wine Glasses - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/WineGlasses/Wine Glass - Listing Template.psd");
-    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - Wine Glass and Stemless - " + data.fileSKU);
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - WINE - " + data.fileSKU);
     var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - Wine Glass - " + data.fileSKU);
 
 // //Generate Print File
@@ -1279,7 +1279,7 @@ function process_DTS_WineGlass(data) {
 function process_EP_PilsnerGlass(data) {
     var printTemplatePath = File("C:/Scripting/Templates/PilsnerGlass/EP - Pilsner - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/PilsnerGlass/Pilsner - Listing Template.psd");
-    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/EP - Pilsner - " + data.fileSKU);
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/EP - PILSNER - " + data.fileSKU);
     var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/EP - Pilsner - " + data.fileSKU);
 
 //Generate Print File
@@ -1306,7 +1306,7 @@ function process_EP_PilsnerGlass(data) {
 function process_DTS_PilsnerGlass(data) {
     var printTemplatePath = File("C:/Scripting/Templates/PilsnerGlass/DTS - Pilsner - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/PilsnerGlass/Pilsner - Listing Template.psd");
-    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - Pilsner - " + data.fileSKU);
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - PILSNER - " + data.fileSKU);
     var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - Pilsner - " + data.fileSKU);
 
 //Generate Print File
@@ -1329,7 +1329,7 @@ function process_DTS_PilsnerGlass(data) {
 function process_DTS_OrnamentDangle(data) {
     var printTemplatePath = File("C:/Scripting/Templates/OrnamentDangle/Ornament Sheet - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/OrnamentDangle/Ornament Dangle - Listing Template.psd");
-    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - Ornament Sheet - " + data.fileSKU);
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - ORNAMENT SHEET 12x12 - " + data.fileSKU);
     var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - Ornament Dangle - " + data.fileSKU);
 
 //Generate Print File
@@ -1379,7 +1379,7 @@ function process_DTS_OrnamentDangle(data) {
 function process_DTS_WoodMagnet(data) {
     var printTemplatePath = File("C:/Scripting/Templates/WoodMagnet/DTS - Wood Magnet - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/WoodMagnet/Wood Magnet - Listing Template.psd");
-    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - Wood Magnet - " + data.fileSKU);
+    var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - WOOD MAGNET - " + data.fileSKU);
     var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - Wood Magnet - " + data.fileSKU);
 
 //Generate Print File
@@ -1404,7 +1404,7 @@ function process_DTS_WoodPrint(data) {
     var printTemplatePath = File("C:/Scripting/Templates/WoodPrint/DTS - Wood Print - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/WoodPrint/Wood Print - Listing Template.psd");
     var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - WP - " + data.fileSKU);
-    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - WP - " + data.fileSKU);
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - Wood Print - " + data.fileSKU);
 
 //Generate Print File
     openTemplate(printTemplatePath);
@@ -1431,7 +1431,7 @@ function process_DTS_SCB(data) {
     var printTemplatePath = File("C:/Scripting/Templates/SCB/DTS - SCB - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/SCB/DTS - SCB - Listing Template.psd");
     var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - SCB - " + data.fileSKU);
-    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - SCB - " + data.fileSKU);   
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - Small Cutting Board - " + data.fileSKU);   
 
 //Generate Print File
     openTemplate(printTemplatePath);
@@ -1454,7 +1454,7 @@ function process_EP_SCB(data) {
     var printTemplatePath = File("C:/Scripting/Templates/SCB/EP - SCB - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/SCB/EP - SCB - Listing Template.psd");
     var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/EP - SCB - " + data.fileSKU);
-    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/EP - SCB - " + data.fileSKU);   
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/EP - Small Cutting Board - " + data.fileSKU);   
 
 //Generate Print File
     openTemplate(printTemplatePath);
@@ -1487,7 +1487,7 @@ function process_DTS_Candle(data) {
     var printTemplatePath = File("C:/Scripting/Templates/Candle/DTS - Candle 6 in - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/Candle/DTS - Candle 6 in - Listing Template.psd");
     var savePrintDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - CANDLE 6 IN - " + data.fileSKU);
-    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - CANDLE 6 IN - " + data.fileSKU);   
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - Candle 6 in - " + data.fileSKU);   
 
 //Generate Print File
     openTemplate(printTemplatePath);
@@ -1510,7 +1510,7 @@ function process_VINYL_Sticker(data) {
     var printTemplatePath = File("C:/Scripting/Templates/Sticker/Sticker - Template.psd");
     var listingTemplatePath = File("C:/Scripting/Templates/Sticker/Sticker - Listing Template.psd");
     var savePrintDestination = "C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/VINYL - STK - DC - " + data.fileSKU;
-    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/VINYL - STK - DC - " + data.fileSKU);   
+    var saveListingDestination = File("C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/VINYL - Sticker - DC - " + data.fileSKU);   
 
 //Generate Print File
     openTemplate(printTemplatePath);

@@ -45,7 +45,7 @@ var productsListColor =
         { type: Types.COLOR, department: Departments.DTS, key: "dts_WoodPrintCheckbox", label: "Wood Print" },
 
         { type: Types.COLOR, department: Departments.BR, key: "br_ApronCheckbox", label: "Apron" },
-        { type: Types.COLOR, department: Departments.BR, key: "br_BaseballCapCheckbox", label: "Baseball Cap" },
+        { type: Types.COLOR, department: Departments.BR, key: "br_BaseballCapCheckbox", label: "Hat" },
         { type: Types.COLOR, department: Departments.BR, key: "br_BeanieCheckbox", label: "Beanie" },
         { type: Types.COLOR, department: Departments.BR, key: "br_CrewSocksCheckbox", label: "Crew Socks" },
         { type: Types.COLOR, department: Departments.BR, key: "br_PatchCheckbox", label: "Patch (4x4 in)" },

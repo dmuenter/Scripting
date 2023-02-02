@@ -52,10 +52,10 @@ var data = {
     // "dts_CandleCheckbox",
     // "vinyl_StickerCheckbox",
     // "dts_PolarMugCheckbox",
-    "dts_PintGlassCheckbox",
-    "dts_PilsnerGlassCheckbox",
-    "dts_StemlessWineCheckbox",
-    "dts_WineGlassCheckbox",
+    // "dts_PintGlassCheckbox",
+    // "dts_PilsnerGlassCheckbox",
+    // "dts_StemlessWineCheckbox",
+    // "dts_WineGlassCheckbox",
 ]
 };
 
