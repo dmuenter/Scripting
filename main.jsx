@@ -68,6 +68,13 @@ function main(data) {
     processProducts(data);
 }
 
+function checkforOutputsFolder() {
+    var outputsFolder = Folder("C:/Scripting/Outputs");
+    if (! outputsFoldersFolder.exists) {
+        outputsFolder.create();
+    }
+}
+
 function createDestinationFolders(data) {
     var destinationFolder = new Folder("C:/Scripting/Outputs/" + data.fileSKU);
     destinationFolder.create();
