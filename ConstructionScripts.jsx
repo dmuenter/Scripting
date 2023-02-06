@@ -25,6 +25,13 @@ function saveJPG(activeDocument, destination, humanAssist) {
     }
 }
 
+function exportPath(activeDocument, destination) {
+    var pathSaveOptions = new ExportOptionsIllustrator();
+    pathSaveOptions.path = IllustratorPathType.ALLPATHS;
+    //pathSaveOptions.pathName = "Work Path";
+    activeDocument.exportDocument(File(destination + "_cutLine.eps"), ExportType.ILLUSTRATORPATHS, pathSaveOptions);
+}
+
 function closeDocument() {
     app.activeDocument.close(SaveOptions.DONOTSAVECHANGES);
 }
@@ -238,14 +245,11 @@ function applyListingGlassGray(targetLayerName) {
     setActiveLayer(targetLayerName);
     applyColorOverlay(targetLayerName,
         {
-            r: 188,
-            g: 188,
-            b: 188,
+            r: 200, //original was 188, 230 was too light
+            g: 200,
+            b: 200,
         });
     rasterizeLayer();
-        // var tempLayer = activeDocument.artLayers.add();
-        // tempLayer.name = "EP inverted";
-        // activeDocument.mergeVisibleLayers();
     setActiveLayer(storeLayer);
 }
 
@@ -262,12 +266,170 @@ function applyEngravingOnSilver(targetLayerName) {
     setActiveLayer(storeLayer);
 }
 
+//Inner Shadow
+
+function applySCBInnerShadow() {
+    var idsetd = charIDToTypeID( "setd" );
+    var desc8 = new ActionDescriptor();
+    var idnull = charIDToTypeID( "null" );
+    var ref4 = new ActionReference();
+    var idPrpr = charIDToTypeID( "Prpr" );
+    var idLefx = charIDToTypeID( "Lefx" );
+    ref4.putProperty( idPrpr, idLefx );
+    var idLyr = charIDToTypeID( "Lyr " );
+    var idOrdn = charIDToTypeID( "Ordn" );
+    var idTrgt = charIDToTypeID( "Trgt" );
+    ref4.putEnumerated( idLyr, idOrdn, idTrgt );
+    desc8.putReference( idnull, ref4 );
+    var idT = charIDToTypeID( "T   " );
+    var desc9 = new ActionDescriptor();
+    var idgagl = charIDToTypeID( "gagl" );
+    var idAng = charIDToTypeID( "#Ang" );
+    desc9.putUnitDouble( idgagl, idAng, -60.000000 );
+    var idScl = charIDToTypeID( "Scl " );
+    var idPrc = charIDToTypeID( "#Prc" );
+    desc9.putUnitDouble( idScl, idPrc, 100.000000 );
+    var idIrSh = charIDToTypeID( "IrSh" );
+    var desc10 = new ActionDescriptor();
+    var idenab = charIDToTypeID( "enab" );
+    desc10.putBoolean( idenab, true );
+    var idMd = charIDToTypeID( "Md  " );
+    var idBlnM = charIDToTypeID( "BlnM" );
+    var idDrkn = charIDToTypeID( "Mltp" );
+    desc10.putEnumerated( idMd, idBlnM, idDrkn );
+    var idClr = charIDToTypeID( "Clr " );
+    var desc11 = new ActionDescriptor();
+    var idRd = charIDToTypeID( "Rd  " );
+    desc11.putDouble( idRd, 92.0 );
+    var idGrn = charIDToTypeID( "Grn " );
+    desc11.putDouble( idGrn, 0.0 );
+    var idBl = charIDToTypeID( "Bl  " );
+    desc11.putDouble( idBl, 0.0 );
+    var idRGBC = charIDToTypeID( "RGBC" );
+    desc10.putObject( idClr, idRGBC, desc11 );
+    var idOpct = charIDToTypeID( "Opct" );
+    var idPrc = charIDToTypeID( "#Prc" );
+    desc10.putUnitDouble( idOpct, idPrc, 50.000000 );
+    var iduglg = charIDToTypeID( "uglg" );
+    desc10.putBoolean( iduglg, true );
+    var idlagl = charIDToTypeID( "lagl" );
+    var idAng = charIDToTypeID( "#Ang" );
+    desc10.putUnitDouble( idlagl, idAng, -60.000000 ); //idk what this is
+    var idDstn = charIDToTypeID( "Dstn" );
+    var idPxl = charIDToTypeID( "#Pxl" );
+    desc10.putUnitDouble( idDstn, idPxl, 4.000000 );
+    var idCkmt = charIDToTypeID( "Ckmt" );
+    var idPxl = charIDToTypeID( "#Pxl" );
+    desc10.putUnitDouble( idCkmt, idPxl, 2.000000 );
+    var idblur = charIDToTypeID( "blur" );
+    var idPxl = charIDToTypeID( "#Pxl" );
+    desc10.putUnitDouble( idblur, idPxl, 2.000000 );
+    var idNose = charIDToTypeID( "Nose" );
+    var idPrc = charIDToTypeID( "#Prc" );
+    desc10.putUnitDouble( idNose, idPrc, 0.000000 );
+    var idAntA = charIDToTypeID( "AntA" );
+    desc10.putBoolean( idAntA, false );
+    var idTrnS = charIDToTypeID( "TrnS" );
+    var desc12 = new ActionDescriptor();
+    var idNm = charIDToTypeID( "Nm  " );
+    desc12.putString( idNm, "Linear" );
+    var idShpC = charIDToTypeID( "ShpC" );
+    desc10.putObject( idTrnS, idShpC, desc12 );
+    var idIrSh = charIDToTypeID( "IrSh" );
+    desc9.putObject( idIrSh, idIrSh, desc10 );
+    var idLefx = charIDToTypeID( "Lefx" );
+    desc8.putObject( idT, idLefx, desc9 );
+    executeAction( idsetd, desc8, DialogModes.NO );
+}
+
+function applyListingGlassInnerGlow() {
+    var idsetd = charIDToTypeID( "setd" );
+    var desc6 = new ActionDescriptor();
+    var idnull = charIDToTypeID( "null" );
+        var ref1 = new ActionReference();
+        var idPrpr = charIDToTypeID( "Prpr" );
+        var idLefx = charIDToTypeID( "Lefx" );
+        ref1.putProperty( idPrpr, idLefx );
+        var idLyr = charIDToTypeID( "Lyr " );
+        var idOrdn = charIDToTypeID( "Ordn" );
+        var idTrgt = charIDToTypeID( "Trgt" );
+        ref1.putEnumerated( idLyr, idOrdn, idTrgt );
+    desc6.putReference( idnull, ref1 );
+    var idT = charIDToTypeID( "T   " );
+        var desc7 = new ActionDescriptor();
+        var idScl = charIDToTypeID( "Scl " );
+        var idPrc = charIDToTypeID( "#Prc" );
+        desc7.putUnitDouble( idScl, idPrc, 100.000000 );
+        var idIrGl = charIDToTypeID( "IrGl" );
+            var desc8 = new ActionDescriptor();
+            var idenab = charIDToTypeID( "enab" );
+            desc8.putBoolean( idenab, true );
+            var idpresent = stringIDToTypeID( "present" );
+            desc8.putBoolean( idpresent, true );
+            var idshowInDialog = stringIDToTypeID( "showInDialog" );
+            desc8.putBoolean( idshowInDialog, true );
+            var idMd = charIDToTypeID( "Md  " );
+            var idBlnM = charIDToTypeID( "BlnM" );
+            var idMltp = charIDToTypeID( "Mltp" );
+            desc8.putEnumerated( idMd, idBlnM, idMltp );
+            var idClr = charIDToTypeID( "Clr " );
+                var desc9 = new ActionDescriptor();
+                var idRd = charIDToTypeID( "Rd  " );
+                desc9.putDouble( idRd, 0.000000 );
+                var idGrn = charIDToTypeID( "Grn " );
+                desc9.putDouble( idGrn, 0.000000 );
+                var idBl = charIDToTypeID( "Bl  " );
+                desc9.putDouble( idBl, 0.000000 );
+            var idRGBC = charIDToTypeID( "RGBC" );
+            desc8.putObject( idClr, idRGBC, desc9 );
+            var idOpct = charIDToTypeID( "Opct" );
+            var idPrc = charIDToTypeID( "#Prc" );
+            desc8.putUnitDouble( idOpct, idPrc, 20.000000 );
+            var idGlwT = charIDToTypeID( "GlwT" );
+            var idBETE = charIDToTypeID( "BETE" );
+            var idSfBL = charIDToTypeID( "SfBL" );
+            desc8.putEnumerated( idGlwT, idBETE, idSfBL );
+            var idCkmt = charIDToTypeID( "Ckmt" );
+            var idPxl = charIDToTypeID( "#Pxl" );
+            desc8.putUnitDouble( idCkmt, idPxl, 0.000000 );
+            var idblur = charIDToTypeID( "blur" );
+            var idPxl = charIDToTypeID( "#Pxl" );
+            desc8.putUnitDouble( idblur, idPxl, 5.000000 );
+            var idNose = charIDToTypeID( "Nose" );
+            var idPrc = charIDToTypeID( "#Prc" );
+            desc8.putUnitDouble( idNose, idPrc, 0.000000 );
+            var idShdN = charIDToTypeID( "ShdN" );
+            var idPrc = charIDToTypeID( "#Prc" );
+            desc8.putUnitDouble( idShdN, idPrc, 0.000000 );
+            var idAntA = charIDToTypeID( "AntA" );
+            desc8.putBoolean( idAntA, false );
+            var idTrnS = charIDToTypeID( "TrnS" );
+                var desc10 = new ActionDescriptor();
+                var idNm = charIDToTypeID( "Nm  " );
+                desc10.putString( idNm, """Linear""" );
+            var idShpC = charIDToTypeID( "ShpC" );
+            desc8.putObject( idTrnS, idShpC, desc10 );
+            var idInpr = charIDToTypeID( "Inpr" );
+            var idPrc = charIDToTypeID( "#Prc" );
+            desc8.putUnitDouble( idInpr, idPrc, 50.000000 );
+            var idglwS = charIDToTypeID( "glwS" );
+            var idIGSr = charIDToTypeID( "IGSr" );
+            var idSrcE = charIDToTypeID( "SrcE" );
+            desc8.putEnumerated( idglwS, idIGSr, idSrcE );
+        var idIrGl = charIDToTypeID( "IrGl" );
+        desc7.putObject( idIrGl, idIrGl, desc8 );
+    var idLefx = charIDToTypeID( "Lefx" );
+    desc6.putObject( idT, idLefx, desc7 );
+executeAction( idsetd, desc6, DialogModes.NO );
+}
+
 //Multiple outputs listing image (specifically, Polar Mug)
 function processBases(saveListingDestination) {
     var basesGroup = activeDocument.layerSets.getByName("Bases").artLayers;
     setLayerVisibility(activeDocument.layerSets.getByName("Bases"), true);
     for (var i = 0; i < basesGroup.length; i++) {
         setLayerVisibility(basesGroup[i], true);
+        setActiveLayer(basesGroup[i]); //just added
         if (i != 0) {setLayerVisibility(basesGroup[i-1], false);
         }
         saveLocation = File(saveListingDestination + " - " + basesGroup[i].name);
@@ -368,6 +530,11 @@ function MoveLayerTo(layerToMove, fX,fY) { //original by Max Kielland
 
     setActiveLayer(storeLayer);
   }
+
+function createNewLayer(desiredName) {
+    var newLayer = activeDocument.artLayers.add();
+    newLayer.name = desiredName;
+}
 
 function renameLayer(currentName, desiredName) {
     var storeLayer = getActiveLayer();
@@ -512,6 +679,15 @@ function convertHextoRGB(hex) {
     } : null;
 }
 
+function hexToSolidColorSwatch(hex) {
+    var inputColor = convertHextoRGB(hex);
+    var colorSwatch = new SolidColor;
+    colorSwatch.rgb.red = inputColor.r;
+    colorSwatch.rgb.green = inputColor.g;
+    colorSwatch.rgb.blue = inputColor.b;
+    return colorSwatch;
+}
+
 function getLayerWidth(targetLayer) {
     $.writeln(targetLayer.name);
     var layerBounds = targetLayer.bounds;
@@ -523,3 +699,4 @@ function getLayerHeight(activeLayer) {
     var layerBounds = activeLayer.bounds;
     return layerBounds[3] - layerBounds[1];
 }
+

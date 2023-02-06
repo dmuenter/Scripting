@@ -17,25 +17,67 @@ const Departments = {
     VINYL: "Vinyl",
     EP: "EP",
     BR: "Brother",
+    DS: "Dye Sub"
 };
 
 var productsListColor =
     [
+        { type: Types.COLOR, department: Departments.DTS, key: "dts_AluminumWalletCheckbox", label: "Aluminum Wallet" },
+        { type: Types.COLOR, department: Departments.DTS, key: "dts_BeerCanGlassCheckbox", label: "Beer Can Glass" },
+        { type: Types.COLOR, department: Departments.DTS, key: "dts_CandleCheckbox", label: "Candle (6 in)" },
+        { type: Types.COLOR, department: Departments.DTS, key: "dts_CeramicCoasterCheckbox", label: "Ceramic Round Coaster" },
+        { type: Types.COLOR, department: Departments.DTS, key: "dts_FlaskCheckbox", label: "Flask" },
+        { type: Types.COLOR, department: Departments.DTS, key: "dts_GlassCoasterCheckbox", label: "Glass Square Coaster" },
+        { type: Types.COLOR, department: Departments.DTS, key: "dts_MagnetCheckbox", label: "Magnet" },
+        { type: Types.COLOR, department: Departments.DTS, key: "dts_MasonCheckbox", label: "Mason" },
+        { type: Types.COLOR, department: Departments.DTS, key: "dts_OrnamentDangleCheckbox", label: "Ornament/Dangle" },
+        { type: Types.COLOR, department: Departments.DTS, key: "dts_PilsnerGlassCheckbox", label: "Pilsner Glass" },
+        { type: Types.COLOR, department: Departments.DTS, key: "dts_PintGlassCheckbox", label: "Pint Glass" },
+        { type: Types.COLOR, department: Departments.DTS, key: "dts_PolarMugCheckbox", label: "Polar Mug" },
         { type: Types.COLOR, department: Departments.DTS, key: "dts_ScotchCGlassCheckbox", label: "Scotch Glass (Capitol)" },
         { type: Types.COLOR, department: Departments.DTS, key: "dts_ScotchMGlassCheckbox", label: "Scotch Glass (Manhatan)" },
-        { type: Types.COLOR, department: Departments.DTS, key: "dts_BeerCanGlassCheckbox", label: "Beer Can Glass" },
+        { type: Types.COLOR, department: Departments.DTS, key: "dts_SCBCheckbox", label: "Small Cutting Board" },
+        { type: Types.COLOR, department: Departments.DTS, key: "dts_StemlessWineCheckbox", label: "Stemless Wine Glass" },
+        { type: Types.COLOR, department: Departments.DTS, key: "dts_WineGlassCheckbox", label: "Wine Glass" },
+        { type: Types.COLOR, department: Departments.DTS, key: "dts_VectorCheckbox", label: "Vector" },
         { type: Types.COLOR, department: Departments.DTS, key: "dts_WaterBottleCheckbox", label: "Water Bottle" },
-        { type: Types.COLOR, department: Departments.VINYL, key: "vinyl_DieCutStickerCheckbox", label: "Die Cut Sticker" },
-        { type: Types.COLOR, department: Departments.VINYL, key: "vinyl_SquareStickerCheckbox", label: "Square Sticker" },
-        { type: Types.COLOR, department: Departments.BR, key: "br_BaseballCapCheckbox", label: "Baseball Cap" },
+        { type: Types.COLOR, department: Departments.DTS, key: "dts_WoodMagnetCheckbox", label: "Wood Magnet" },
+        { type: Types.COLOR, department: Departments.DTS, key: "dts_WoodPrintCheckbox", label: "Wood Print" },
+
+        { type: Types.COLOR, department: Departments.BR, key: "br_ApronCheckbox", label: "Apron" },
+        { type: Types.COLOR, department: Departments.BR, key: "br_BaseballCapCheckbox", label: "Hat" },
+        { type: Types.COLOR, department: Departments.BR, key: "br_BeanieCheckbox", label: "Beanie" },
+        { type: Types.COLOR, department: Departments.BR, key: "br_CrewSocksCheckbox", label: "Crew Socks" },
+        { type: Types.COLOR, department: Departments.BR, key: "br_PatchCheckbox", label: "Patch (4x4 in)" },
+        { type: Types.COLOR, department: Departments.BR, key: "br_PillowcaseCheckbox", label: "Pillowcase" },
+        
         { type: Types.COLOR, department: Departments.DTS, key: "ds_MugCheckbox", label: "Coffee Mug" },
+        { type: Types.COLOR, department: Departments.DTS, key: "ds_DogTagCheckbox", label: "Dog Tag" },
+        { type: Types.COLOR, department: Departments.DTS, key: "ds_KeyChainCheckbox", label: "Key Chain" },
+        { type: Types.COLOR, department: Departments.DTS, key: "ds_MousePadCheckbox", label: "Mouse Pad" },
+        { type: Types.COLOR, department: Departments.DTS, key: "ds_SequinHeartCheckbox", label: "Sequin Heart Case" },
+        { type: Types.COLOR, department: Departments.DTS, key: "ds_SequinSquareCheckbox", label: "Sequin Square Case" },
+
+        { type: Types.COLOR, department: Departments.VINYL, key: "vinyl_DieCutStickerCheckbox", label: "Die Cut Sticker" },
     ];
 
 var productsListEngraving =
     [  
+        { type: Types.ENGRAVING, department: Departments.EP, key: "ep_BeerCanGlassCheckbox", label: "Beer Can Glass" },
+        { type: Types.ENGRAVING, department: Departments.EP, key: "ep_BeerMugCheckbox", label: "Beer Mug" },
+        { type: Types.ENGRAVING, department: Departments.EP, key: "ep_DogTagCheckbox", label: "Dog Tag" },
+        { type: Types.ENGRAVING, department: Departments.EP, key: "ep_KeyChainCheckbox", label: "Key Chain" },
+        { type: Types.ENGRAVING, department: Departments.EP, key: "ep_FlaskCheckbox", label: "Flask" },
+        { type: Types.ENGRAVING, department: Departments.EP, key: "ep_PilsnerGlassCheckbox", label: "Pilsner Glass" },
+        { type: Types.ENGRAVING, department: Departments.EP, key: "ep_PintGlassCheckbox", label: "Pint Glass" },
+        { type: Types.ENGRAVING, department: Departments.EP, key: "ep_PolarMugCheckbox", label: "Polar Mug" },
         { type: Types.ENGRAVING, department: Departments.EP, key: "ep_ScotchCGlassCheckbox", label: "Scotch Glass (Capitol)" },
         { type: Types.ENGRAVING, department: Departments.EP, key: "ep_ScotchMGlassCheckbox", label: "Scotch Glass (Manhatan)" },
-        { type: Types.ENGRAVING, department: Departments.EP, key: "ep_BeerCanGlassCheckbox", label: "Beer Can Glass" },
+        { type: Types.ENGRAVING, department: Departments.EP, key: "ep_SCBCheckbox", label: "Small Cutting Board" },
+        { type: Types.ENGRAVING, department: Departments.EP, key: "ep_StemlessWineCheckbox", label: "Stemless Wine Glass" },
+        { type: Types.ENGRAVING, department: Departments.EP, key: "ep_WineGlassCheckbox", label: "Wine Glass" },
+        { type: Types.ENGRAVING, department: Departments.EP, key: "ep_VectorCheckbox", label: "Vector" },
+
 
     ]
 
