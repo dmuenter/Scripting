@@ -2,10 +2,11 @@
 #include "./ProductScripts.jsx";
 
 var data = {
-    inputFilePath: "C:/Scripting/sampleTall.psd",
-    fileSKU: "EX - 0002",
+    inputFilePath: "C:/Scripting/sampleSquare.psd",
+    fileSKU: "EX - 0001",
     colorVariationStatus: false,
-    imageOrientation: "Tall",
+    PSPStatus: false,
+    imageOrientation: "Square",
     backgroundColor: "#ffffff",
     products: [
     // "dts_WaterBottleCheckbox",

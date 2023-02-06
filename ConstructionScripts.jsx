@@ -173,6 +173,20 @@ function unlockAllFoldersExcept(foldersToKeepLocked) {
     }
 }
 
+function unlockAllLayersExcept(layersToKeepLocked) {
+    var layersToUnlock = [];
+    var layerCt = activeDocument.artLayers.length;
+    for (var layerUnlockCt = 0; layerUnlockCt < layerCt; layerUnlockCt++) {
+        if (layersToKeepLocked.includes(activeDocument.artLayers[layerUnlockCt].name)) {
+            $.writeln("ensuring that " + activeDocument.artLayers[layerUnlockCt].name + " is locked");
+            activeDocument.artLayers[layerUnlockCt].allLocked = true;
+        } else {
+            $.writeln ("unlocking " + activeDocument.artLayers[layerUnlockCt].name);
+            activeDocument.artLayers[layerUnlockCt].allLocked = false;
+        }
+    }
+}
+
 function deleteAllFolders() {
     var foldersToDelete = [];
     var folderCt = activeDocument.layerSets.length;
@@ -432,8 +446,8 @@ function processBases(saveListingDestination) {
         setActiveLayer(basesGroup[i]); //just added
         if (i != 0) {setLayerVisibility(basesGroup[i-1], false);
         }
-        saveLocation = File(saveListingDestination + " - " + basesGroup[i].name);
-        saveJPG(activeDocument, saveLocation);
+        saveLocation = saveListingDestination + " - " + basesGroup[i].name;
+        saveJPG(activeDocument, File(saveLocation));
     }
 }
 
@@ -700,3 +714,16 @@ function getLayerHeight(activeLayer) {
     return layerBounds[3] - layerBounds[1];
 }
 
+//Pot Smoking Pals specific stuff
+
+function switchToPSPTemplate(baseTemplate) {
+    return baseTemplate.replace(".psd", " - PSP.psd");
+}
+
+function setPSPBackground() {
+    if (data.imageOrientation === "Wide") {
+        setLayerVisibility("Horizontal", true);
+    } else {
+        setLayerVisibility("Vertical", true);
+    }
+}

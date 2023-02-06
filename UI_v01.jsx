@@ -133,7 +133,7 @@ var statictext2 = group2.add("statictext", undefined, undefined, {name: "statict
 var fileSKUInput = group2.add('edittext {properties: {name: "fileSKUInput"}}'); 
     fileSKUInput.text = "e.g. \u0022EX - 0001\u0022"; 
 
-// Create Group to Hold Variation Color Change Info (group 3)
+// Create Group to Hold Variation Color Change Info (group 3) and also PSP status
 // ======
 var group3 = panel1.add("group", undefined, {name: "group3"}); 
     group3.orientation = "row"; 
@@ -143,6 +143,8 @@ var group3 = panel1.add("group", undefined, {name: "group3"});
 
 var colorVariationStatusInput = group3.add("checkbox", undefined, undefined, {name: "colorVariationStatusInput"}); 
     colorVariationStatusInput.text = "Are variations color only changes?"; 
+var PSPStatusInput = group3.add("checkbox", undefined, undefined, {name: "PSPStatusInput"}); 
+    PSPStatusInput.text = "Is this a Pot Smoking Pals design?"; 
 
 // Create Group to Hold Image Orientation (Group 4)
 // ======
@@ -266,7 +268,7 @@ function uiRunButtonOnClick() {
         inputFilePath: filePathInput.text,
         fileSKU: fileSKUInput.text,
         colorVariationStatus: colorVariationStatusInput.value,
-        imageOrientation: imageOrientationInput.selection,
+        PSPStatus: PSPStatusInput.value, imageOrientation: imageOrientationInput.selection,
         backgroundColor: bgColorHexInput.text,
         products: []
     };
