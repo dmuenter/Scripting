@@ -1464,10 +1464,6 @@ function process_EP_SCB(data) {
     savePSD(activeDocument, savePrintDestination);
     closeDocument();
 
-
-// INNER SHADOW ANGLE TO BE AT -60 IF POSSIBLE
-//might have to manually do it: https://stackoverflow.com/questions/23572710/applescript-photoshop-apply-layer-style-inner-shadow
-
 //Generate Listing File
     openTemplate(listingTemplatePath);
     processFile(data);
