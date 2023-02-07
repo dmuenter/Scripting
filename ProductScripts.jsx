@@ -382,7 +382,7 @@ function process_DTS_WaterBottle(data){
     keepColor("listing");
     unlockAllFoldersExcept(["Bases"]);
     deleteAllFolders();
-    savePSD(activeDocument, File(saveListingDestination));
+    savePSD(activeDocument, File(saveListingDestination), true);
     closeDocument();
 }
 
@@ -618,7 +618,7 @@ function process_EP_DogTag(data) {
     deleteAllFolders();
     applyColorOverlay("EP", convertHextoRGB("#c8c8c8"));
     applyColorOverlay("EP inverted", convertHextoRGB("#c8c8c8"));
-    savePSD(activeDocument, File(saveListingDestination));
+    savePSD(activeDocument, File(saveListingDestination), true);
     closeDocument();
 }
 
@@ -647,7 +647,7 @@ var saveListingDestination = "C:/Scripting/Outputs/" + data.fileSKU + "/Listing 
     setLayerVisibility(activeDocument.layerSets.getByName("Key Chain"), true);
     applyColorOverlay("EP", convertHextoRGB("#c8c8c8"));
     applyColorOverlay("EP inverted", convertHextoRGB("#c8c8c8"));
-    savePSD(activeDocument, File(saveListingDestination));
+    savePSD(activeDocument, File(saveListingDestination), true);
     closeDocument();
 }
 
@@ -870,7 +870,7 @@ function process_DTS_AluminumWallet(data){
     if (data.imageOrientation === "Wide") {
         activeDocument.rotateCanvas(-90);
     }
-    savePSD(activeDocument, File(saveListingDestination));
+    savePSD(activeDocument, File(saveListingDestination), true);
     closeDocument();
 }
 
@@ -1093,7 +1093,7 @@ function process_EP_Vector(data) {
         makeMask(activeDocument.layerSets[i]);
     }
     setLayerVisibility("EP inverted", false);
-    savePSD(activeDocument, File(saveListingDestination));
+    savePSD(activeDocument, File(saveListingDestination), true);
     closeDocument();
 }
 
@@ -1117,7 +1117,7 @@ function process_DTS_Vector(data) {
     keepColor("listing");
     unlockAllFoldersExcept(["Bases"]);
     deleteAllFolders();
-    savePSD(activeDocument, File(saveListingDestination));
+    savePSD(activeDocument, File(saveListingDestination), true);
     closeDocument();
 }
 
@@ -1372,7 +1372,7 @@ function process_DTS_OrnamentDangle(data) {
     setActiveLayer("Color").move(activeDocument.layerSets.getByName("Ornament Shape"), ElementPlacement.PLACEATBEGINNING);
     activeDocument.layerSets.getByName("Ornament Shape").allLocked = false;
     applyColorOverlay(activeDocument.layerSets.getByName("Ornament Shape").artLayers.getByName("Hanger"), convertHextoRGB(data.backgroundColor));
-    savePSD(activeDocument, File(savePrintDestination));
+    savePSD(activeDocument, File(savePrintDestination), true);
     closeDocument();
 
 //Generate Listing File
@@ -1394,7 +1394,7 @@ function process_DTS_OrnamentDangle(data) {
     setActiveLayer("Fill").move(activeDocument.layerSets.getByName("Pieces"), ElementPlacement.PLACEATEND);
     setActiveLayer(activeDocument.layerSets.getByName("Pieces").artLayers.getByName("AttachmentCircle")).move(activeDocument.layerSets.getByName("Pieces"), ElementPlacement.PLACEATEND);
     applyColorOverlay(activeDocument.layerSets.getByName("Pieces").artLayers.getByName("AttachmentCircle"), convertHextoRGB(data.backgroundColor));
-    savePSD(activeDocument, File(saveListingDestination));
+    savePSD(activeDocument, File(saveListingDestination), true);
     closeDocument();
 }
 

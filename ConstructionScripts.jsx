@@ -9,7 +9,7 @@ function openTemplate(path) {
 
 function savePSD(activeDocument, destination, humanAssist) {
     if (humanAssist === true) {
-        assistFiles.push(destination);
+        assistFiles.push(destination.fullName + ".psd");
     }
     var psdSaveOptions = new PhotoshopSaveOptions();
     psdSaveOptions.alphaChannels = true;
