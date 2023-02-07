@@ -2,11 +2,11 @@
 #include "./ProductScripts.jsx";
 
 var data = {
-    inputFilePath: "C:/Scripting/sampleSquare.psd",
-    fileSKU: "EX - 0001",
+    inputFilePath: "C:/Scripting/sampleTall.psd",
+    fileSKU: "TALL",
     colorVariationStatus: false,
     PSPStatus: false,
-    imageOrientation: "Square",
+    imageOrientation: "Tall",
     backgroundColor: "#ffffff",
     products: [
     // "dts_WaterBottleCheckbox",
@@ -60,6 +60,7 @@ var data = {
 ]
 };
 
+var assistFiles = [];
 
 //main(data); //comment out if using UI, renenable if testing from main
 function main(data) {
@@ -83,9 +84,6 @@ function createDestinationFolders(data) {
     listingFilesFolder.create();
 }
 
-var assistFiles = [];
-
-
 function processProducts(data) {
     data.products.forEach(function(product) {
         ProductScripts.filter(function(productsScriptsItem) {
@@ -96,7 +94,7 @@ function processProducts(data) {
         open(File(assistFile));
     })
     if (assistFiles.length > 0) {
-        alert("Script done running. Please alter opened files that need human judgment.");
+        alert("Script done running. Please make decisions and changes for opened files that need human judgment.");
     } else {
         alert("Script done running.");
     }

@@ -723,30 +723,15 @@ function switchToPSPTemplate(baseTemplate) {
     return baseTemplate.replace(".psd", " - PSP.psd");
 }
 
-function setPSPBackground() {
-    if (data.imageOrientation === "Wide") {
-        setLayerVisibility("Horizontal", true);
-    } else {
-        setLayerVisibility("Vertical", true);
+function setPSPBackground(data) {
+    try {
+        getLayerByName("Horizontal");
+            if (data.imageOrientation === "Wide") {
+                setLayerVisibility("Horizontal", true);
+            } else {
+                setLayerVisibility("Vertical", true);
+            }
+    } catch (error) {
+            setLayerVisibility("Fill"), true;
     }
-
-//preliminary checker for if it detects horizontal/vertical layers it will do
-// the check, otherwise it just makes fill visible for single orientation files
-// var layers = activeDocument.artLayers;
-// var checker;
-// for (i = 0; i < layers.length; i++) {
-//     if (layers.name == "Horizontal") {
-//         checker = true;
-//     }
-// }
-// if (checker = true) {
-// if (data.imageOrientation === "Wide") {
-//     setLayerVisibility("Horizontal", true);
-// } else {
-//     setLayerVisibility("Vertical", true);
-// }
-// } else {
-//     setLayerVisibility("Fill"), true;
-// }
-
 }

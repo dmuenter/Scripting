@@ -227,8 +227,8 @@ function process_DTS_ScotchGlassC(data) {
 function process_EP_ScotchGlassC(data) {
     var printTemplatePath = "C:/Scripting/Templates/ScotchGlass/EP Scotch - Capitol - Template.psd";
     var listingTemplatePath = "C:/Scripting/Templates/ScotchGlass/Scotch - Capitol - Listing Template.psd";
-    var savePrintDestination = "C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/EP - SCOTCH - Capitol - " + data.fileSKU;
-    var saveListingDestination = "C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/EP - Scotch - " + data.fileSKU;
+    var savePrintDestination = "C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/EP - SCOTCH - " + data.fileSKU;
+    var saveListingDestination = "C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/EP - Scotch - Capitol - " + data.fileSKU;
 
 //Generate Print File
     openTemplate(File(printTemplatePath));
@@ -256,7 +256,7 @@ function process_DTS_ScotchGlassM(data) {
 //Manhatan
     var printTemplatePath = "C:/Scripting/Templates/ScotchGlass/Scotch - Manhatan - Template.psd";
     var listingTemplatePath = "C:/Scripting/Templates/ScotchGlass/Scotch - Manhatan - Listing Template.psd";
-    var savePrintDestination = "C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - SCOTCH - Manhatan - " + data.fileSKU;
+    var savePrintDestination = "C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - SCOTCH - " + data.fileSKU;
     var saveListingDestination = "C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - Scotch - Manhatan - " + data.fileSKU;
     
 //Generate Print File
@@ -471,6 +471,11 @@ function process_DS_Mug(data) {
     var savePrintDestination = "C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DS - MG - " + data.fileSKU;
     var saveListingDestination = "C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DS - Mug - " + data.fileSKU;
 
+    if (data.PSPStatus === true) {
+        printTemplatePath = switchToPSPTemplate(printTemplatePath);
+        //Listing image shows only front side so conversion is not necessary
+    }
+
 //Generate Print File
     openTemplate(File(printTemplatePath));
     processFile(data);
@@ -478,24 +483,45 @@ function process_DS_Mug(data) {
     deleteAllFolders();
     setActiveLayer("Color");
     getActiveLayer().copy();
-    magicWand (1900, 600, 0, true);
-    activeDocument.paste();
-    //deselect();
-    activeDocument.artLayers[0].merge();
-    renameLayer("Color", "Top Set");
-    activeLayer = activeDocument.artLayers[0];
-    magicWand (650, 1650, 0, true);
-    activeDocument.paste();
-    magicWand (1900, 1650, 0, true);
-    activeDocument.paste();
-    activeDocument.artLayers[0].merge();
-    renameLayer("Layer 1", "Mid Set");
-    magicWand (650, 2700, 0, true);
-    activeDocument.paste();
-    magicWand (1900, 2700, 0, true);
-    activeDocument.paste();
-    activeDocument.artLayers[0].merge();
-    renameLayer("Layer 1", "Bot Set");
+
+    if (data.PSPStatus === true) {
+        getLayerByName("Logo Top").move(activeDocument.artLayers.getByName("Color"), ElementPlacement.PLACEAFTER);
+        layerLock("Logo Top", false);
+        activeDocument.artLayers[0].merge();
+        renameLayer("Logo Top", "Top Set");
+        magicWand (1900, 1650, 0, true);
+        activeDocument.paste();
+        getLayerByName("Logo Mid").move(activeDocument.artLayers.getByName("Layer 1"), ElementPlacement.PLACEAFTER);
+        layerLock("Logo Mid", false);
+        activeDocument.artLayers[0].merge();
+        renameLayer("Logo Mid", "Mid Set");
+        magicWand (1900, 2700, 0, true);
+        activeDocument.paste();
+        getLayerByName("Logo Bot").move(activeDocument.artLayers.getByName("Layer 1"), ElementPlacement.PLACEAFTER);
+        layerLock("Logo Bot", false);
+        activeDocument.artLayers[0].merge();
+        renameLayer("Logo Bot", "Bot Set");
+
+    } else {
+        magicWand (1900, 600, 0, true);
+        activeDocument.paste();
+        activeDocument.artLayers[0].merge();
+        renameLayer("Color", "Top Set");
+        activeLayer = activeDocument.artLayers[0];
+        magicWand (650, 1650, 0, true);
+        activeDocument.paste();
+        magicWand (1900, 1650, 0, true);
+        activeDocument.paste();
+        activeDocument.artLayers[0].merge();
+        renameLayer("Layer 1", "Mid Set");
+        magicWand (650, 2700, 0, true);
+        activeDocument.paste();
+        magicWand (1900, 2700, 0, true);
+        activeDocument.paste();
+        activeDocument.artLayers[0].merge();
+        renameLayer("Layer 1", "Bot Set");
+        
+    }
     savePSD(activeDocument, File(savePrintDestination));
     closeDocument();
 
@@ -514,15 +540,26 @@ function process_BR_Patch(data) {
     var savePrintDestination = "C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/BR - HS P - " + data.fileSKU;
     var saveListingDestination = "C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/BR - HS Patch - " + data.fileSKU;
 
+    if (data.PSPStatus === true) {
+        printTemplatePath = switchToPSPTemplate(printTemplatePath);
+        listingTemplatePath = switchToPSPTemplate(listingTemplatePath);
+    }
+
 //Generate Print File
     openTemplate(File(printTemplatePath));
     processFile(data);
     keepColor("print");
     deleteAllFolders();
     layerLock("Fill", false);
-    applyColorOverlay("Fill", convertHextoRGB(data.backgroundColor));
-    setActiveLayer("Fill");
-    rasterizeLayer();
+
+    if (data.PSPStatus === true) {
+        setPSPBackground(data);
+
+    } else {
+        applyColorOverlay("Fill", convertHextoRGB(data.backgroundColor));
+        setActiveLayer("Fill");
+        rasterizeLayer();
+    }
     activeDocument.artLayers[0].merge();
     savePSD(activeDocument, File(savePrintDestination));
     closeDocument();
@@ -533,19 +570,26 @@ function process_BR_Patch(data) {
     keepColor("listing");
     deleteAllFolders();
     layerLock("Fill", false);
-    var bgRGB = convertHextoRGB(data.backgroundColor);
-    applyColorOverlay("Fill", bgRGB);
-    setActiveLayer("Fill");
-    rasterizeLayer();
-    if (bgRGB.r <= 35 && bgRGB.g <= 35 && bgRGB.b <= 35) {
-        setFillOpacity("Fill", 90);
+
+    if (data.PSPStatus === true) {
+        setPSPBackground(data);
+        activeDocument.artLayers[0].merge();
+
+    } else {
+        var bgRGB = convertHextoRGB(data.backgroundColor);
+        applyColorOverlay("Fill", bgRGB);
+        setActiveLayer("Fill");
+        rasterizeLayer();
+        if (bgRGB.r <= 35 && bgRGB.g <= 35 && bgRGB.b <= 35) {
+            setFillOpacity("Fill", 90);
         }
-    selectLayerPixels("Color");
-    activeDocument.selection.invert();
-    activeDocument.selection.expand(1);
-    makeMask("Fill");
-    getLayerByName("Fill").blendMode = BlendMode.MULTIPLY;
-    getLayerByName("Color").blendMode = BlendMode.MULTIPLY;
+        selectLayerPixels("Color");
+        activeDocument.selection.invert();
+        activeDocument.selection.expand(1);
+        makeMask("Fill");
+        getLayerByName("Fill").blendMode = BlendMode.MULTIPLY;
+        getLayerByName("Color").blendMode = BlendMode.MULTIPLY;
+    }
     saveJPG(activeDocument, File(saveListingDestination));
     closeDocument();
 }
@@ -756,15 +800,27 @@ function process_DS_MousePad(data) {
     var savePrintDestination = "C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/BR - MP - " + data.fileSKU;
     var saveListingDestination = "C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/BR - MousePad - " + data.fileSKU;
 
+    if (data.PSPStatus === true) {
+        printTemplatePath = switchToPSPTemplate(printTemplatePath);
+        listingTemplatePath = switchToPSPTemplate(listingTemplatePath);
+    }
+
 //Generate Print File
     openTemplate(File(printTemplatePath));
     processFile(data);
     keepColor("print");
     deleteAllFolders();
     layerLock("Fill", false);
+
+    if (data.PSPStatus === true) {
+        setPSPBackground(data);
+    
+    } else {
     applyColorOverlay("Fill", convertHextoRGB(data.backgroundColor));
     setActiveLayer("Fill");
     rasterizeLayer();
+    //activeDocument.artLayers[0].merge();
+    }
     activeDocument.artLayers[0].merge();
     savePSD(activeDocument, File(savePrintDestination));
     closeDocument();
@@ -775,6 +831,12 @@ function process_DS_MousePad(data) {
     keepColor("listing");
     deleteAllFolders();
     layerLock("Fill", false);
+
+    if (data.PSPStatus === true) {
+        setPSPBackground(data);
+        activeDocument.artLayers[0].merge();
+
+    } else {
     var bgRGB = convertHextoRGB(data.backgroundColor);
     applyColorOverlay("Fill", bgRGB);
     setActiveLayer("Fill");
@@ -788,6 +850,7 @@ function process_DS_MousePad(data) {
     makeMask("Fill");
     getLayerByName("Fill").blendMode = BlendMode.MULTIPLY;
     getLayerByName("Color").blendMode = BlendMode.MULTIPLY;
+    } 
     saveJPG(activeDocument, File(saveListingDestination));
     closeDocument();
 }
@@ -880,15 +943,27 @@ function process_DTS_CeramicCoaster(data) {
     var savePrintDestination = "C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - CST - " + data.fileSKU;
     var saveListingDestination = "C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - Ceramic Coaster  - " + data.fileSKU;
 
+    if (data.PSPStatus === true) {
+        printTemplatePath = switchToPSPTemplate(printTemplatePath);
+        listingTemplatePath = switchToPSPTemplate(listingTemplatePath);
+    }
+
 // //Generate Print File
     openTemplate(File(printTemplatePath));
     processFile(data);
     keepColor("print");
     deleteAllFolders();
     layerLock("Fill", false);
+
+    if (data.PSPStatus === true) {
+        setPSPBackground(data);
+
+    } else {
     applyColorOverlay("Fill", convertHextoRGB(data.backgroundColor));
     setActiveLayer("Fill");
     rasterizeLayer();
+    }
+
     activeDocument.artLayers[0].merge();
     savePSD(activeDocument, File(savePrintDestination));
     closeDocument();
@@ -899,6 +974,11 @@ function process_DTS_CeramicCoaster(data) {
     keepColor("listing");
     deleteAllFolders();
     layerLock("Fill", false);
+
+    if (data.PSPStatus === true) {
+        setPSPBackground(data);
+
+    } else {
     var bgRGB = convertHextoRGB(data.backgroundColor);
     applyColorOverlay("Fill", bgRGB);
     setActiveLayer("Fill");
@@ -906,6 +986,7 @@ function process_DTS_CeramicCoaster(data) {
     if (bgRGB.r <= 35 && bgRGB.g <= 35 && bgRGB.b <= 35) {
         setFillOpacity("Fill", 90);
         }
+    }
     activeDocument.artLayers[0].merge();
     getLayerByName("Fill").blendMode = BlendMode.MULTIPLY;
     saveJPG(activeDocument, File(saveListingDestination));
@@ -1074,6 +1155,11 @@ function process_EP_Vector(data) {
     var savePrintDestination = "C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/EP - VT - " + data.fileSKU;
     var saveListingDestination = "C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/EP - Vector - " + data.fileSKU;
 
+    if (data.PSPStatus === true) {
+        printTemplatePath = switchToPSPTemplate(printTemplatePath);
+        listingTemplatePath = switchToPSPTemplate(listingTemplatePath);
+    }
+
 //Generate Print File
     openTemplate(File(printTemplatePath));
     processFile(data);
@@ -1088,7 +1174,18 @@ function process_EP_Vector(data) {
     keepEPInverted("listing");
     deleteAllFolders();
     unlockAllFoldersExcept(["Bases"]);
-    for (var i = 0; i < 3; i++) { //iterate through folders 0, 1, 2
+
+    var i; //index //PSP logic
+    var g; //layer groups #
+    if (data.PSPStatus === true) {
+        i = 1;
+        g = 4; //layer groups #
+    } else {
+        i = 0;
+        g = 3; //layer groups #
+    }
+
+    for (; i < g; i++) { //iterate through folders 0, 1, 2
         selectLayerPixels("EP inverted");
         makeMask(activeDocument.layerSets[i]);
     }
@@ -1103,6 +1200,11 @@ function process_DTS_Vector(data) {
     var savePrintDestination = "C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - VT - " + data.fileSKU;
     var saveListingDestination = "C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - Vector - " + data.fileSKU;
 
+    if (data.PSPStatus === true) {
+        printTemplatePath = switchToPSPTemplate(printTemplatePath);
+        listingTemplatePath = switchToPSPTemplate(listingTemplatePath);
+    }
+
 //Generate Print File
     openTemplate(File(printTemplatePath));
     processFile(data);
@@ -1115,7 +1217,7 @@ function process_DTS_Vector(data) {
     openTemplate(File(listingTemplatePath));
     processFile(data);
     keepColor("listing");
-    unlockAllFoldersExcept(["Bases"]);
+    unlockAllFoldersExcept(["Bases", "Logos"]);
     deleteAllFolders();
     savePSD(activeDocument, File(saveListingDestination), true);
     closeDocument();
@@ -1428,11 +1530,31 @@ function process_DTS_WoodPrint(data) {
     var savePrintDestination = "C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - WP - " + data.fileSKU;
     var saveListingDestination = "C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - Wood Print - " + data.fileSKU;
 
+    if (data.PSPStatus === true) {
+        printTemplatePath = switchToPSPTemplate(printTemplatePath);
+        listingTemplatePath = switchToPSPTemplate(listingTemplatePath);
+    }
+
 //Generate Print File
     openTemplate(File(printTemplatePath));
     processFile(data);
     keepColor("print");
     deleteAllFolders();
+
+    if (data.PSPStatus === true) {
+        setPSPBackground(data);
+        if (data.imageOrientation === "Wide") {
+            layerLock("Vertical", false);
+            getLayerByName("Vertical").remove();
+            layerLock("Horizontal", false);
+        } else {
+            layerLock("Horizontal", false);
+            getLayerByName("Horizontal").remove();
+            layerLock("Vertical", false);
+        }
+        activeDocument.artLayers[0].merge();
+    }
+
     savePSD(activeDocument, File(savePrintDestination));
     closeDocument();
 
@@ -1440,8 +1562,22 @@ function process_DTS_WoodPrint(data) {
     openTemplate(File(listingTemplatePath));
     processFile(data);
     keepColor("listing");
-    unlockAllFoldersExcept(["Bases"]);
+    unlockAllFoldersExcept([]);
     deleteAllFolders();
+
+    if (data.PSPStatus === true) {
+        setPSPBackground(data);
+        if (data.imageOrientation === "Wide") {
+            layerLock("Vertical", false);
+            getLayerByName("Vertical").remove();
+            layerLock("Horizontal", false);
+        } else {
+            layerLock("Horizontal", false);
+            getLayerByName("Horizontal").remove();
+            layerLock("Vertical", false);
+        }
+    }
+
     if (data.imageOrientation === "Wide") {
         activeDocument.rotateCanvas(-90);
     }
