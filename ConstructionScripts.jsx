@@ -7,7 +7,10 @@ function openTemplate(path) {
     app.displayDialogs = DialogModes.ERROR;
 };
 
-function savePSD(activeDocument, destination) {
+function savePSD(activeDocument, destination, humanAssist) {
+    if (humanAssist === true) {
+        assistFiles.push(destination);
+    }
     var psdSaveOptions = new PhotoshopSaveOptions();
     psdSaveOptions.alphaChannels = true;
     psdSaveOptions.embedColorProfile = true;
@@ -16,7 +19,7 @@ function savePSD(activeDocument, destination) {
 
 function saveJPG(activeDocument, destination, humanAssist) {
     if (humanAssist === true) {
-        savePSD(activeDocument, destination);
+        savePSD(activeDocument, destination, humanAssist);
     } else {
         var jpgSaveOptions = new JPEGSaveOptions();
         jpgSaveOptions.embedColorProfile = true;

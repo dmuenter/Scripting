@@ -51,14 +51,14 @@ var productsListColor =
         { type: Types.COLOR, department: Departments.BR, key: "br_PatchCheckbox", label: "Patch (4x4 in)" },
         { type: Types.COLOR, department: Departments.BR, key: "br_PillowcaseCheckbox", label: "Pillowcase" },
         
-        { type: Types.COLOR, department: Departments.DTS, key: "ds_MugCheckbox", label: "Coffee Mug" },
-        { type: Types.COLOR, department: Departments.DTS, key: "ds_DogTagCheckbox", label: "Dog Tag" },
-        { type: Types.COLOR, department: Departments.DTS, key: "ds_KeyChainCheckbox", label: "Key Chain" },
-        { type: Types.COLOR, department: Departments.DTS, key: "ds_MousePadCheckbox", label: "Mouse Pad" },
-        { type: Types.COLOR, department: Departments.DTS, key: "ds_SequinHeartCheckbox", label: "Sequin Heart Case" },
-        { type: Types.COLOR, department: Departments.DTS, key: "ds_SequinSquareCheckbox", label: "Sequin Square Case" },
+        { type: Types.COLOR, department: Departments.DS, key: "ds_MugCheckbox", label: "Coffee Mug" },
+        { type: Types.COLOR, department: Departments.DS, key: "ds_DogTagCheckbox", label: "Dog Tag" },
+        { type: Types.COLOR, department: Departments.DS, key: "ds_KeyChainCheckbox", label: "Key Chain" },
+        { type: Types.COLOR, department: Departments.DS, key: "ds_MousePadCheckbox", label: "Mouse Pad" },
+        { type: Types.COLOR, department: Departments.DS, key: "ds_SequinHeartCheckbox", label: "Sequin Heart Case" },
+        { type: Types.COLOR, department: Departments.DS, key: "ds_SequinSquareCheckbox", label: "Sequin Square Case" },
 
-        { type: Types.COLOR, department: Departments.VINYL, key: "vinyl_DieCutStickerCheckbox", label: "Die Cut Sticker" },
+        { type: Types.COLOR, department: Departments.VINYL, key: "vinyl_StickerCheckbox", label: "Die Cut Sticker" },
     ];
 
 var productsListEngraving =
@@ -118,6 +118,7 @@ var filePathInput = group1.add('edittext {properties: {name: "filePathInput"}}')
 
 var fileBrowseButtonInput = group1.add("button", undefined, undefined, {name: "fileBrowseButtonInput"}); 
     fileBrowseButtonInput.text = "Browse"; 
+    fileBrowseButtonInput.onClick = browseButtonOnClick; 
 
 // Create Group to Hold File SKU Input (group 2)
 // ======
@@ -261,6 +262,13 @@ var uiRunButton = group8.add("button", undefined, undefined, {name: "cancelButto
 
 dialog.show();
 
+function browseButtonOnClick() {
+    var fileName = File.openDialog("Select your set up file.", "*.psd");
+    if (fileName != null) {
+        filePathInput.text = fileName;
+    }
+}
+
 function uiRunButtonOnClick() {
     $.writeln("Starting Script.");
 
@@ -269,13 +277,18 @@ function uiRunButtonOnClick() {
         fileSKU: fileSKUInput.text,
         colorVariationStatus: colorVariationStatusInput.value,
         PSPStatus: PSPStatusInput.value,
-        imageOrientation: imageOrientationInput.selection,
+        imageOrientation: imageOrientationInput.selection.text,
         backgroundColor: bgColorHexInput.text,
         products: []
     };
 
     data.products = getCheckboxes(productsListColor).concat(getCheckboxes(productsListEngraving));
-    main(data);
+    
+    var isValid = validateInput(data);
+    if (isValid) {
+        dialog.close();
+        main(data);
+    }
 }
 
 function getCheckboxes(productList){
@@ -291,8 +304,55 @@ function getCheckboxes(productList){
     return selectedCheckboxes;
 }
 
-
-
 function cancelButtonOnClick() {
     dialog.close();
+}
+
+//validation corner
+
+function validateInput(data) {
+//check if file path is gucci
+//strip double quotes if copy file path used (have to do replace x2 because Photoshop is dumb)
+data.inputFilePath = data.inputFilePath.replace("\"", "").replace("\"", "");
+
+//check if file exists
+var inputFile = new File(data.inputFilePath);
+if (! inputFile.exists) {
+    alert("Invalid file path or file does not exist.");
+    return false;
+}
+
+//check if correct format
+if (data.inputFilePath.indexOf(".psd") < 0 && data.inputFilePath.indexOf(".PSD") < 0) {
+    alert("File selected is not a .PSD.");
+    return false;
+}
+
+//check SKU
+if (data.fileSKU.length === 0) {
+    alert("SKU field cannot be blank.")
+    return false;
+}
+if (data.fileSKU === "e.g. \u0022EX - 0001\u0022") {
+    alert("Please input a SKU to save as.");
+    return false;
+}
+
+//check orientation
+if (data.imageOrientation.length === 0) {
+    alert("Please set an orientation.");
+    return false;
+}
+
+//check hex code
+if (data.backgroundColor.indexOf("#") !== 0) {
+    data.backgroundColor = "#" + data.backgroundColor;
+}
+
+//check if products selected
+    if (data.products.length < 1) {
+        alert("No items selected.");
+        return false;
+    }
+    return true;
 }

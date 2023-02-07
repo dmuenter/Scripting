@@ -61,9 +61,8 @@ var data = {
 };
 
 
-main(data);
+//main(data); //comment out if using UI, renenable if testing from main
 function main(data) {
- //   printObject(data);
     createDestinationFolders(data);
     processProducts(data);
 }
@@ -84,6 +83,7 @@ function createDestinationFolders(data) {
     listingFilesFolder.create();
 }
 
+var assistFiles = [];
 
 
 function processProducts(data) {
@@ -92,8 +92,12 @@ function processProducts(data) {
             return product === productsScriptsItem.key;
         })[0].functionToRun(data);
     })
-
-    alert("Script done running.");
-
+    assistFiles.forEach(function(assistFile) {
+        open(File(assistFile));
+    })
+    if (assistFiles.length > 0) {
+        alert("Script done running. Please alter opened files that need human judgment.");
+    } else {
+        alert("Script done running.");
+    }
 }
-
