@@ -268,7 +268,8 @@ function uiRunButtonOnClick() {
         inputFilePath: filePathInput.text,
         fileSKU: fileSKUInput.text,
         colorVariationStatus: colorVariationStatusInput.value,
-        PSPStatus: PSPStatusInput.value, imageOrientation: imageOrientationInput.selection,
+        PSPStatus: PSPStatusInput.value,
+        imageOrientation: imageOrientationInput.selection,
         backgroundColor: bgColorHexInput.text,
         products: []
     };

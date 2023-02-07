@@ -936,10 +936,10 @@ function process_DTS_Magnet(data) {
         unlockAllLayersExcept(["Color"]);
         deleteAllLayersExcept([]);
     } else {
-    applyColorOverlay("Fill", convertHextoRGB(data.backgroundColor));
-    setActiveLayer("Fill");
-    rasterizeLayer();
-    activeDocument.artLayers[0].merge();
+        applyColorOverlay("Fill", convertHextoRGB(data.backgroundColor));
+        setActiveLayer("Fill");
+        rasterizeLayer();
+        activeDocument.artLayers[0].merge();
     }
     savePSD(activeDocument, File(savePrintDestination));
     closeDocument();
@@ -957,15 +957,15 @@ function process_DTS_Magnet(data) {
         unlockAllLayersExcept(["Color"]);
         deleteAllLayersExcept([]);
     } else {
-    var bgRGB = convertHextoRGB(data.backgroundColor);
-    applyColorOverlay("Fill", bgRGB);
-    setActiveLayer("Fill");
-    rasterizeLayer();
-    if (bgRGB.r <= 35 && bgRGB.g <= 35 && bgRGB.b <= 35) {
-        setFillOpacity("Fill", 90);
+        var bgRGB = convertHextoRGB(data.backgroundColor);
+        applyColorOverlay("Fill", bgRGB);
+        setActiveLayer("Fill");
+        rasterizeLayer();
+        if (bgRGB.r <= 35 && bgRGB.g <= 35 && bgRGB.b <= 35) {
+            setFillOpacity("Fill", 90);
         }
-    activeDocument.artLayers[1].merge();
-    getLayerByName("Fill").blendMode = BlendMode.MULTIPLY;
+        activeDocument.artLayers[1].merge();
+        getLayerByName("Fill").blendMode = BlendMode.MULTIPLY;
     }
     if (data.imageOrientation === "Wide") {
         activeDocument.rotateCanvas(-90);
