@@ -81,6 +81,7 @@ var productsListEngraving =
 
     ]
 
+    var allProducts = productsListColor.concat(productsListEngraving);
 
 // DIALOG
 // ======
@@ -244,6 +245,28 @@ populateTabs(groupColorDepartments, productsListColor);
 populateTabs(groupEngravingDepartments, productsListEngraving);
  
 
+//attempting to implement select all/none button or inverse
+var group9 = dialog.add("group", undefined, {name: "group9"});
+    group9.orientation = "row";
+    group9.alignChildren = ["left","center"];
+    group9.spacing = 10;
+    group9.margins = 0;
+
+var uiRunButton = group9.add("button", undefined, undefined, {name: "selectAllButton"});
+    uiRunButton.text = "Select All";
+    uiRunButton.onClick = selectAllButtonOnClick;
+
+var uiRunButton = group9.add("button", undefined, undefined, {name: "selectNoneButton"});
+    uiRunButton.text = "Select None";
+    uiRunButton.onClick = selectNoneButtonOnClick;
+
+var uiRunButton = group9.add("button", undefined, undefined, {name: "invertSelectionButton"});
+    uiRunButton.text = "Invert Selection";
+    uiRunButton.onClick = invertSelectionButtonOnClick;
+
+//back to normal stuff
+
+
 // Run/Cancel Button Group
 // ======
 var group8 = dialog.add("group", undefined, {name: "group8"}); 
@@ -261,6 +284,44 @@ var uiRunButton = group8.add("button", undefined, undefined, {name: "cancelButto
     uiRunButton.onClick = cancelButtonOnClick;  
 
 dialog.show();
+
+//also new stuff that I'm trying
+
+function selectAllButtonOnClick() {
+    //set all checkbox values to true
+    var checkboxNames = allProducts.map(function(product) {
+        return product.key;
+    })
+    checkboxNames.forEach(function(name) {
+        dialog.findElement(name).value = true;
+    })
+}
+
+function selectNoneButtonOnClick() {
+    //set all checkbox values to false
+    var checkboxNames = allProducts.map(function(product) {
+        return product.key;
+    })
+    checkboxNames.forEach(function(name) {
+        dialog.findElement(name).value = false;
+    })
+}
+
+function invertSelectionButtonOnClick() {
+    //set true checkboxes to false, false checkboxes to true, but at thesame time???
+    var checkboxNames = allProducts.map(function(product) {
+        return product.key;
+    })
+    checkboxNames.forEach(function(name) {
+        if (dialog.findElement(name).value === true) {
+            dialog.findElement(name).value = false;
+        } else {
+            dialog.findElement(name).value = true;
+        }
+    })
+}
+
+//back to normal
 
 function browseButtonOnClick() {
     var fileName = File.openDialog("Select your set up file.", "*.psd");
@@ -282,7 +343,7 @@ function uiRunButtonOnClick() {
         products: []
     };
 
-    data.products = getCheckboxes(productsListColor).concat(getCheckboxes(productsListEngraving));
+    data.products = getCheckboxes();
     
     var isValid = validateInput(data);
     if (isValid) {
@@ -291,8 +352,8 @@ function uiRunButtonOnClick() {
     }
 }
 
-function getCheckboxes(productList){
-    var checkboxNames = productList.map(function(product) {
+function getCheckboxes(){
+    var checkboxNames = allProducts.map(function(product) {
         return product.key;
     })
     var selectedCheckboxes = [];
