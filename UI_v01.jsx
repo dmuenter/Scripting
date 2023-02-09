@@ -118,8 +118,12 @@ var filePathInput = group1.add('edittext {properties: {name: "filePathInput"}}')
     filePathInput.text = "paste file path here"; 
 
 var fileBrowseButtonInput = group1.add("button", undefined, undefined, {name: "fileBrowseButtonInput"}); 
-    fileBrowseButtonInput.text = "Browse"; 
-    fileBrowseButtonInput.onClick = browseButtonOnClick; 
+    fileBrowseButtonInput.text = "Browse for PSD"; 
+    fileBrowseButtonInput.onClick = browsePSDButtonOnClick; 
+
+var folderBrowseButtonInput = group1.add("button", undefined, undefined, {name: "folderBrowseButtonInput"}); 
+    folderBrowseButtonInput.text = "Browse for Folder"; 
+    folderBrowseButtonInput.onClick = browseFolderButtonOnClick; 
 
 // Create Group to Hold File SKU Input (group 2)
 // ======
@@ -323,10 +327,17 @@ function invertSelectionButtonOnClick() {
 
 //back to normal
 
-function browseButtonOnClick() {
+function browsePSDButtonOnClick() {
     var fileName = File.openDialog("Select your set up file.", "*.psd");
     if (fileName != null) {
         filePathInput.text = fileName;
+    }
+}
+
+function browseFolderButtonOnClick() {
+    var folderName = Folder.selectDialog("Select your folder containing set up files.");
+    if (folderName != null) {
+        filePathInput.text = folderName;
     }
 }
 
@@ -347,8 +358,39 @@ function uiRunButtonOnClick() {
     
     var isValid = validateInput(data);
     if (isValid) {
-        dialog.close();
-        main(data);
+        var variationData = processFiles(data);
+        if (variationData.length > 0) {
+            dialog.close();
+            main(variationData);
+        } else {
+            alert("Couldn't find files to process.")
+        }
+    }
+}
+
+function processFiles(data) {
+    var folder = Folder(data.inputFilePath);
+    var isFolder = folder.constructor === Folder;
+    if (isFolder) {
+        var files = folder.getFiles("*.psd");
+        var variationData = files.map(function(file) {
+            return {
+                inputFilePath: file.fullName,
+                fileSKU: data.fileSKU + " - " + file.name.toUpperCase().replace(".PSD", ""),
+                colorVariationStatus: data.colorVariationStatus,
+                PSPStatus: data.PSPStatus,
+                imageOrientation: data.imageOrientation,
+                backgroundColor: data.backgroundColor,
+                products: data.products
+            }
+        })
+        return variationData;
+    } else {
+        if (data.inputFilePath.indexOf(".psd") < 0 && data.inputFilePath.indexOf(".PSD") < 0) {
+    alert("File selected is not a .PSD.");
+    return [];
+        }
+        return [data];
     }
 }
 
@@ -384,10 +426,10 @@ if (! inputFile.exists) {
 }
 
 //check if correct format
-if (data.inputFilePath.indexOf(".psd") < 0 && data.inputFilePath.indexOf(".PSD") < 0) {
-    alert("File selected is not a .PSD.");
-    return false;
-}
+// if (data.inputFilePath.indexOf(".psd") < 0 && data.inputFilePath.indexOf(".PSD") < 0) {
+//     alert("File selected is not a .PSD.");
+//     return false;
+// }
 
 //check SKU
 if (data.fileSKU.length === 0) {
