@@ -137,7 +137,11 @@ var statictext2 = group2.add("statictext", undefined, undefined, {name: "statict
     statictext2.text = "File SKU:"; 
 
 var fileSKUInput = group2.add('edittext {properties: {name: "fileSKUInput"}}'); 
-    fileSKUInput.text = "e.g. \u0022EX - 0001\u0022"; 
+    fileSKUInput.text = "e.g. \u0022EX - 0001\u0022";
+
+var SKUtip = group2.add("statictext", undefined, undefined, {name: "statictext2"}); 
+    SKUtip.text = "Hover for advice on SKU."; 
+    SKUtip.helpTip = "If SKU is filled out when processing a folder the SKU will be at the beginning of the file names. \nBest use case: fill in SKU for single files and variations, leave blank for running a folder of unrelated files."
 
 // Create Group to Hold Variation Color Change Info (group 3) and also PSP status
 // ======
@@ -166,6 +170,11 @@ var statictext3 = group4.add("statictext", undefined, undefined, {name: "statict
 var imageOrientationInput_array = ["","Square","Tall","Wide"]; 
 var imageOrientationInput = group4.add("dropdownlist", undefined, undefined, {name: "imageOrientationInput", items: imageOrientationInput_array}); 
     imageOrientationInput.selection = 0; 
+
+var OrientationTip = group4.add("statictext", undefined, undefined, {name: "statictext2"}); 
+    OrientationTip.text = "Hover for advice on Orientation."; 
+    OrientationTip.helpTip = "When running a folder of files, you can only set one orientation! \nFor best results, arrange unrelated files that you want to run as a batch in a folder for each orientation."
+
 
 // Create Group to Hold BG Color Hexcode (Group 5)
 // ======
@@ -374,9 +383,15 @@ function processFiles(data) {
     if (isFolder) {
         var files = folder.getFiles("*.psd");
         var variationData = files.map(function(file) {
+            var finalSKU;
+            if (data.fileSKU.length > 0) {
+                finalSKU = data.fileSKU + " - " + file.name.toUpperCase().replace(".PSD", "");
+            } else {
+                finalSKU = file.name.toUpperCase().replace(".PSD", "");
+            }
             return {
                 inputFilePath: file.fullName,
-                fileSKU: data.fileSKU + " - " + file.name.toUpperCase().replace(".PSD", ""),
+                fileSKU: finalSKU,
                 colorVariationStatus: data.colorVariationStatus,
                 PSPStatus: data.PSPStatus,
                 imageOrientation: data.imageOrientation,
@@ -390,6 +405,15 @@ function processFiles(data) {
     alert("File selected is not a .PSD.");
     return [];
         }
+//check SKU
+    if (data.fileSKU.length === 0) {
+        alert("SKU field cannot be blank when inputting a single PSD.")
+        return [];
+    }
+    if (data.fileSKU === "e.g. \u0022EX - 0001\u0022") {
+        alert("Please input a SKU to save as.");
+        return [];
+    }
         return [data];
     }
 }
@@ -431,15 +455,7 @@ if (! inputFile.exists) {
 //     return false;
 // }
 
-//check SKU
-if (data.fileSKU.length === 0) {
-    alert("SKU field cannot be blank.")
-    return false;
-}
-if (data.fileSKU === "e.g. \u0022EX - 0001\u0022") {
-    alert("Please input a SKU to save as.");
-    return false;
-}
+
 
 //check orientation
 if (data.imageOrientation.length === 0) {
