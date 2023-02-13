@@ -1,0 +1,5 @@
+Script UI Dialog Builder tool to help ID fields and draft the UI: https://scriptui.joonas.me/
+
+ExtendScript es5 Shim: https://github.com/ExtendScript/extendscript-es5-shim/
+note, this file has been edited to add some additional functionality
+
