@@ -425,6 +425,14 @@ function process_DTS_PolarMug(data) {
     var savePrintDestination = "C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - POLAR MUG - " + data.fileSKU;
     var saveListingDestination = "C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - Polar Mug - " + data.fileSKU;
 
+//Generate Print File
+    openTemplate(File(printTemplatePath));
+    processFile(data);
+    keepColor("print");
+    deleteAllFolders();
+    savePSD(activeDocument, File(savePrintDestination));
+    closeDocument();
+
 //Generate Listing Files
     openTemplate(File(listingTemplatePath));
     processFile(data);
@@ -432,7 +440,7 @@ function process_DTS_PolarMug(data) {
     deleteAllFolders();
     setActiveLayer("SILVER").move(activeDocument.layerSets.getByName("Bases"), ElementPlacement.PLACEATBEGINNING);
     processBases(saveListingDestination); //Don't need File() as it's inside of the function
-
+    closeDocument();
 }
 
 function process_BR_BaseballCap(data) {
@@ -819,7 +827,6 @@ function process_DS_MousePad(data) {
     applyColorOverlay("Fill", convertHextoRGB(data.backgroundColor));
     setActiveLayer("Fill");
     rasterizeLayer();
-    //activeDocument.artLayers[0].merge();
     }
     activeDocument.artLayers[0].merge();
     savePSD(activeDocument, File(savePrintDestination));
@@ -1284,12 +1291,12 @@ function process_DTS_PintGlass(data) {
     var saveListingDestination = "C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - Pint - " + data.fileSKU;
 
 //Generate Print File
-    // openTemplate(File(printTemplatePath));
-    // processFile(data);
-    // keepColor("print");
-    // deleteAllFolders();
-    // savePSD(activeDocument, File(savePrintDestination));
-    // closeDocument();
+    openTemplate(File(printTemplatePath));
+    processFile(data);
+    keepColor("print");
+    deleteAllFolders();
+    savePSD(activeDocument, File(savePrintDestination));
+    closeDocument();
 
 // Generate Listing File
     openTemplate(File(listingTemplatePath));
@@ -1328,18 +1335,18 @@ function process_EP_StemlessWine(data) {
 }
 
 function process_DTS_StemlessWine(data) {
-    var printTemplatePath = "C:/Scripting/Templates/WineGlasses/DTS - WineGlasses - Template.psd";
+    var printTemplatePath = "C:/Scripting/Templates/WineGlasses/DTS - Wine Glasses - Template.psd";
     var listingTemplatePath = "C:/Scripting/Templates/WineGlasses/Stemless Wine - Listing Template.psd";
     var savePrintDestination = "C:/Scripting/Outputs/" + data.fileSKU + "/Print Files/DTS - WINE - " + data.fileSKU;
     var saveListingDestination = "C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - Stemless Wine - " + data.fileSKU;
 
 //Generate Print File
-    // openTemplate(File(printTemplatePath));
-    // processFile(data);
-    // keepColor("print");
-    // deleteAllFolders();
-    // savePSD(activeDocument, File(savePrintDestination));
-    // closeDocument();
+    openTemplate(File(printTemplatePath));
+    processFile(data);
+    keepColor("print");
+    deleteAllFolders();
+    savePSD(activeDocument, File(savePrintDestination));
+    closeDocument();
 
 // Generate Listing File
     openTemplate(File(listingTemplatePath));
@@ -1384,12 +1391,12 @@ function process_DTS_WineGlass(data) {
     var saveListingDestination = "C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - Wine Glass - " + data.fileSKU;
 
 // //Generate Print File
-//     openTemplate(File(printTemplatePath));
-//     processFile(data);
-//     keepColor("print");
-//     deleteAllFolders();
-//     savePSD(activeDocument, File(savePrintDestination));
-//     closeDocument();
+    openTemplate(File(printTemplatePath));
+    processFile(data);
+    keepColor("print");
+    deleteAllFolders();
+    savePSD(activeDocument, File(savePrintDestination));
+    closeDocument();
 
 // Generate Listing File
     openTemplate(File(listingTemplatePath));
@@ -1434,12 +1441,12 @@ function process_DTS_PilsnerGlass(data) {
     var saveListingDestination = "C:/Scripting/Outputs/" + data.fileSKU + "/Listing Files/DTS - Pilsner - " + data.fileSKU;
 
 //Generate Print File
-    // openTemplate(File(printTemplatePath));
-    // processFile(data);
-    // keepColor("print");
-    // deleteAllFolders();
-    // savePSD(activeDocument, File(savePrintDestination));
-    // closeDocument();
+    openTemplate(File(printTemplatePath));
+    processFile(data);
+    keepColor("print");
+    deleteAllFolders();
+    savePSD(activeDocument, File(savePrintDestination));
+    closeDocument();
 
 // Generate Listing File
     openTemplate(File(listingTemplatePath));

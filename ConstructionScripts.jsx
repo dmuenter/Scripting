@@ -251,9 +251,6 @@ function apply404040(targetLayerName) {
             b: 64,
         });
     rasterizeLayer();
-    // var tempLayer = activeDocument.artLayers.add();
-    // tempLayer.name = "EP inverted";
-    // activeDocument.mergeVisibleLayers();
     setActiveLayer(storeLayer);
 }
 
@@ -285,7 +282,7 @@ function applyEngravingOnSilver(targetLayerName) {
 
 //Inner Shadow
 
-function applySCBInnerShadow() {
+function applySCBInnerShadow() { //grabbed from ScriptListener
     var idsetd = charIDToTypeID( "setd" );
     var desc8 = new ActionDescriptor();
     var idnull = charIDToTypeID( "null" );
@@ -359,7 +356,7 @@ function applySCBInnerShadow() {
     executeAction( idsetd, desc8, DialogModes.NO );
 }
 
-function applyListingGlassInnerGlow() {
+function applyListingGlassInnerGlow() { //grabbed from ScriptListener
     var idsetd = charIDToTypeID( "setd" );
     var desc6 = new ActionDescriptor();
     var idnull = charIDToTypeID( "null" );
@@ -440,7 +437,7 @@ function applyListingGlassInnerGlow() {
 executeAction( idsetd, desc6, DialogModes.NO );
 }
 
-//Multiple outputs listing image (specifically, Polar Mug)
+//For multiple saved outputs listing image. Specificall for Polar Mug, can apply to other files set up similarly.
 function processBases(saveListingDestination) {
     var basesGroup = activeDocument.layerSets.getByName("Bases").artLayers;
     setLayerVisibility(activeDocument.layerSets.getByName("Bases"), true);
@@ -518,7 +515,7 @@ function setLayerVisibility(targetLayerName, visibility) {
     setActiveLayer(storeLayer);
 }
 
-function layerLock(name, status) {
+function layerLock(name, status) { //set layer lock status
     activeDocument.artLayers.getByName(name).allLocked = status;
 }
 
@@ -531,7 +528,7 @@ function setFillOpacity(targetLayerName, percentage) {
     setActiveLayer(storeLayer);
 }
 
-function MoveLayerTo(layerToMove, fX,fY) { //original by Max Kielland
+function MoveLayerTo(layerToMove, fX, fY) { //original by Max Kielland
     var storeLayer = getActiveLayer();
     setActiveLayer(layerToMove);
 
@@ -553,7 +550,7 @@ function createNewLayer(desiredName) {
     newLayer.name = desiredName;
 }
 
-function renameLayer(currentName, desiredName) {
+function renameLayer(currentName, desiredName) { //("string", "string")
     var storeLayer = getActiveLayer();
     setActiveLayer(currentName);
 
@@ -562,7 +559,7 @@ function renameLayer(currentName, desiredName) {
     setActiveLayer(storeLayer);
   }
 
-function rasterizeLayer() {
+function rasterizeLayer() { //from ScriptListener
     var idrasterizeLayer = stringIDToTypeID( "rasterizeLayer" );
     var desc5 = new ActionDescriptor();
     var idnull = charIDToTypeID( "null" );
@@ -581,7 +578,7 @@ executeAction( idrasterizeLayer, desc5, DialogModes.NO );
 
 //Photoshop Functions
 
-function makeMask(targetLayerName) {
+function makeMask(targetLayerName) { //from ScriptListener
     var storeLayer = getActiveLayer();
     setActiveLayer(targetLayerName);
 
@@ -606,9 +603,6 @@ function makeMask(targetLayerName) {
     setActiveLayer(storeLayer);
 }
 
-
-    
-
 //Selection functions
 
 function selectAll() {
@@ -627,7 +621,7 @@ function paste() {
     app.activeDocument.paste();
 }
 
-function magicWand (x, y, tol, sampleAllLyrs){
+function magicWand (x, y, tol, sampleAllLyrs){ //from ScriptListener
     var idsetd = charIDToTypeID( "setd" );
         var desc2 = new ActionDescriptor();
         var idnull = charIDToTypeID( "null" );
@@ -654,14 +648,13 @@ function magicWand (x, y, tol, sampleAllLyrs){
         desc2.putBoolean( idCntg, true );
 
         if (sampleAllLyrs == true) {
-        var idMrgd = charIDToTypeID( "Mrgd" ); //added a 'sample all layers' uhhh element
-        desc2.putBoolean( idMrgd, true);
+        var idMrgd = charIDToTypeID( "Mrgd" ); //allows us to choose select all layers functionality
         }
 
     executeAction( idsetd, desc2, DialogModes.NO );
     };
 
-function selectLayerPixels(targetLayerName) {
+function selectLayerPixels(targetLayerName) { //from Script Listener
     var storeLayer = getActiveLayer();
     setActiveLayer(targetLayerName);
 
@@ -687,7 +680,7 @@ function selectLayerPixels(targetLayerName) {
 
 //Some other helpers/calculations
 
-function convertHextoRGB(hex) {
+function convertHextoRGB(hex) { //hex code inputs are easier to copy/paste for the User
     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result ? {
       r: parseInt(result[1], 16),
@@ -696,7 +689,7 @@ function convertHextoRGB(hex) {
     } : null;
 }
 
-function hexToSolidColorSwatch(hex) {
+function hexToSolidColorSwatch(hex) { //for Fill functions and such
     var inputColor = convertHextoRGB(hex);
     var colorSwatch = new SolidColor;
     colorSwatch.rgb.red = inputColor.r;
@@ -705,13 +698,13 @@ function hexToSolidColorSwatch(hex) {
     return colorSwatch;
 }
 
-function getLayerWidth(targetLayer) {
+function getLayerWidth(targetLayer) { //used for moving layer center to coordinate
     $.writeln(targetLayer.name);
     var layerBounds = targetLayer.bounds;
     return layerBounds[2] - layerBounds[0];
 }
 
-function getLayerHeight(activeLayer) {
+function getLayerHeight(activeLayer) { //used for moving layer center to coordinate
     $.writeln(activeLayer.name);
     var layerBounds = activeLayer.bounds;
     return layerBounds[3] - layerBounds[1];
@@ -719,11 +712,11 @@ function getLayerHeight(activeLayer) {
 
 //Pot Smoking Pals specific stuff
 
-function switchToPSPTemplate(baseTemplate) {
+function switchToPSPTemplate(baseTemplate) { //adds PSP template ending
     return baseTemplate.replace(".psd", " - PSP.psd");
 }
 
-function setPSPBackground(data) {
+function setPSPBackground(data) { //Chooses PSP background tile based on orientation or just makes sure the fill is visible if PSP background is preset
     try {
         getLayerByName("Horizontal");
             if (data.imageOrientation === "Wide") {

@@ -1,10 +1,9 @@
 #include "./SupportScripts/extendscript-es5-shim.jsxinc";
 #include "./ProductScripts.jsx";
 
-// var data = {
+// var data = { //test hardcoded data for single file
 //     inputFilePath: "C:/Scripting/sampleTall.psd",
 //     fileSKU: "TALL",
-//     colorVariationStatus: false,
 //     PSPStatus: false,
 //     imageOrientation: "Tall",
 //     backgroundColor: "#ffffff",
@@ -60,34 +59,32 @@
 // ]
 // }
 
-var data = [
-    {
-        inputFilePath: "C:/Users/dipty/OneDrive/Pictures/testFolder/GREEN.psd",
-        fileSKU: "BF - 0001 - GREEN",
-        colorVariationStatus: false,
-        PSPStatus: false,
-        imageOrientation: "Square",
-        backgroundColor: "#ffffff",
-        products: [
-            "dts_MagnetCheckbox"
-        ]
-    },
-    {
-        inputFilePath: "C:/Users/dipty/OneDrive/Pictures/testFolder/RED.psd",
-        fileSKU: "BF - 0001 - RED",
-        colorVariationStatus: false,
-        PSPStatus: false,
-        imageOrientation: "Square",
-        backgroundColor: "#ffffff",
-        products: [
-            "dts_MagnetCheckbox"
-        ]
-    }
-]
+// var data = [ //test hardcoded data for multiple files
+//     {
+//         inputFilePath: "C:/Users/dipty/OneDrive/Pictures/testFolder/GREEN.psd",
+//         fileSKU: "BF - 0001 - GREEN",
+//         PSPStatus: false,
+//         imageOrientation: "Square",
+//         backgroundColor: "#ffffff",
+//         products: [
+//             "dts_MagnetCheckbox"
+//         ]
+//     },
+//     {
+//         inputFilePath: "C:/Users/dipty/OneDrive/Pictures/testFolder/RED.psd",
+//         fileSKU: "BF - 0001 - RED",
+//         PSPStatus: false,
+//         imageOrientation: "Square",
+//         backgroundColor: "#ffffff",
+//         products: [
+//             "dts_MagnetCheckbox"
+//         ]
+//     }
+// ]
 
 var assistFiles = [];
 
-//main(data); //comment out if using UI, renenable if testing from main
+//main(data); //comment out if using UI to test, renenable if testing from main
 
 function main(data) {
     data.forEach(function(variation) {
@@ -104,14 +101,14 @@ function main(data) {
     }
 }
 
-function checkforOutputsFolder() {
+function checkforOutputsFolder() { //checks if Outputs folder exists, creates it if not
     var outputsFolder = Folder("C:/Scripting/Outputs");
     if (! outputsFoldersFolder.exists) {
         outputsFolder.create();
     }
 }
 
-function createDestinationFolders(data) {
+function createDestinationFolders(data) { //creates folder for SKU and listing/print folders inside
     var destinationFolder = new Folder("C:/Scripting/Outputs/" + data.fileSKU);
     destinationFolder.create();
     var printFilesFolder = new Folder("C:/Scripting/Outputs/" + data.fileSKU + "/Print Files");
