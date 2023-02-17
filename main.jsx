@@ -117,7 +117,7 @@ function createDestinationFolders(data) { //creates folder for SKU and listing/p
     listingFilesFolder.create();
 }
 
-function processProducts(data) {
+function processProducts(data) {    //gathers product input and creates outputs
     data.products.forEach(function(product) {
         ProductScripts.filter(function(productsScriptsItem) {
             return product === productsScriptsItem.key;
