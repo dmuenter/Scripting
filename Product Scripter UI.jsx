@@ -1,5 +1,5 @@
-#include "./SupportScripts/extendscript-es5-shim.jsxinc";
-#include "./main.jsx";
+#include "C:/Scripting/SupportScripts/extendscript-es5-shim.jsxinc";
+#include "C:/Scripting/main.jsx";
 
 const Types = {
     COLOR: "Color",
