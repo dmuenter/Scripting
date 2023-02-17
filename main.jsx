@@ -3,7 +3,7 @@
 
 // var data = { //test hardcoded data for single file
 //     inputFilePath: "C:/Scripting/sampleTall.psd",
-//     fileSKU: "TALL",
+//     fileSKU: "SOLO EX - 0001",
 //     PSPStatus: false,
 //     imageOrientation: "Tall",
 //     backgroundColor: "#ffffff",

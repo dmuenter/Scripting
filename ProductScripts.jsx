@@ -236,7 +236,7 @@ function process_EP_ScotchGlassC(data) {
     keepEPInverted("print");
     unlockAllFoldersExcept([]);
     deleteAllFolders();
-    apply404040("EP inverted");    
+    apply404040("EP Inverted");    
     savePSD(activeDocument, File(savePrintDestination));
     closeDocument();
 
@@ -245,8 +245,8 @@ function process_EP_ScotchGlassC(data) {
     processFile(data);
     keepEPInverted("listing");
     deleteAllFolders();
-    applyListingGlassGray("EP inverted");
-    setActiveLayer("EP inverted");
+    applyListingGlassGray("EP Inverted");
+    setActiveLayer("EP Inverted");
     applyListingGlassInnerGlow();
     saveJPG(activeDocument, File(saveListingDestination));
     closeDocument();
@@ -291,7 +291,7 @@ function process_EP_ScotchGlassM(data) {
     keepEPInverted("print");
     unlockAllFoldersExcept([]);
     deleteAllFolders();
-    apply404040("EP inverted");    
+    apply404040("EP Inverted");    
     savePSD(activeDocument, File(savePrintDestination));
     closeDocument();
 
@@ -300,8 +300,8 @@ function process_EP_ScotchGlassM(data) {
     processFile(data);
     keepEPInverted("listing");
     deleteAllFolders();
-    applyListingGlassGray("EP inverted");
-    setActiveLayer("EP inverted");
+    applyListingGlassGray("EP Inverted");
+    setActiveLayer("EP Inverted");
     applyListingGlassInnerGlow();
     saveJPG(activeDocument, File(saveListingDestination));
     closeDocument();
@@ -345,7 +345,7 @@ function process_EP_BeerCanGlass(data) {
     unlockAllFoldersExcept([]);
     deleteAllFolders();
     $.writeln("about to apply 404040");
-    apply404040("EP inverted");    
+    apply404040("EP Inverted");    
     savePSD(activeDocument, File(savePrintDestination));
     closeDocument();
 
@@ -354,8 +354,8 @@ function process_EP_BeerCanGlass(data) {
     processFile(data);
     keepEPInverted("listing");
     deleteAllFolders();
-    applyListingGlassGray("EP inverted");
-    setActiveLayer("EP inverted");
+    applyListingGlassGray("EP Inverted");
+    setActiveLayer("EP Inverted");
     applyListingGlassInnerGlow();
     saveJPG(activeDocument, File(saveListingDestination), false);
     closeDocument();
@@ -407,13 +407,13 @@ function process_EP_PolarMug(data) {
     keepBothEP("listing");
     deleteAllFolders();
     applyEngravingOnSilver("EP");
-    setLayerVisibility("EP inverted", false);
+    setLayerVisibility("EP Inverted", false);
     saveJPG(activeDocument, File(saveListingDestination + " - SILVER"));
     setLayerVisibility("EP", false);
-    selectLayerPixels("EP inverted");
+    selectLayerPixels("EP Inverted");
     layerLock("SILVER", false);
     makeMask("SILVER");
-    setLayerVisibility("EP inverted", false);
+    setLayerVisibility("EP Inverted", false);
     setActiveLayer("SILVER");
     processBases(saveListingDestination); //Don't need File() as it's inside of the function
     closeDocument();
@@ -669,7 +669,7 @@ function process_EP_DogTag(data) {
     keepBothEP("listing");
     deleteAllFolders();
     applyColorOverlay("EP", convertHextoRGB("#c8c8c8"));
-    applyColorOverlay("EP inverted", convertHextoRGB("#c8c8c8"));
+    applyColorOverlay("EP Inverted", convertHextoRGB("#c8c8c8"));
     savePSD(activeDocument, File(saveListingDestination), true);
     closeDocument();
 }
@@ -694,11 +694,11 @@ var saveListingDestination = "C:/Scripting/Outputs/" + data.fileSKU + "/Listing 
     keepBothEP("listing");
     deleteAllFolders();
     MoveLayerTo(getLayerByName("EP"), 1967, 2962);
-    MoveLayerTo(getLayerByName("EP inverted"), 1967, 2962);
+    MoveLayerTo(getLayerByName("EP Inverted"), 1967, 2962);
     setLayerVisibility(activeDocument.layerSets.getByName("Dog Tag"), false);
     setLayerVisibility(activeDocument.layerSets.getByName("Key Chain"), true);
     applyColorOverlay("EP", convertHextoRGB("#c8c8c8"));
-    applyColorOverlay("EP inverted", convertHextoRGB("#c8c8c8"));
+    applyColorOverlay("EP Inverted", convertHextoRGB("#c8c8c8"));
     savePSD(activeDocument, File(saveListingDestination), true);
     closeDocument();
 }
@@ -1011,7 +1011,7 @@ function process_DTS_Magnet(data) {
         listingTemplatePath = switchToPSPTemplate(listingTemplatePath);
     }
 
-// //Generate Print File
+//Generate Print File
     openTemplate(File(printTemplatePath));
     processFile(data);
     keepColor("print");
@@ -1193,10 +1193,10 @@ function process_EP_Vector(data) {
     }
 
     for (; i < g; i++) { //iterate through folders 0, 1, 2
-        selectLayerPixels("EP inverted");
+        selectLayerPixels("EP Inverted");
         makeMask(activeDocument.layerSets[i]);
     }
-    setLayerVisibility("EP inverted", false);
+    setLayerVisibility("EP Inverted", false);
     savePSD(activeDocument, File(saveListingDestination), true);
     closeDocument();
 }
@@ -1241,7 +1241,7 @@ function process_EP_BeerMug(data) {
     processFile(data);
     keepEPInverted("print");
     deleteAllFolders();
-    apply404040("EP inverted");    
+    apply404040("EP Inverted");    
     savePSD(activeDocument, File(savePrintDestination));
     closeDocument();
 
@@ -1250,8 +1250,8 @@ function process_EP_BeerMug(data) {
     processFile(data);
     keepEPInverted("listing");
     deleteAllFolders();
-    applyListingGlassGray("EP inverted");
-    setActiveLayer("EP inverted");
+    applyListingGlassGray("EP Inverted");
+    setActiveLayer("EP Inverted");
     applyListingGlassInnerGlow();
     saveJPG(activeDocument, File(saveListingDestination));
     closeDocument();
@@ -1268,7 +1268,7 @@ function process_EP_PintGlass(data) {
     processFile(data);
     keepEPInverted("print");
     deleteAllFolders();
-    apply404040("EP inverted");    
+    apply404040("EP Inverted");    
     savePSD(activeDocument, File(savePrintDestination));
     closeDocument();
 
@@ -1277,8 +1277,8 @@ function process_EP_PintGlass(data) {
     processFile(data);
     keepEPInverted("listing");
     deleteAllFolders();
-    applyListingGlassGray("EP inverted");
-    setActiveLayer("EP inverted");
+    applyListingGlassGray("EP Inverted");
+    setActiveLayer("EP Inverted");
     applyListingGlassInnerGlow();
     saveJPG(activeDocument, File(saveListingDestination));
     closeDocument();
@@ -1318,7 +1318,7 @@ function process_EP_StemlessWine(data) {
     processFile(data);
     keepEPInverted("print");
     deleteAllFolders();
-    apply404040("EP inverted");    
+    apply404040("EP Inverted");    
     savePSD(activeDocument, File(savePrintDestination));
     closeDocument();
 
@@ -1327,8 +1327,8 @@ function process_EP_StemlessWine(data) {
     processFile(data);
     keepEPInverted("listing");
     deleteAllFolders();
-    applyListingGlassGray("EP inverted");
-    setActiveLayer("EP inverted");
+    applyListingGlassGray("EP Inverted");
+    setActiveLayer("EP Inverted");
     applyListingGlassInnerGlow();
     saveJPG(activeDocument, File(saveListingDestination));
     closeDocument();
@@ -1368,7 +1368,7 @@ function process_EP_WineGlass(data) {
     processFile(data);
     keepEPInverted("print");
     deleteAllFolders();
-    apply404040("EP inverted");    
+    apply404040("EP Inverted");    
     savePSD(activeDocument, File(savePrintDestination));
     closeDocument();
 
@@ -1377,8 +1377,8 @@ function process_EP_WineGlass(data) {
     processFile(data);
     keepEPInverted("listing");
     deleteAllFolders();
-    applyListingGlassGray("EP inverted");
-    setActiveLayer("EP inverted");
+    applyListingGlassGray("EP Inverted");
+    setActiveLayer("EP Inverted");
     applyListingGlassInnerGlow();
     saveJPG(activeDocument, File(saveListingDestination));
     closeDocument();
@@ -1418,7 +1418,7 @@ function process_EP_PilsnerGlass(data) {
     processFile(data);
     keepEPInverted("print");
     deleteAllFolders();
-    apply404040("EP inverted");    
+    apply404040("EP Inverted");    
     savePSD(activeDocument, File(savePrintDestination));
     closeDocument();
 
@@ -1427,8 +1427,8 @@ function process_EP_PilsnerGlass(data) {
     processFile(data);
     keepEPInverted("listing");
     deleteAllFolders();
-    applyListingGlassGray("EP inverted");
-    setActiveLayer("EP inverted");
+    applyListingGlassGray("EP Inverted");
+    setActiveLayer("EP Inverted");
     applyListingGlassInnerGlow();
     saveJPG(activeDocument, File(saveListingDestination));
     closeDocument();

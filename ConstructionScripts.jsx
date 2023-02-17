@@ -110,13 +110,13 @@ function keepEP(type) {
 //Keep EP Inverted layer
 function keepEPInverted(type) {
     var activeGroup = app.activeDocument.activeLayer;
-    var epInverted = setActiveLayer(activeGroup.artLayers.getByName("EP inverted"));
+    var epInverted = setActiveLayer(activeGroup.artLayers.getByName("EP Inverted"));
     epInverted.move(activeDocument.layerSets.getByName("Targets"), ElementPlacement.PLACEBEFORE);
 
     if (type === "print") { //for print files
-       deleteAllLayersExcept(["EP inverted"]);
+       deleteAllLayersExcept(["EP Inverted"]);
     } else { //for listing files
-        deleteAllLayersExcept(["EP inverted"]);
+        deleteAllLayersExcept(["EP Inverted"]);
     }    
 }
 
@@ -124,16 +124,14 @@ function keepEPInverted(type) {
 function keepBothEP(type) {
     var activeGroup = app.activeDocument.activeLayer;
     var ep = setActiveLayer(activeGroup.artLayers.getByName("EP"));
-    var epInverted = setActiveLayer(activeGroup.artLayers.getByName("EP inverted"));
-    //currentLayer = activeGroup.artLayers.getByName("EP");
+    var epInverted = setActiveLayer(activeGroup.artLayers.getByName("EP Inverted"));
     ep.move(activeDocument.layerSets.getByName("Targets"), ElementPlacement.PLACEBEFORE);
-    //currentLayer = activeGroup.artLayers.getByName("EP inverted");
     epInverted.move(activeDocument.layerSets.getByName("Targets"), ElementPlacement.PLACEBEFORE);
    
     if (type === "print") {
-        deleteAllLayersExcept(["EP", "EP inverted"])
+        deleteAllLayersExcept(["EP", "EP Inverted"])
     } else { //for listing files
-        deleteAllLayersExcept(["EP", "EP inverted"])
+        deleteAllLayersExcept(["EP", "EP Inverted"])
     }
 }
 
@@ -142,7 +140,6 @@ function keepBothEP(type) {
 function deleteAllLayersExcept(layersToKeep) {
     var layersToDelete = [];
     for (var layerCt = 0; layerCt < activeDocument.artLayers.length; layerCt++) {
-        //if (activeDocument.artLayers[layerCt].name === layersToKeep[layerCt].name) {
         if (layersToKeep.includes(activeDocument.artLayers[layerCt].name)) {
             $.writeln("skipping " + activeDocument.artLayers[layerCt].name);
             continue;
@@ -210,7 +207,6 @@ function deleteAllFolders() {
 
 //Color Overlay styles for layers
 
-
 function applyColorOverlay(targetLayerName, color) {
     var storeLayer = getActiveLayer();
     setActiveLayer(targetLayerName);
@@ -254,6 +250,7 @@ function apply404040(targetLayerName) {
     setActiveLayer(storeLayer);
 }
 
+//Apply a shade of gray for listing images on glassware
 function applyListingGlassGray(targetLayerName) {
     var storeLayer = getActiveLayer();
     setActiveLayer(targetLayerName);
@@ -267,6 +264,7 @@ function applyListingGlassGray(targetLayerName) {
     setActiveLayer(storeLayer);
 }
 
+//Apply shade of brown for stainless steel engravings using Ceramark
 function applyEngravingOnSilver(targetLayerName) {
     var storeLayer = getActiveLayer();
     setActiveLayer(targetLayerName);
@@ -280,8 +278,7 @@ function applyEngravingOnSilver(targetLayerName) {
     setActiveLayer(storeLayer);
 }
 
-//Inner Shadow
-
+//Inner Shadow used for wood engravings, especially Small Cutting Boards
 function applySCBInnerShadow() { //grabbed from ScriptListener
     var idsetd = charIDToTypeID( "setd" );
     var desc8 = new ActionDescriptor();
@@ -356,6 +353,7 @@ function applySCBInnerShadow() { //grabbed from ScriptListener
     executeAction( idsetd, desc8, DialogModes.NO );
 }
 
+//Inner Glow to add some depth to listing images of glass
 function applyListingGlassInnerGlow() { //grabbed from ScriptListener
     var idsetd = charIDToTypeID( "setd" );
     var desc6 = new ActionDescriptor();
@@ -438,6 +436,7 @@ executeAction( idsetd, desc6, DialogModes.NO );
 }
 
 //For multiple saved outputs listing image. Specificall for Polar Mug, can apply to other files set up similarly.
+//Iterates and saves a copy on every layer inside of a Bases folder
 function processBases(saveListingDestination) {
     var basesGroup = activeDocument.layerSets.getByName("Bases").artLayers;
     setLayerVisibility(activeDocument.layerSets.getByName("Bases"), true);
@@ -475,7 +474,7 @@ function getFolderByName(name) {
 
 //Layer Functionality
 
-function setLayerVisibility(targetLayerName, visibility) {
+function setLayerVisibility(targetLayerName, visibility) { //set a layer to visible/hidden for true/false
     var storeLayer = getActiveLayer();
     setActiveLayer(targetLayerName);
 
@@ -515,7 +514,7 @@ function setLayerVisibility(targetLayerName, visibility) {
     setActiveLayer(storeLayer);
 }
 
-function layerLock(name, status) { //set layer lock status
+function layerLock(name, status) { //set layer lock status to locked/unlocked for true/false
     activeDocument.artLayers.getByName(name).allLocked = status;
 }
 
@@ -528,7 +527,7 @@ function setFillOpacity(targetLayerName, percentage) {
     setActiveLayer(storeLayer);
 }
 
-function MoveLayerTo(layerToMove, fX, fY) { //original by Max Kielland
+function MoveLayerTo(layerToMove, fX, fY) { //original by Max Kielland; fX is x coordinate, fY is y coordinate for destination
     var storeLayer = getActiveLayer();
     setActiveLayer(layerToMove);
 
@@ -559,7 +558,7 @@ function renameLayer(currentName, desiredName) { //("string", "string")
     setActiveLayer(storeLayer);
   }
 
-function rasterizeLayer() { //from ScriptListener
+function rasterizeLayer() { //from ScriptListener; rasterizes currently active layer
     var idrasterizeLayer = stringIDToTypeID( "rasterizeLayer" );
     var desc5 = new ActionDescriptor();
     var idnull = charIDToTypeID( "null" );
@@ -605,23 +604,23 @@ function makeMask(targetLayerName) { //from ScriptListener
 
 //Selection functions
 
-function selectAll() {
+function selectAll() {                      // Ctrl + A
     app.activeDocument.selection.selectAll();
 }
 
-function copySelection() {
+function copySelection() {                  // Ctrl + C
     app.activeDocument.selection.copy();
 }
 
-function deselect() {
+function deselect() {                       // Ctrl + D
     app.activeDocument.selection.deselect();
 }
 
-function paste() {
+function paste() {                          // Ctrl + V
     app.activeDocument.paste();
 }
 
-function magicWand (x, y, tol, sampleAllLyrs){ //from ScriptListener
+function magicWand (x, y, tol, sampleAllLyrs){ //from ScriptListener; The Magic Wand Tool; x coordinate and y coordinate to 'click', tolerance setting, sample all layers on/off for true/false
     var idsetd = charIDToTypeID( "setd" );
         var desc2 = new ActionDescriptor();
         var idnull = charIDToTypeID( "null" );
@@ -654,7 +653,7 @@ function magicWand (x, y, tol, sampleAllLyrs){ //from ScriptListener
     executeAction( idsetd, desc2, DialogModes.NO );
     };
 
-function selectLayerPixels(targetLayerName) { //from Script Listener
+function selectLayerPixels(targetLayerName) { //from Script Listener; equivalent of Ctrl + click a layer thumbnail
     var storeLayer = getActiveLayer();
     setActiveLayer(targetLayerName);
 
@@ -680,7 +679,7 @@ function selectLayerPixels(targetLayerName) { //from Script Listener
 
 //Some other helpers/calculations
 
-function convertHextoRGB(hex) { //hex code inputs are easier to copy/paste for the User
+function convertHextoRGB(hex) { //converts hex codes (easier for user) to rgb values that PS reads
     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result ? {
       r: parseInt(result[1], 16),
@@ -689,7 +688,7 @@ function convertHextoRGB(hex) { //hex code inputs are easier to copy/paste for t
     } : null;
 }
 
-function hexToSolidColorSwatch(hex) { //for Fill functions and such
+function hexToSolidColorSwatch(hex) { //for Fill functions, Photoshop needs a SolidColor object
     var inputColor = convertHextoRGB(hex);
     var colorSwatch = new SolidColor;
     colorSwatch.rgb.red = inputColor.r;
