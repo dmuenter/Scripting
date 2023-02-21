@@ -646,9 +646,10 @@ function magicWand (x, y, tol, sampleAllLyrs){ //from ScriptListener; The Magic 
         var idCntg = charIDToTypeID( "Cntg" );
         desc2.putBoolean( idCntg, true );
 
-        if (sampleAllLyrs == true) {
+        if (sampleAllLyrs === true) {
         var idMrgd = charIDToTypeID( "Mrgd" ); //allows us to choose select all layers functionality
-        }
+        desc2.putBoolean( idMrgd, true);
+    }
 
     executeAction( idsetd, desc2, DialogModes.NO );
     };
