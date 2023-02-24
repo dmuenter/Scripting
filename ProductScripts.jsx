@@ -454,13 +454,13 @@ function process_BR_BaseballCap(data) {
     processFile(data);
     keepColor("print");
     deleteAllFolders();
-    setActiveLayer("Color"); //currentLayer = activeDocument.artLayers.getByName("Color");
-    getActiveLayer().duplicate(activeDocument, ElementPlacement.PLACEATBEGINNING);
-    setActiveLayer("Color copy"); //currentLayer = activeDocument.artLayers.getByName("Color copy");
-    getActiveLayer().rotate(180, AnchorPosition.MIDDLECENTER);
-    MoveLayerTo(getActiveLayer(), 3770, 2061);
-    renameLayer("Color", "Left");
-    renameLayer("Color copy", "Right");
+    setActiveLayer("Color");
+//    getActiveLayer().duplicate(activeDocument, ElementPlacement.PLACEATBEGINNING); //These are commented out because there's an exception that sometimes happens.
+//    setActiveLayer("Color copy");                                                 // I've had it happen only once, Sara had it happen every time on her PC, so we're just removing the code that triggers it
+//    getActiveLayer().rotate(180, AnchorPosition.MIDDLECENTER);
+//    MoveLayerTo(getActiveLayer(), 3770, 2061);
+//    renameLayer("Color", "Left");
+//    renameLayer("Color copy", "Right");
     savePSD(activeDocument, File(savePrintDestination));
     closeDocument();
 
