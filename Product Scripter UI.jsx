@@ -81,16 +81,20 @@ var productsListEngraving =
 // ======
 var dialog = new Window("dialog"); 
     dialog.text = "Dialog"; 
-    dialog.preferredSize.width = 400; 
-    dialog.preferredSize.height = 600; 
+    //dialog.preferredSize.width = 400; 
+    //dialog.preferredSize.height = 600;
     dialog.orientation = "column"; 
     dialog.alignChildren = ["center","top"]; 
     dialog.spacing = 10; 
     dialog.margins = 16; 
 
+var inputGroup = dialog.add("group", undefined, {name: "inputGroup"});
+    inputGroup.orientation = "row";
+    inputGroup.alignChildren = ["left", "center"];
+
 // Create Panel for File Setup (Panel 1)
 // ======
-var panel1 = dialog.add("panel", undefined, undefined, {name: "panel1"}); 
+var panel1 = inputGroup.add("panel", undefined, undefined, {name: "panel1"}); 
     panel1.text = "File Set Up Info"; 
     panel1.orientation = "column"; 
     panel1.alignChildren = ["left","top"]; 
@@ -184,7 +188,7 @@ var bgColorHexInput = bgColorGroup.add('edittext {properties: {name: "bgColorHex
 
 // Create Group to Hold Products (productsGroup)
 // ======
-var productsGroup = dialog.add("group", undefined, {name: "productsGroup"}); 
+var productsGroup = inputGroup.add("group", undefined, {name: "productsGroup"}); 
     productsGroup.orientation = "row"; 
     productsGroup.alignChildren = ["left","center"]; 
     productsGroup.spacing = 10; 
